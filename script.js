@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Place all pieces correctly
     const pieces = {
-        '1': '♙', // White Pawns
-        '6': '♟', // Black Pawns
+        '6': '♙', // White Pawns (second row from the bottom)
+        '1': '♟', // Black Pawns (second row from the top)
         '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
         '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
     };
@@ -69,10 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
             case '♟': // Black pawn
                 return endX === startX && endY === startY - 1;
             case '♖': case '♜': // Rook
-                return (startX === endX || startY === endY);
+                return startX === endX || startY === endY;
             case '♘': case '♞': // Knight
                 return (Math.abs(startX - endX) === 2 && Math.abs(startY - endY) === 1) ||
                        (Math.abs(startX - endX) === 1 && Math.abs(startY - endY) === 2);
+            case '♗': case '♝': // Bishop
+                return Math.abs(startX - endX) === Math.abs(startY - endY);
+            case '♕': case '♛': // Queen
+                return (startX === endX || startY === endY) || // Rook movement
+                       (Math.abs(startX - endX) === Math.abs(startY - endY)); // Bishop movement
+            case '♔': case '♚': // King
+                return Math.abs(startX - endX) <= 1 && Math.abs(startY - endY) <= 1;
             default:
                 return false;
         }
@@ -105,6 +112,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         (Math.abs(startX - x) === 1 && Math.abs(startY - y) === 2)) {
                         square.classList.add('highlight');
                     }
+                    break;
+                case '♗': case '♝': // Bishop
+                    if (Math.abs(startX - x) === Math.abs(startY - y)) square.classList.add('highlight');
+                    break;
+                case '♕': case '♛': // Queen
+                    if (x === startX || y === startY || // Rook movement
+                        Math.abs(startX - x) === Math.abs(startY - y)) { // Bishop movement
+                        square.classList.add('highlight');
+                    }
+                    break;
+                case '♔': case '♚': // King
+                    if (Math.abs(startX - x) <= 1 && Math.abs(startY - y) <= 1) square.classList.add('highlight');
                     break;
             }
         });
