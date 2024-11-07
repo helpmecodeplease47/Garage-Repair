@@ -12,30 +12,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Place pieces (simplified setup for demonstration)
+    // Place all pieces correctly
     const pieces = {
-        '1': '♙', '6': '♟', // Pawns
-        '0': '♜', '7': '♖', // Rooks
+        '1': '♙', // White Pawns
+        '6': '♟', // Black Pawns
+        '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
+        '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
     };
 
     let squares = board.querySelectorAll('.square');
     squares.forEach(square => {
-        let x = parseInt(square.getAttribute('data-x'));
-        let y = parseInt(square.getAttribute('data-y'));
-        if (y === 1 || y === 6) square.innerHTML = `<div class="piece">${pieces[y]}</div>`;
-        if (y === 0 || y === 7) {
-            if (x === 0 || x === 7) square.innerHTML = `<div class="piece">${pieces[y]}</div>`;
+        const x = parseInt(square.getAttribute('data-x'));
+        const y = parseInt(square.getAttribute('data-y'));
+        if (y === 1) {
+            square.innerHTML = `<div class="piece">${pieces[y]}</div>`; // White Pawns
+        } else if (y === 6) {
+            square.innerHTML = `<div class="piece">${pieces[y]}</div>`; // Black Pawns
+        } else if (y === 0 || y === 7) {
+            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`; // Other pieces
         }
     });
 
-    // Handle piece movement (very basic, needs improvement for real chess)
+    // Handle piece movement (basic implementation)
     board.addEventListener('click', (e) => {
         if (e.target.classList.contains('piece')) {
-            const square = e.target.parentElement;
-            const x = square.getAttribute('data-x');
-            const y = square.getAttribute('data-y');
+            const piece = e.target;
+            const square = piece.parentElement;
+            const x = parseInt(square.getAttribute('data-x'));
+            const y = parseInt(square.getAttribute('data-y'));
             console.log(`Moving piece at (${x}, ${y})`);
-            // Implement move logic here
+            // Here you would implement your game logic for moving pieces
         }
     });
 });
