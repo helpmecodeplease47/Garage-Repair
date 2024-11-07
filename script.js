@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Place all pieces correctly
     const pieces = {
-        '6': '♙', // White Pawns (second row from the bottom)
-        '1': '♟', // Black Pawns (second row from the top)
+        '6': '♙', // White Pawns
+        '1': '♟', // Black Pawns
         '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
         '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
     };
@@ -65,9 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         switch (pieceType) {
             case '♙': // White pawn
-                return endX === startX && endY === startY + 1;
+                if (startX === endX && endY === startY + 1 && !destinationSquare.hasChildNodes()) return true; // One-square move
+                if (startX === endX && startY === 6 && endY === 4 && !destinationSquare.hasChildNodes()) return true; // Two-square move from start
+                if (Math.abs(startX - endX) === 1 && endY === startY + 1 && destinationSquare.hasChildNodes()) return true; // Diagonal capture
+                return false;
             case '♟': // Black pawn
-                return endX === startX && endY === startY - 1;
+                if (startX === endX && endY === startY - 1 && !destinationSquare.hasChildNodes()) return true; // One-square move
+                if (startX === endX && startY === 1 && endY === 3 && !destinationSquare.hasChildNodes()) return true; // Two-square move from start
+                if (Math.abs(startX - endX) === 1 && endY === startY - 1 && destinationSquare.hasChildNodes()) return true; // Diagonal capture
+                return false;
             case '♖': case '♜': // Rook
                 return startX === endX || startY === endY;
             case '♘': case '♞': // Knight
@@ -99,10 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             switch (pieceType) {
                 case '♙': // White pawn
-                    if (x === startX && y === startY + 1) square.classList.add('highlight');
+                    if (x === startX && y === startY + 1 && !square.hasChildNodes()) square.classList.add('highlight');
+                    if (x === startX && y === startY + 2 && startY === 6 && !square.hasChildNodes()) square.classList.add('highlight');
+                    if (Math.abs(x - startX) === 1 && y === startY + 1 && square.hasChildNodes()) square.classList.add('highlight');
                     break;
                 case '♟': // Black pawn
-                    if (x === startX && y === startY - 1) square.classList.add('highlight');
+                    if (x === startX && y === startY - 1 && !square.hasChildNodes()) square.classList.add('highlight');
+                    if (x === startX && y === startY - 2 && startY === 1 && !square.hasChildNodes()) square.classList.add('highlight');
+                    if (Math.abs(x - startX) === 1 && y === startY - 1 && square.hasChildNodes()) square.classList.add('highlight');
                     break;
                 case '♖': case '♜': // Rook
                     if (x === startX || y === startY) square.classList.add('highlight');
