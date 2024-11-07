@@ -35,41 +35,83 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle piece movement
     board.addEventListener('click', (e) => {
         const square = e.target.closest('.square');
-        if (!square) return; // Clicked outside the board
+        if (!square) return;
 
-        if (square.children.length > 0) { // A piece exists here
-            // If there's no piece selected or a different piece is clicked, select this piece
+        if (square.children.length > 0 && square.firstChild.classList.contains('piece')) { // A piece exists here
             if (!selectedPiece || selectedPiece !== e.target) {
-                selectedPiece = e.target;
-                highlightMoves(selectedPiece); // Highlighting possible moves is not implemented here
+                removeHighlight();
+                selectedPiece = square.firstChild;
+                highlightMoves(selectedPiece, square); // Highlight moves
             } else {
-                // Deselect if clicking same piece again
-                removeHighlight(); // Remove any previous highlighting
+                removeHighlight();
                 selectedPiece = null;
             }
         } else if (selectedPiece) {
-            // Move the selected piece here if it's a valid move (this is where you'd check for legal moves)
-            if (isValidMove(selectedPiece, square)) { // Placeholder function
+            if (isValidMove(selectedPiece, square)) {
                 square.appendChild(selectedPiece);
-                removeHighlight(); // Remove any highlighting after move
-                selectedPiece = null; // Deselect the piece after moving
+                removeHighlight();
+                selectedPiece = null;
             }
         }
     });
 
-    // Placeholder functions for move validation and highlighting
+    // Valid move checker for different pieces
     function isValidMove(piece, destinationSquare) {
-        // Here you would implement the chess rules for valid moves
-        // This is a very simplified example that just allows any move
-        return true;
+        const pieceType = piece.textContent;
+        const startX = parseInt(piece.parentElement.getAttribute('data-x'));
+        const startY = parseInt(piece.parentElement.getAttribute('data-y'));
+        const endX = parseInt(destinationSquare.getAttribute('data-x'));
+        const endY = parseInt(destinationSquare.getAttribute('data-y'));
+
+        switch (pieceType) {
+            case '♙': // White pawn
+                return endX === startX && endY === startY + 1;
+            case '♟': // Black pawn
+                return endX === startX && endY === startY - 1;
+            case '♖': case '♜': // Rook
+                return (startX === endX || startY === endY);
+            case '♘': case '♞': // Knight
+                return (Math.abs(startX - endX) === 2 && Math.abs(startY - endY) === 1) ||
+                       (Math.abs(startX - endX) === 1 && Math.abs(startY - endY) === 2);
+            default:
+                return false;
+        }
     }
 
-    function highlightMoves(piece) {
-        // Here you would implement highlighting logic for possible moves
-        console.log("Highlighting moves for ", piece);
+    // Highlight possible moves for each piece
+    function highlightMoves(piece, startSquare) {
+        const pieceType = piece.textContent;
+        const startX = parseInt(startSquare.getAttribute('data-x'));
+        const startY = parseInt(startSquare.getAttribute('data-y'));
+
+        removeHighlight();
+
+        squares.forEach(square => {
+            const x = parseInt(square.getAttribute('data-x'));
+            const y = parseInt(square.getAttribute('data-y'));
+
+            switch (pieceType) {
+                case '♙': // White pawn
+                    if (x === startX && y === startY + 1) square.classList.add('highlight');
+                    break;
+                case '♟': // Black pawn
+                    if (x === startX && y === startY - 1) square.classList.add('highlight');
+                    break;
+                case '♖': case '♜': // Rook
+                    if (x === startX || y === startY) square.classList.add('highlight');
+                    break;
+                case '♘': case '♞': // Knight
+                    if ((Math.abs(startX - x) === 2 && Math.abs(startY - y) === 1) ||
+                        (Math.abs(startX - x) === 1 && Math.abs(startY - y) === 2)) {
+                        square.classList.add('highlight');
+                    }
+                    break;
+            }
+        });
     }
 
+    // Remove highlights from the board
     function removeHighlight() {
-        // Remove any highlighting from the board
+        squares.forEach(sq => sq.classList.remove('highlight'));
     }
 });
