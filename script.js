@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (square.children.length > 0 && square.firstChild.classList.contains('piece')) { // A piece exists here
             if (!selectedPiece || selectedPiece !== e.target) {
-                if ((isWhiteTurn && square.firstChild.textContent === '♙') || (!isWhiteTurn && square.firstChild.textContent === '♟')) {
+                if ((isWhiteTurn && square.firstChild.textContent === '♙') || 
+                    (isWhiteTurn && square.firstChild.textContent === '♟')) {
                     removeHighlight();
                     selectedPiece = square.firstChild;
                     highlightMoves(selectedPiece, square); // Highlight moves
@@ -182,54 +183,67 @@ document.addEventListener('DOMContentLoaded', () => {
         const pieceType = piece.textContent;
         const startX = parseInt(startSquare.getAttribute('data-x'));
         const startY = parseInt(startSquare.getAttribute('data-y'));
+        const possibleMoves = [];
+        
+        // Move logic for each piece type
+        switch (pieceType) {
+            case '♙': // Pawn move
+                let direction = isWhiteTurn ? -1 : 1;
+                let startRow = startY;
+                let moveOneSquare = { x: startX, y: startY + direction };
+                let moveTwoSquares = { x: startX, y: startY + (direction * 2) };
+                // Pawn moves forward by 1 or 2 squares if not moved yet
+                if (moveOneSquare.y >= 0 && moveOneSquare.y < 8) {
+                    possibleMoves.push(moveOneSquare);
+                }
+                if (startRow === 6 && isWhiteTurn || startRow === 1 && !isWhiteTurn) {
+                    if (moveTwoSquares.y >= 0 && moveTwoSquares.y < 8) {
+                        possibleMoves.push(moveTwoSquares);
+                    }
+                }
+                break;
+            case '♘': // Knight move
+                const knightMoves = [
+                    { x: startX + 2, y: startY + 1 }, { x: startX + 2, y: startY - 1 },
+                    { x: startX - 2, y: startY + 1 }, { x: startX - 2, y: startY - 1 },
+                    { x: startX + 1, y: startY + 2 }, { x: startX + 1, y: startY - 2 },
+                    { x: startX - 1, y: startY + 2 }, { x: startX - 1, y: startY - 2 }
+                ];
+                knightMoves.forEach(move => {
+                    if (move.x >= 0 && move.x < 8 && move.y >= 0 && move.y < 8) {
+                        possibleMoves.push(move);
+                    }
+                });
+                break;
+            case '♗': // Bishop move
+                // Add logic for Bishop movement diagonally
+                break;
+            case '♖': // Rook move
+                // Add logic for Rook movement horizontally and vertically
+                break;
+            case '♕': // Queen move
+                // Add logic for Queen movement (combination of Rook and Bishop)
+                break;
+            case '♔': // King move
+                // Add logic for King movement (one square in any direction)
+                break;
+        }
 
-        removeHighlight();
-
-        squares.forEach(square => {
-            const x = parseInt(square.getAttribute('data-x'));
-            const y = parseInt(square.getAttribute('data-y'));
-
-            if (isValidMove(piece, square)) {
-                square.classList.add('highlight');
-            }
+        // Highlight the possible moves
+        possibleMoves.forEach(move => {
+            const square = document.querySelector(`[data-x="${move.x}"][data-y="${move.y}"]`);
+            square.classList.add('highlight');
         });
     }
 
-    // Validate move for each piece type
+    // Check if the move is valid for the piece
     function isValidMove(piece, square) {
         const pieceType = piece.textContent;
         const startX = parseInt(square.getAttribute('data-x'));
         const startY = parseInt(square.getAttribute('data-y'));
-        const pieceX = parseInt(piece.parentElement.getAttribute('data-x'));
-        const pieceY = parseInt(piece.parentElement.getAttribute('data-y'));
-        const hasMoved = piece.getAttribute('data-has-moved') === 'true';
-
-        if (pieceType === '♙' || pieceType === '♟') {
-            // White Pawn
-            if (pieceType === '♙') {
-                // Check for normal move (1 square forward)
-                if (startX === pieceX && startY === pieceY - 1) {
-                    return true;
-                }
-                // Check for first move (2 squares forward)
-                if (!hasMoved && startX === pieceX && startY === pieceY - 2) {
-                    return true;
-                }
-                return false;
-            }
-            // Black Pawn
-            if (pieceType === '♟') {
-                // Check for normal move (1 square forward)
-                if (startX === pieceX && startY === pieceY + 1) {
-                    return true;
-                }
-                // Check for first move (2 squares forward)
-                if (!hasMoved && startX === pieceX && startY === pieceY + 2) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        return true; // For other pieces (non-pawn), we can keep the default behavior.
+        
+        // Handle move validation for each piece type here (simplified)
+        return true; // Placeholder
     }
+
 });
