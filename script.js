@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('chessboard');
+    let selectedPiece = null;
 
     // Initialize the board
     for (let i = 0; i < 8; i++) {
@@ -24,24 +25,51 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.forEach(square => {
         const x = parseInt(square.getAttribute('data-x'));
         const y = parseInt(square.getAttribute('data-y'));
-        if (y === 1) {
-            square.innerHTML = `<div class="piece">${pieces[y]}</div>`; // White Pawns
-        } else if (y === 6) {
-            square.innerHTML = `<div class="piece">${pieces[y]}</div>`; // Black Pawns
+        if (y === 1 || y === 6) {
+            square.innerHTML = `<div class="piece">${pieces[y]}</div>`; 
         } else if (y === 0 || y === 7) {
-            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`; // Other pieces
+            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`;
         }
     });
 
-    // Handle piece movement (basic implementation)
+    // Handle piece movement
     board.addEventListener('click', (e) => {
-        if (e.target.classList.contains('piece')) {
-            const piece = e.target;
-            const square = piece.parentElement;
-            const x = parseInt(square.getAttribute('data-x'));
-            const y = parseInt(square.getAttribute('data-y'));
-            console.log(`Moving piece at (${x}, ${y})`);
-            // Here you would implement your game logic for moving pieces
+        const square = e.target.closest('.square');
+        if (!square) return; // Clicked outside the board
+
+        if (square.children.length > 0) { // A piece exists here
+            // If there's no piece selected or a different piece is clicked, select this piece
+            if (!selectedPiece || selectedPiece !== e.target) {
+                selectedPiece = e.target;
+                highlightMoves(selectedPiece); // Highlighting possible moves is not implemented here
+            } else {
+                // Deselect if clicking same piece again
+                removeHighlight(); // Remove any previous highlighting
+                selectedPiece = null;
+            }
+        } else if (selectedPiece) {
+            // Move the selected piece here if it's a valid move (this is where you'd check for legal moves)
+            if (isValidMove(selectedPiece, square)) { // Placeholder function
+                square.appendChild(selectedPiece);
+                removeHighlight(); // Remove any highlighting after move
+                selectedPiece = null; // Deselect the piece after moving
+            }
         }
     });
+
+    // Placeholder functions for move validation and highlighting
+    function isValidMove(piece, destinationSquare) {
+        // Here you would implement the chess rules for valid moves
+        // This is a very simplified example that just allows any move
+        return true;
+    }
+
+    function highlightMoves(piece) {
+        // Here you would implement highlighting logic for possible moves
+        console.log("Highlighting moves for ", piece);
+    }
+
+    function removeHighlight() {
+        // Remove any highlighting from the board
+    }
 });
