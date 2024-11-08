@@ -26,20 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const pieces = {
         '6': '♙', // White Pawns
         '1': '♟', // Black Pawns
-        '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
+        '0': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'], // White back row
         '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
     };
 
+    // Get all squares to place pieces
     let squares = board.querySelectorAll('.square');
-    squares.forEach(square => {
+    
+    // Loop over squares and place pieces
+    squares.forEach((square, idx) => {
         const x = parseInt(square.getAttribute('data-x'));
         const y = parseInt(square.getAttribute('data-y'));
+
+        // Place pawns on row 6 (white) and row 1 (black)
         if (y === 6) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // White Pawns
+            square.innerHTML = `<div class="piece">${pieces['6']}</div>`; // White Pawns
         } else if (y === 1) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // Black Pawns
-        } else if (y === 0 || y === 7) {
-            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`;
+            square.innerHTML = `<div class="piece">${pieces['1']}</div>`; // Black Pawns
+        } 
+
+        // Place pieces on the back rows (0 for white, 7 for black)
+        else if (y === 0) {
+            square.innerHTML = `<div class="piece">${pieces['0'][x]}</div>`; // White back row
+        } else if (y === 7) {
+            square.innerHTML = `<div class="piece">${pieces['7'][x]}</div>`; // Black back row
         }
     });
 
