@@ -172,8 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const startY = parseInt(piece.parentElement.getAttribute('data-y'));
                 for (let i = 0; i < 8; i++) {
                     for (let j = 0; j < 8; j++) {
-                        const destSquare = board.querySelector(`[data-x="${i}"][data-y="${j}"]`);
-                        if (isValidMove(piece, destSquare) && moveWillBeLegal(piece, destSquare)) {
+                        const destSquare = board.querySelector(`[data-x="${j}"][data-y="${i}"]`);
+                        if (isValidMove(piece, destSquare) && !moveWillBeLegal(piece.textContent, destSquare)) {
                             return false;
                         }
                     }
@@ -183,29 +183,38 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    function promotePawn(piece) {
-        const promotion = prompt("Promote pawn to (Q = Queen, R = Rook, B = Bishop, N = Knight):");
-        piece.innerHTML = {
-            'Q': isWhiteTurn ? '♕' : '♛',
-            'R': isWhiteTurn ? '♖' : '♖',
-            'B': isWhiteTurn ? '♗' : '♝',
-            'N': isWhiteTurn ? '♘' : '♞'
-        }[promotion.toUpperCase()] || piece.textContent;
+    function isValidMove(piece, square) {
+        const pieceText = piece.textContent;
+        const startX = parseInt(piece.parentElement.getAttribute('data-x'));
+        const startY = parseInt(piece.parentElement.getAttribute('data-y'));
+        const endX = parseInt(square.getAttribute('data-x'));
+        const endY = parseInt(square.getAttribute('data-y'));
+        
+        // Move logic for pawns
+        if (pieceText === '♙' || pieceText === '♟') {
+            return validPawnMove(piece, startX, startY, endX, endY);
+        }
+        return true;
     }
 
-    function highlightMoves(piece, square) {
-        // Add logic for each piece's move pattern (currently only for pawns)
-        const validMoves = getValidMoves(piece, square);
-        validMoves.forEach(move => {
-            move.style.backgroundColor = 'rgba(0, 255, 0, 0.5)'; // Highlight valid move
-        });
+    function validPawnMove(piece, startX, startY, endX, endY) {
+        const direction = piece.textContent === '♙' ? -1 : 1;
+        if (startX === endX && startY + direction === endY && !document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`).hasChildNodes()) {
+            return true; // Normal forward move
+        } else if (Math.abs(startX - endX) === 1 && startY + direction === endY && document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`).hasChildNodes()) {
+            return true; // Diagonal capture
+        }
+        return false;
     }
 
     function removeHighlight() {
-        board.querySelectorAll('.square').forEach(sq => sq.style.backgroundColor = '');
+        const highlighted = document.querySelectorAll('.highlight');
+        highlighted.forEach(square => square.classList.remove('highlight'));
     }
 
-    function isValidMove(piece, square) {
-        return true; // Implement actual move validation logic here
+    function highlightMoves(piece, square) {
+        const startX = parseInt(square.getAttribute('data-x'));
+        const startY = parseInt(square.getAttribute('data-y'));
+        // Add logic to highlight valid moves for the selected piece
     }
 });
