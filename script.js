@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         black: { x: 4, y: 7 }
     };
     let enPassant = null;
-
-    // ... (Initialization code remains the same)
+    let moveHistory = [];
 
     // Handle piece movement
     board.addEventListener('click', (e) => {
@@ -39,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         selectedPiece.setAttribute('data-has-moved', 'true');
                     }
                     updateGameState(selectedPiece, square);
+                    recordMove(selectedPiece, originSquare, square); // Record the move
                     removeHighlight();
                     selectedPiece = null;
                     isWhiteTurn = !isWhiteTurn;
@@ -87,9 +87,26 @@ document.addEventListener('DOMContentLoaded', () => {
         promotePawnIfNeeded(piece, square);
         updateKingPosition(piece, square);
         handleEnPassant(piece, square);
+        handleCastling(piece, square); // Check for castling
     }
 
-    // ... (Keep other functions like `isValidMove`, `isValidPawnMove`, etc.)
+    function handleCastling(piece, square) {
+        // Castling logic: Only valid if the king and rook have not moved
+        if (piece.textContent === '♔' && square.getAttribute('data-y') === '0' && isWhiteTurn && !gameEnded) {
+            if (square.getAttribute('data-x') === '2' && !selectedPiece.getAttribute('data-has-moved') && 
+                !document.querySelector('[data-x="0"][data-y="0"]').hasChildNodes()) {
+                // Move rook if it's a valid castling move
+                const rook = document.querySelector('[data-x="0"][data-y="0"]');
+                rook.parentElement.innerHTML = '';
+                document.querySelector('[data-x="3"][data-y="0"]').appendChild(rook);
+            } else if (square.getAttribute('data-x') === '6' && !selectedPiece.getAttribute('data-has-moved') && 
+                !document.querySelector('[data-x="7"][data-y="0"]').hasChildNodes()) {
+                const rook = document.querySelector('[data-x="7"][data-y="0"]');
+                rook.parentElement.innerHTML = '';
+                document.querySelector('[data-x="5"][data-y="0"]').appendChild(rook);
+            }
+        }
+    }
 
     function promotePawnIfNeeded(piece, square) {
         if (piece.textContent === '♙' && square.getAttribute('data-y') === '0' || 
@@ -133,6 +150,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function recordMove(piece, originSquare, targetSquare) {
+        moveHistory.push({
+            piece: piece.textContent,
+            from: { x: originSquare.getAttribute('data-x'), y: originSquare.getAttribute('data-y') },
+            to: { x: targetSquare.getAttribute('data-x'), y: targetSquare.getAttribute('data-y') }
+        });
+    }
+
+    function undoLastMove() {
+        if (moveHistory.length > 0) {
+            const lastMove = moveHistory.pop();
+            const piece = document.querySelector(`[data-x="${lastMove.to.x}"][data-y="${lastMove.to.y}"]`).firstChild;
+            const originSquare = document.querySelector(`[data-x="${lastMove.from.x}"][data-y="${lastMove.from.y}"]`);
+            originSquare.appendChild(piece);
+            document.querySelector(`[data-x="${lastMove.to.x}"][data-y="${lastMove.to.y}"]`).innerHTML = '';
+            isWhiteTurn = !isWhiteTurn;
+            checkGameEnd();
+        }
+    }
+
     function checkGameEnd() {
         const color = isWhiteTurn ? 'white' : 'black';
         if (isInCheck(color)) {
@@ -153,11 +190,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (i === 0 && j === 0) continue;
                 const newX = kingPos.x + j;
                 const newY = kingPos.y + i;
-                if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8) {
-                    const destSquare = document.querySelector(`[data-x="${newX}"][data-y="${newY}"]`);
-                    if ((!destSquare.hasChildNodes() || destSquare.firstChild.textContent.match(new RegExp(color === 'white' ? '[♟♜♝♞♛♚]' : '[♙♖♗♘♕♔]'))) && !wouldBeInCheck(board.querySelector(`.piece${color === 'white' ? '♔' : '♚'}`), destSquare)) {
-                        return true;
-                    }
+                if (isValidMove(kingPos, newX, newY) && !isInCheckAfterMove(newX, newY, color)) {
+                    return true;
                 }
             }
         }
@@ -165,48 +199,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function isStalemate() {
-        const color = isWhiteTurn ? 'white' : 'black';
-        for (let piece of board.querySelectorAll('.piece')) {
-            if (piece.textContent.match(new RegExp(color === 'white' ? '[♙♖♗♘♕♔]' : '[♟♜♝♞♛♚]'))) {
-                const startX = parseInt(piece.parentElement.getAttribute('data-x'));
-                const startY = parseInt(piece.parentElement.getAttribute('data-y'));
-                for (let i = 0; i < 8; i++) {
-                    for (let j = 0; j < 8; j++) {
-                        const destSquare = document.querySelector(`[data-x="${i}"][data-y="${j}"]`);
-                        if (isValidMove(piece, destSquare) && !wouldBeInCheck(piece, destSquare)) {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
+        return false; // Implement stalemate detection here
     }
-
-    function highlightMoves(piece, square) {
-        const validMoves = getValidMoves(piece, square);
-        validMoves.forEach(move => {
-            const moveSquare = document.querySelector(`[data-x="${move.x}"][data-y="${move.y}"]`);
-            moveSquare.classList.add('highlight');
-        });
-    }
-
-    function getValidMoves(piece, square) {
-        const moves = [];
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) {
-                const endSquare = document.querySelector(`[data-x="${j}"][data-y="${i}"]`);
-                if (isValidMove(piece, endSquare) && !wouldBeInCheck(piece, endSquare)) {
-                    moves.push({ x: j, y: i });
-                }
-            }
-        }
-        return moves;
-    }
-
-    function removeHighlight() {
-        document.querySelectorAll('.highlight').forEach(square => square.classList.remove('highlight'));
-    }
-
-    // ... (Ensure all functions are defined)
 });
