@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Place pieces correctly - Ensure pawns are placed only once
+    // Place pieces
     const pieces = {
         '6': '♙', // White Pawns
         '1': '♟', // Black Pawns
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.forEach(square => {
         const x = parseInt(square.getAttribute('data-x'));
         const y = parseInt(square.getAttribute('data-y'));
-        
+
         // Place pawns only in their initial rows
         if (y === 6 && !square.hasChildNodes()) {
             square.innerHTML = `<div class="piece" data-has-moved="false">${pieces['6']}</div>`; // White Pawns
