@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const board = document.getElementById('chessboard');
+    const board = document.getElementById('board');
     let selectedPiece = null;
     let isWhiteTurn = true;
     let gameEnded = false;
@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Place pieces
+    // Place all pieces correctly
     const pieces = {
         '6': '♙', // White Pawns
         '1': '♟', // Black Pawns
-        '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
+        '0': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'], // White back row
         '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
     };
 
@@ -32,16 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.forEach(square => {
         const x = parseInt(square.getAttribute('data-x'));
         const y = parseInt(square.getAttribute('data-y'));
-
-        // Place pawns only in their initial rows
-        if (y === 6 && !square.hasChildNodes()) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces['6']}</div>`; // White Pawns
-        } else if (y === 1 && !square.hasChildNodes()) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces['1']}</div>`; // Black Pawns
+        if (y === 6) {
+            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // White Pawns
+        } else if (y === 1) {
+            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // Black Pawns
         } else if (y === 0 || y === 7) {
-            if (!square.hasChildNodes()) {
-                square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`; // Place non-pawn pieces
-            }
+            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`;
         }
     });
 
@@ -66,13 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (selectedPiece) {
             if (isValidMove(selectedPiece, square)) {
                 const originSquare = selectedPiece.parentElement;
-
+                
                 // Move the piece to the new square
                 square.appendChild(selectedPiece);
-
+                
                 // Clear the original square
                 originSquare.innerHTML = '';
-
+                
                 if (selectedPiece.getAttribute('data-has-moved') === 'false') {
                     selectedPiece.setAttribute('data-has-moved', 'true');
                 }
@@ -86,6 +82,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    function moveWillBeLegal(piece, square) {
+        const color = piece.textContent.match(/[♙♖♗♘♕♔]/) ? 'white' : 'black';
+        const tempPiece = piece.cloneNode(true);
+        const origin = piece.parentElement;
+        square.appendChild(tempPiece);
+        const kingInCheck = isInCheck(color);
+        square.removeChild(tempPiece);
+        origin.appendChild(tempPiece);
+        return !kingInCheck;
+    }
 
     function promotePawnIfNeeded(piece, square) {
         if ((piece.textContent === '♙' && parseInt(square.getAttribute('data-y')) === 0) || 
@@ -172,8 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const startY = parseInt(piece.parentElement.getAttribute('data-y'));
                 for (let i = 0; i < 8; i++) {
                     for (let j = 0; j < 8; j++) {
-                        const destSquare = board.querySelector(`[data-x="${j}"][data-y="${i}"]`);
-                        if (isValidMove(piece, destSquare) && !moveWillBeLegal(piece.textContent, destSquare)) {
+                        if (isValidMove(piece, board.querySelector(`[data-x="${j}"][data-y="${i}"]`))) {
                             return false;
                         }
                     }
@@ -183,38 +189,19 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    function isValidMove(piece, square) {
-        const pieceText = piece.textContent;
-        const startX = parseInt(piece.parentElement.getAttribute('data-x'));
-        const startY = parseInt(piece.parentElement.getAttribute('data-y'));
-        const endX = parseInt(square.getAttribute('data-x'));
-        const endY = parseInt(square.getAttribute('data-y'));
-        
-        // Move logic for pawns
-        if (pieceText === '♙' || pieceText === '♟') {
-            return validPawnMove(piece, startX, startY, endX, endY);
-        }
-        return true;
-    }
-
-    function validPawnMove(piece, startX, startY, endX, endY) {
-        const direction = piece.textContent === '♙' ? -1 : 1;
-        if (startX === endX && startY + direction === endY && !document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`).hasChildNodes()) {
-            return true; // Normal forward move
-        } else if (Math.abs(startX - endX) === 1 && startY + direction === endY && document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`).hasChildNodes()) {
-            return true; // Diagonal capture
-        }
-        return false;
+    function highlightMoves(piece, square) {
+        const x = parseInt(square.getAttribute('data-x'));
+        const y = parseInt(square.getAttribute('data-y'));
+        // You can add logic for highlighting possible moves here based on piece type and logic.
     }
 
     function removeHighlight() {
         const highlighted = document.querySelectorAll('.highlight');
-        highlighted.forEach(square => square.classList.remove('highlight'));
+        highlighted.forEach(el => el.classList.remove('highlight'));
     }
 
-    function highlightMoves(piece, square) {
-        const startX = parseInt(square.getAttribute('data-x'));
-        const startY = parseInt(square.getAttribute('data-y'));
-        // Add logic to highlight valid moves for the selected piece
+    function isValidMove(piece, square) {
+        // Check logic here for all piece types (Rooks, Knights, Bishops, Pawns, Kings, Queens)
+        return true; // Placeholder
     }
 });
