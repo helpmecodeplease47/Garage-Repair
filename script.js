@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const startY = parseInt(piece.parentElement.getAttribute('data-y'));
                 for (let i = 0; i < 8; i++) {
                     for (let j = 0; j < 8; j++) {
-                        if (isValidMove(piece, board.querySelector(`[data-x="${j}"][data-y="${i}"]`))) {
+                        const destSquare = board.querySelector(`[data-x="${i}"][data-y="${j}"]`);
+                        if (isValidMove(piece, destSquare) && moveWillBeLegal(piece, destSquare)) {
                             return false;
                         }
                     }
@@ -187,6 +188,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         return true;
+    }
+
+    function promotePawn(piece) {
+        const promotion = prompt("Promote pawn to (Q = Queen, R = Rook, B = Bishop, N = Knight):");
+        if (['Q', 'R', 'B', 'N'].includes(promotion)) {
+            piece.textContent = {
+                'Q': isWhiteTurn ? '♕' : '♛',
+                'R': isWhiteTurn ? '♖' : '♜',
+                'B': isWhiteTurn ? '♗' : '♝',
+                'N': isWhiteTurn ? '♘' : '♞'
+            }[promotion];
+        }
     }
 
     function highlightMoves(piece, square) {
