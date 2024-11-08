@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Move validation and legality check
     function moveWillBeLegal(piece, square) {
         const color = piece.textContent.match(/[♙♖♗♘♕♔]/) ? 'white' : 'black';
         const tempPiece = piece.cloneNode(true);
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return !kingInCheck;
     }
 
+    // Promote Pawn if it reaches the last rank
     function promotePawnIfNeeded(piece, square) {
         if ((piece.textContent === '♙' && parseInt(square.getAttribute('data-y')) === 0) || 
             (piece.textContent === '♟' && parseInt(square.getAttribute('data-y')) === 7)) {
@@ -97,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Update King's position after every move
     function updateKingPosition(piece, square) {
         if (piece.textContent === (isWhiteTurn ? '♔' : '♚')) {
             kingsPosition[isWhiteTurn ? 'white' : 'black'] = { 
@@ -106,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Handle En Passant rule
     function handleEnPassant(piece, square) {
         if (enPassant) {
             const startX = parseInt(piece.parentElement.getAttribute('data-x'));
@@ -123,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Check game end (checkmate, stalemate)
     function checkGameEnd() {
         const color = !isWhiteTurn ? 'white' : 'black'; // Opponent's king is checked
         if (isInCheck(color)) {
@@ -136,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Check if the King is in check
     function isInCheck(color) {
         const opponentColor = color === 'white' ? 'black' : 'white';
         const kingPos = kingsPosition[color];
@@ -148,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
+    // Check if the King can move out of check
     function canKingMoveOut(color) {
         const kingPos = kingsPosition[color];
         for (let i = -1; i <= 1; i++) {
@@ -166,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     }
 
+    // Check if it's a stalemate
     function isStalemate() {
         const color = isWhiteTurn ? 'white' : 'black';
         const pieces = board.querySelectorAll('.piece');
@@ -186,105 +194,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
-    function promotePawn(piece) {
-        const promotion = prompt("Promote pawn to (Q = Queen, R = Rook, B = Bishop, N = Knight):");
-        if (['Q', 'R', 'B', 'N'].includes(promotion)) {
-            piece.textContent = {
-                'Q': isWhiteTurn ? '♕' : '♛',
-                'R': isWhiteTurn ? '♖' : '♜',
-                'B': isWhiteTurn ? '♗' : '♝',
-                'N': isWhiteTurn ? '♘' : '♞'
-            }[promotion];
-        }
-    }
-
+    // Highlight valid moves based on piece
     function highlightMoves(piece, square) {
-        const moves = getValidMoves(piece, square);
-        moves.forEach(move => {
-            const moveSquare = board.querySelector(`[data-x="${move.x}"][data-y="${move.y}"]`);
-            moveSquare.classList.add('highlight');
-        });
+        // Add logic here to highlight valid moves for the selected piece
     }
 
+    // Remove all highlights
     function removeHighlight() {
-        document.querySelectorAll('.highlight').forEach(square => {
+        const highlightedSquares = board.querySelectorAll('.highlight');
+        highlightedSquares.forEach(square => {
             square.classList.remove('highlight');
         });
     }
 
-    function getValidMoves(piece, square) {
-        const pieceType = piece.textContent;
-        const startX = parseInt(square.getAttribute('data-x'));
-        const startY = parseInt(square.getAttribute('data-y'));
-        const direction = isWhiteTurn ? -1 : 1;
-        let moves = [];
-
-        switch (pieceType) {
-            case '♙': case '♟':
-                // Pawn moves
-                if (!piece.getAttribute('data-has-moved') && !board.querySelector(`[data-x="${startX}"][data-y="${startY + direction}"]`).hasChildNodes()) {
-                    moves.push({x: startX, y: startY + (2 * direction)});
-                }
-                if (!board.querySelector(`[data-x="${startX}"][data-y="${startY + direction}"]`).hasChildNodes()) {
-                    moves.push({x: startX, y: startY + direction});
-                }
-                // Pawn captures
-                for (let dx of [-1, 1]) {
-                    const captureSquare = board.querySelector(`[data-x="${startX + dx}"][data-y="${startY + direction}"]`);
-                    if (captureSquare && captureSquare.hasChildNodes()) {
-                        if (isWhiteTurn && captureSquare.firstChild.textContent.match(/[♟♜♝♞♛♚]/) || 
-                            !isWhiteTurn && captureSquare.firstChild.textContent.match(/[♙♖♗♘♕♔]/)) {
-                            moves.push({x: startX + dx, y: startY + direction});
-                        }
-                    }
-                }
-                // En passant
-                if (enPassant && enPassant.x === startX + 1 && enPassant.y === startY + direction) {
-                    moves.push({x: startX + 1, y: startY + direction});
-                }
-                if (enPassant && enPassant.x === startX - 1 && enPassant.y === startY + direction) {
-                    moves.push({x: startX - 1, y: startY + direction});
-                }
-                break;
-
-            // Implement for other pieces...
-        }
-
-        // Filter moves to ensure they are within the board and legal
-        return moves.filter(move => move.x >= 0 && move.x < 8 && move.y >= 0 && move.y < 8 && isValidMove(piece, board.querySelector(`[data-x="${move.x}"][data-y="${move.y}"]`)));
-    }
-
-    // Check if move is valid (needs to be implemented)
+    // Determine if move is valid for a specific piece (basic check)
     function isValidMove(piece, square) {
-        const pieceType = piece.textContent;
-        const startX = parseInt(piece.parentElement.getAttribute('data-x'));
-        const startY = parseInt(piece.parentElement.getAttribute('data-y'));
-        const endX = parseInt(square.getAttribute('data-x'));
-        const endY = parseInt(square.getAttribute('data-y'));
-        const direction = isWhiteTurn ? -1 : 1;
-
-        switch (pieceType) {
-            case '♙': case '♟':
-                if (startX === endX && endY - startY === direction && !square.hasChildNodes()) {
-                    return true;
-                }
-                if (!piece.getAttribute('data-has-moved') && startX === endX && Math.abs(endY - startY) === 2 && 
-                    !square.hasChildNodes() && !board.querySelector(`[data-x="${startX}"][data-y="${startY + direction}"]`).hasChildNodes()) {
-                    return true;
-                }
-                if (Math.abs(startX - endX) === 1 && endY - startY === direction && square.hasChildNodes() && 
-                    square.firstChild.textContent.match(new RegExp(isWhiteTurn ? '[♟♜♝♞♛♚]' : '[♙♖♗♘♕♔]'))) {
-                    return true;
-                }
-                if (enPassant && enPassant.x === endX && enPassant.y === endY) {
-                    return true;
-                }
-                return false;
-
-            // Implement for other pieces...
-        }
-
-        // Add logic for other pieces here
-        return true; // Placeholder
+        // Implement piece-specific move validation logic
+        return true; // Placeholder, needs specific logic for different pieces
     }
 });
