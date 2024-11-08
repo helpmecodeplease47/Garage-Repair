@@ -111,13 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function isValidPawnMove(piece, startX, startY, endX, endY) {
         const direction = piece.textContent === '♙' ? -1 : 1;
+        const startRow = piece.textContent === '♙' ? 6 : 1;
+        const targetSquare = document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`);
+
         // Regular move
-        if (startX === endX && !document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`).hasChildNodes() && endY - startY === direction) {
+        if (startX === endX && !targetSquare.hasChildNodes() && endY - startY === direction) {
             return true;
         }
+
+        // Double move from starting position
+        if (startX === endX && !targetSquare.hasChildNodes() && !document.querySelector(`[data-x="${endX}"][data-y="${endY - direction}"]`).hasChildNodes() && endY - startY === 2 * direction && startY === startRow) {
+            return true;
+        }
+
         // Capture move
         if (Math.abs(startX - endX) === 1 && endY - startY === direction) {
-            const targetSquare = document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`);
             if (targetSquare && targetSquare.hasChildNodes()) {
                 return true;
             }
@@ -126,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function isValidRookMove(startX, startY, endX, endY) {
-        // Rooks can move horizontally or vertically, but not through other pieces
         if (startX !== endX && startY !== endY) return false;
         if (startX === endX) {
             const step = startY < endY ? 1 : -1;
@@ -149,12 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function isValidKnightMove(startX, startY, endX, endY) {
-        // Knights move in an "L" shape
         return (Math.abs(startX - endX) === 2 && Math.abs(startY - endY) === 1) || (Math.abs(startX - endX) === 1 && Math.abs(startY - endY) === 2);
     }
 
     function isValidBishopMove(startX, startY, endX, endY) {
-        // Bishops move diagonally
         if (Math.abs(startX - endX) === Math.abs(startY - endY)) {
             const stepX = startX < endX ? 1 : -1;
             const stepY = startY < endY ? 1 : -1;
