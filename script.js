@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const board = document.getElementById('chessboard');
-    const undoBtn = document.getElementById('undoBtn');
     let selectedPiece = null;
     let isWhiteTurn = true;
     let gameEnded = false;
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         black: { x: 4, y: 7 }
     };
     let enPassant = null;
-    let moveHistory = []; // Store the history of moves for undo
 
     // Initialize the board
     for (let i = 0; i < 8; i++) {
@@ -26,30 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const pieces = {
         '6': '♙', // White Pawns
         '1': '♟', // Black Pawns
-        '0': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖'], // White back row
+        '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
         '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
     };
 
-    // Get all squares to place pieces
     let squares = board.querySelectorAll('.square');
-    
-    // Loop over squares and place pieces
-    squares.forEach((square, idx) => {
+    squares.forEach(square => {
         const x = parseInt(square.getAttribute('data-x'));
         const y = parseInt(square.getAttribute('data-y'));
-
-        // Place pawns on row 6 (white) and row 1 (black)
         if (y === 6) {
-            square.innerHTML = `<div class="piece">${pieces['6']}</div>`; // White Pawns
+            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // White Pawns
         } else if (y === 1) {
-            square.innerHTML = `<div class="piece">${pieces['1']}</div>`; // Black Pawns
-        } 
-
-        // Place pieces on the back rows (0 for white, 7 for black)
-        else if (y === 0) {
-            square.innerHTML = `<div class="piece">${pieces['0'][x]}</div>`; // White back row
-        } else if (y === 7) {
-            square.innerHTML = `<div class="piece">${pieces['7'][x]}</div>`; // Black back row
+            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // Black Pawns
+        } else if (y === 0 || y === 7) {
+            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`;
         }
     });
 
@@ -75,13 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isValidMove(selectedPiece, square)) {
                 const originSquare = selectedPiece.parentElement;
                 
-                // Save the move to history for undo
-                moveHistory.push({
-                    piece: selectedPiece,
-                    from: { x: parseInt(originSquare.getAttribute('data-x')), y: parseInt(originSquare.getAttribute('data-y')) },
-                    to: { x: parseInt(square.getAttribute('data-x')), y: parseInt(square.getAttribute('data-y')) }
-                });
-
                 // Move the piece to the new square
                 square.appendChild(selectedPiece);
                 
@@ -100,23 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 checkGameEnd();
             }
         }
-    });
-
-    // Undo the last move
-    undoBtn.addEventListener('click', () => {
-        if (moveHistory.length === 0) return;
-
-        const lastMove = moveHistory.pop();
-        const { piece, from, to } = lastMove;
-        const fromSquare = document.querySelector(`[data-x="${from.x}"][data-y="${from.y}"]`);
-        const toSquare = document.querySelector(`[data-x="${to.x}"][data-y="${to.y}"]`);
-        
-        // Move the piece back to its original position
-        fromSquare.appendChild(piece);
-        toSquare.innerHTML = ''; // Clear the target square
-        
-        // Update game state
-        isWhiteTurn = !isWhiteTurn; // Reverse the turn
     });
 
     // Check if a move is valid for the piece
@@ -156,23 +120,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Double move from starting position
-        if (startX === endX && !targetSquare.hasChildNodes() && !document.querySelector(`[data-x="${endX}"][data-y="${endY - direction}"]`).hasChildNodes() && endY - startY === direction * 2) {
-            return startY === startRow;
+        if (startX === endX && !targetSquare.hasChildNodes() && !document.querySelector(`[data-x="${endX}"][data-y="${endY - direction}"]`).hasChildNodes() && endY - startY === 2 * direction && startY === startRow) {
+            return true;
         }
 
+        // Capture move
+        if (Math.abs(startX - endX) === 1 && endY - startY === direction) {
+            if (targetSquare && targetSquare.hasChildNodes()) {
+                return true;
+            }
+        }
         return false;
     }
 
     function isValidRookMove(startX, startY, endX, endY) {
-        // Rook move logic here
+        if (startX !== endX && startY !== endY) return false;
+        if (startX === endX) {
+            const step = startY < endY ? 1 : -1;
+            for (let y = startY + step; y !== endY; y += step) {
+                if (document.querySelector(`[data-x="${startX}"][data-y="${y}"]`).hasChildNodes()) {
+                    return false;
+                }
+            }
+            return true;
+        } else if (startY === endY) {
+            const step = startX < endX ? 1 : -1;
+            for (let x = startX + step; x !== endX; x += step) {
+                if (document.querySelector(`[data-x="${x}"][data-y="${startY}"]`).hasChildNodes()) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     function isValidKnightMove(startX, startY, endX, endY) {
-        // Knight move logic here
+        return (Math.abs(startX - endX) === 2 && Math.abs(startY - endY) === 1) || (Math.abs(startX - endX) === 1 && Math.abs(startY - endY) === 2);
     }
 
     function isValidBishopMove(startX, startY, endX, endY) {
-        // Bishop move logic here
+        if (Math.abs(startX - endX) === Math.abs(startY - endY)) {
+            const stepX = startX < endX ? 1 : -1;
+            const stepY = startY < endY ? 1 : -1;
+            let x = startX + stepX;
+            let y = startY + stepY;
+            while (x !== endX && y !== endY) {
+                if (document.querySelector(`[data-x="${x}"][data-y="${y}"]`).hasChildNodes()) {
+                    return false;
+                }
+                x += stepX;
+                y += stepY;
+            }
+            return true;
+        }
+        return false;
     }
 
     function isValidQueenMove(startX, startY, endX, endY) {
@@ -206,16 +208,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function checkGameEnd() {
+        if (gameEnded) return;
+        // Add conditions for stalemate, check, or checkmate
+    }
+
     function removeHighlight() {
         squares.forEach(square => square.classList.remove('highlight'));
     }
 
     function highlightMoves(piece, square) {
-        // Add logic to highlight valid moves
-    }
-
-    function checkGameEnd() {
-        if (gameEnded) return;
-        // Check for check, checkmate, stalemate
+        const pieceType = piece.textContent;
+        const x = parseInt(square.getAttribute('data-x'));
+        const y = parseInt(square.getAttribute('data-y'));
+        // Logic to highlight valid moves goes here
     }
 });
