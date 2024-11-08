@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Place all pieces correctly
+    // Place pieces correctly - Ensure pawns are placed only once
     const pieces = {
         '6': '♙', // White Pawns
         '1': '♟', // Black Pawns
@@ -32,12 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     squares.forEach(square => {
         const x = parseInt(square.getAttribute('data-x'));
         const y = parseInt(square.getAttribute('data-y'));
-        if (y === 6) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // White Pawns
-        } else if (y === 1) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // Black Pawns
+        
+        // Place pawns only in their initial rows
+        if (y === 6 && !square.hasChildNodes()) {
+            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces['6']}</div>`; // White Pawns
+        } else if (y === 1 && !square.hasChildNodes()) {
+            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces['1']}</div>`; // Black Pawns
         } else if (y === 0 || y === 7) {
-            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`;
+            if (!square.hasChildNodes()) {
+                square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`; // Place non-pawn pieces
+            }
         }
     });
 
@@ -181,18 +185,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function promotePawn(piece) {
         const promotion = prompt("Promote pawn to (Q = Queen, R = Rook, B = Bishop, N = Knight):");
-        if (['Q', 'R', 'B', 'N'].includes(promotion)) {
-            piece.textContent = {
-                'Q': isWhiteTurn ? '♕' : '♛',
-                'R': isWhiteTurn ? '♖' : '♖',
-                'B': isWhiteTurn ? '♗' : '♝',
-                'N': isWhiteTurn ? '♘' : '♞'
-            }[promotion];
-        }
+        piece.innerHTML = {
+            'Q': isWhiteTurn ? '♕' : '♛',
+            'R': isWhiteTurn ? '♖' : '♖',
+            'B': isWhiteTurn ? '♗' : '♝',
+            'N': isWhiteTurn ? '♘' : '♞'
+        }[promotion.toUpperCase()] || piece.textContent;
     }
 
     function highlightMoves(piece, square) {
-        // Example: Add logic for each piece's move pattern (currently only for pawns)
+        // Add logic for each piece's move pattern (currently only for pawns)
         const validMoves = getValidMoves(piece, square);
         validMoves.forEach(move => {
             move.style.backgroundColor = 'rgba(0, 255, 0, 0.5)'; // Highlight valid move
