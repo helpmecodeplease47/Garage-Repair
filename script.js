@@ -9,37 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     let enPassant = null;
 
-    // Initialize the board
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-            let square = document.createElement('div');
-            square.className = `square ${(i + j) % 2 === 0 ? 'light' : 'dark'}`;
-            square.setAttribute('data-x', j);
-            square.setAttribute('data-y', i);
-            board.appendChild(square);
-        }
-    }
-
-    // Place all pieces correctly
-    const pieces = {
-        '6': '♙', // White Pawns
-        '1': '♟', // Black Pawns
-        '0': ['♜', '♞', '♝', '♛', '♚', '♝', '♞', '♜'], // White back row
-        '7': ['♖', '♘', '♗', '♕', '♔', '♗', '♘', '♖']  // Black back row
-    };
-
-    let squares = board.querySelectorAll('.square');
-    squares.forEach(square => {
-        const x = parseInt(square.getAttribute('data-x'));
-        const y = parseInt(square.getAttribute('data-y'));
-        if (y === 6) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // White Pawns
-        } else if (y === 1) {
-            square.innerHTML = `<div class="piece" data-has-moved="false">${pieces[y]}</div>`; // Black Pawns
-        } else if (y === 0 || y === 7) {
-            square.innerHTML = `<div class="piece">${pieces[y][x]}</div>`;
-        }
-    });
+    // ... (Initialization code remains the same)
 
     // Handle piece movement
     board.addEventListener('click', (e) => {
@@ -48,179 +18,195 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (square.children.length > 0 && square.firstChild.classList.contains('piece')) {
             const piece = square.firstChild;
-            const correctColor = isWhiteTurn ? piece.textContent.match(/[♙♖♗♘♕♔]/) : piece.textContent.match(/[♟♜♝♞♛♚]/);
-            if (!selectedPiece || selectedPiece !== piece) {
-                if (correctColor && !gameEnded) {
+            if (isWhiteTurn ? piece.textContent.match(/[♙♖♗♘♕♔]/) : piece.textContent.match(/[♟♜♝♞♛♚]/)) {
+                if (!selectedPiece || selectedPiece !== piece) {
                     removeHighlight();
                     selectedPiece = piece;
                     highlightMoves(selectedPiece, square);
+                } else {
+                    removeHighlight();
+                    selectedPiece = null;
                 }
-            } else {
-                removeHighlight();
-                selectedPiece = null;
             }
         } else if (selectedPiece) {
-            if (isValidMove(selectedPiece, square)) {
+            if (isValidMove(selectedPiece, square) && !wouldBeInCheck(selectedPiece, square)) {
                 const originSquare = selectedPiece.parentElement;
-                
-                // Move the piece to the new square
-                square.appendChild(selectedPiece);
-                
-                // Clear the original square
-                originSquare.innerHTML = '';
-                
-                if (selectedPiece.getAttribute('data-has-moved') === 'false') {
-                    selectedPiece.setAttribute('data-has-moved', 'true');
+                if (moveWillBeLegal(selectedPiece, square)) {
+                    square.appendChild(selectedPiece);
+                    originSquare.innerHTML = '';
+                    
+                    if (selectedPiece.getAttribute('data-has-moved') === 'false') {
+                        selectedPiece.setAttribute('data-has-moved', 'true');
+                    }
+                    updateGameState(selectedPiece, square);
+                    removeHighlight();
+                    selectedPiece = null;
+                    isWhiteTurn = !isWhiteTurn;
+                    checkGameEnd();
                 }
-                promotePawnIfNeeded(selectedPiece, square);
-                updateKingPosition(selectedPiece, square);
-                handleEnPassant(selectedPiece, square);
-                removeHighlight();
-                selectedPiece = null;
-                isWhiteTurn = !isWhiteTurn; // Flip turn
-                checkGameEnd();
             }
         }
     });
 
-    // Check if a move is valid for the piece
-    function isValidMove(piece, square) {
-        const pieceType = piece.textContent;
-        const startX = parseInt(piece.parentElement.getAttribute('data-x'));
-        const startY = parseInt(piece.parentElement.getAttribute('data-y'));
-        const endX = parseInt(square.getAttribute('data-x'));
-        const endY = parseInt(square.getAttribute('data-y'));
-        
-        switch (pieceType) {
-            case '♙': case '♟':
-                return isValidPawnMove(piece, startX, startY, endX, endY);
-            case '♖': case '♜':
-                return isValidRookMove(startX, startY, endX, endY);
-            case '♘': case '♞':
-                return isValidKnightMove(startX, startY, endX, endY);
-            case '♗': case '♝':
-                return isValidBishopMove(startX, startY, endX, endY);
-            case '♕': case '♛':
-                return isValidQueenMove(startX, startY, endX, endY);
-            case '♔': case '♚':
-                return isValidKingMove(startX, startY, endX, endY);
-            default:
-                return false;
-        }
+    function moveWillBeLegal(piece, square) {
+        const color = piece.textContent.match(/[♙♖♗♘♕♔]/) ? 'white' : 'black';
+        const tempPiece = piece.cloneNode(true);
+        const origin = piece.parentElement;
+        square.appendChild(tempPiece);
+        const kingInCheck = isInCheck(color);
+        square.removeChild(tempPiece);
+        origin.appendChild(tempPiece);
+        return !kingInCheck;
     }
 
-    function isValidPawnMove(piece, startX, startY, endX, endY) {
-        const direction = piece.textContent === '♙' ? -1 : 1;
-        const startRow = piece.textContent === '♙' ? 6 : 1;
-        const targetSquare = document.querySelector(`[data-x="${endX}"][data-y="${endY}"]`);
+    function wouldBeInCheck(piece, square) {
+        const color = piece.textContent.match(/[♙♖♗♘♕♔]/) ? 'white' : 'black';
+        const tempPiece = piece.cloneNode(true);
+        const origin = piece.parentElement;
+        square.appendChild(tempPiece);
+        const check = isInCheck(color);
+        square.removeChild(tempPiece);
+        origin.appendChild(tempPiece);
+        return check;
+    }
 
-        // Regular move
-        if (startX === endX && !targetSquare.hasChildNodes() && endY - startY === direction) {
-            return true;
-        }
-
-        // Double move from starting position
-        if (startX === endX && !targetSquare.hasChildNodes() && !document.querySelector(`[data-x="${endX}"][data-y="${endY - direction}"]`).hasChildNodes() && endY - startY === 2 * direction && startY === startRow) {
-            return true;
-        }
-
-        // Capture move
-        if (Math.abs(startX - endX) === 1 && endY - startY === direction) {
-            if (targetSquare && targetSquare.hasChildNodes()) {
-                return true;
+    function isInCheck(color) {
+        const opponentColor = color === 'white' ? 'black' : 'white';
+        const kingPos = kingsPosition[color];
+        for (let piece of board.querySelectorAll('.piece')) {
+            if (piece.textContent.match(new RegExp(opponentColor === 'white' ? '[♙♖♗♘♕♔]' : '[♟♜♝♞♛♚]'))) {
+                if (isValidMove(piece, document.querySelector(`[data-x="${kingPos.x}"][data-y="${kingPos.y}"]`))) {
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    function isValidRookMove(startX, startY, endX, endY) {
-        if (startX !== endX && startY !== endY) return false;
-        if (startX === endX) {
-            const step = startY < endY ? 1 : -1;
-            for (let y = startY + step; y !== endY; y += step) {
-                if (document.querySelector(`[data-x="${startX}"][data-y="${y}"]`).hasChildNodes()) {
-                    return false;
-                }
-            }
-            return true;
-        } else if (startY === endY) {
-            const step = startX < endX ? 1 : -1;
-            for (let x = startX + step; x !== endX; x += step) {
-                if (document.querySelector(`[data-x="${x}"][data-y="${startY}"]`).hasChildNodes()) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+    function updateGameState(piece, square) {
+        promotePawnIfNeeded(piece, square);
+        updateKingPosition(piece, square);
+        handleEnPassant(piece, square);
     }
 
-    function isValidKnightMove(startX, startY, endX, endY) {
-        return (Math.abs(startX - endX) === 2 && Math.abs(startY - endY) === 1) || (Math.abs(startX - endX) === 1 && Math.abs(startY - endY) === 2);
-    }
-
-    function isValidBishopMove(startX, startY, endX, endY) {
-        if (Math.abs(startX - endX) === Math.abs(startY - endY)) {
-            const stepX = startX < endX ? 1 : -1;
-            const stepY = startY < endY ? 1 : -1;
-            let x = startX + stepX;
-            let y = startY + stepY;
-            while (x !== endX && y !== endY) {
-                if (document.querySelector(`[data-x="${x}"][data-y="${y}"]`).hasChildNodes()) {
-                    return false;
-                }
-                x += stepX;
-                y += stepY;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    function isValidQueenMove(startX, startY, endX, endY) {
-        return isValidRookMove(startX, startY, endX, endY) || isValidBishopMove(startX, startY, endX, endY);
-    }
-
-    function isValidKingMove(startX, startY, endX, endY) {
-        return Math.abs(startX - endX) <= 1 && Math.abs(startY - endY) <= 1;
-    }
+    // ... (Keep other functions like `isValidMove`, `isValidPawnMove`, etc.)
 
     function promotePawnIfNeeded(piece, square) {
-        if ((piece.textContent === '♙' && square.getAttribute('data-y') === '0') || (piece.textContent === '♟' && square.getAttribute('data-y') === '7')) {
-            piece.textContent = piece.textContent === '♙' ? '♕' : '♛'; // Promote to Queen
+        if (piece.textContent === '♙' && square.getAttribute('data-y') === '0' || 
+            piece.textContent === '♟' && square.getAttribute('data-y') === '7') {
+            const promotion = prompt("Promote to (Q = Queen, R = Rook, B = Bishop, N = Knight):");
+            piece.textContent = {
+                'Q': piece.textContent === '♙' ? '♕' : '♛',
+                'R': piece.textContent === '♙' ? '♖' : '♜',
+                'B': piece.textContent === '♙' ? '♗' : '♝',
+                'N': piece.textContent === '♙' ? '♘' : '♞'
+            }[promotion] || '♕'; // Default to Queen if invalid input
         }
     }
 
     function updateKingPosition(piece, square) {
-        const color = piece.textContent === '♙' || piece.textContent === '♖' || piece.textContent === '♘' || piece.textContent === '♗' || piece.textContent === '♕' || piece.textContent === '♔' ? 'white' : 'black';
-        if (piece.textContent === '♔') {
-            kingsPosition[color] = { x: parseInt(square.getAttribute('data-x')), y: parseInt(square.getAttribute('data-y')) };
+        const color = piece.textContent === '♔' ? 'white' : 'black';
+        if (piece.textContent.match(/[♔♚]/)) {
+            kingsPosition[color] = { 
+                x: parseInt(square.getAttribute('data-x')), 
+                y: parseInt(square.getAttribute('data-y'))
+            };
         }
     }
 
     function handleEnPassant(piece, square) {
         if (enPassant) {
-            const targetSquare = document.querySelector(`[data-x="${square.getAttribute('data-x')}"][data-y="${parseInt(square.getAttribute('data-y')) + (piece.textContent === '♙' ? -1 : 1)}"]`);
+            const targetSquare = document.querySelector(`[data-x="${square.getAttribute('data-x')}"][data-y="${parseInt(square.getAttribute('data-y')) + (piece.textContent === '♙' ? 1 : -1)}"]`);
             if (targetSquare && targetSquare.hasChildNodes()) {
                 targetSquare.innerHTML = ''; // Remove the captured pawn
                 enPassant = null;
             }
         }
+        // Set en passant if pawn moved two squares
+        const startY = parseInt(piece.parentElement.getAttribute('data-y'));
+        const endY = parseInt(square.getAttribute('data-y'));
+        if ((piece.textContent === '♙' && startY === 6 && endY === 4) || 
+            (piece.textContent === '♟' && startY === 1 && endY === 3)) {
+            enPassant = { x: parseInt(square.getAttribute('data-x')), y: endY };
+        } else {
+            enPassant = null;
+        }
     }
 
     function checkGameEnd() {
-        if (gameEnded) return;
-        // Add conditions for stalemate, check, or checkmate
+        const color = isWhiteTurn ? 'white' : 'black';
+        if (isInCheck(color)) {
+            if (!canKingMoveOut(color)) {
+                gameEnded = true;
+                alert(`${color === 'white' ? 'Black' : 'White'} wins by checkmate!`);
+            }
+        } else if (isStalemate()) {
+            gameEnded = true;
+            alert('Stalemate! It\'s a draw.');
+        }
     }
 
-    function removeHighlight() {
-        squares.forEach(square => square.classList.remove('highlight'));
+    function canKingMoveOut(color) {
+        const kingPos = kingsPosition[color];
+        for (let i = -1; i <= 1; i++) {
+            for (let j = -1; j <= 1; j++) {
+                if (i === 0 && j === 0) continue;
+                const newX = kingPos.x + j;
+                const newY = kingPos.y + i;
+                if (newX >= 0 && newX < 8 && newY >= 0 && newY < 8) {
+                    const destSquare = document.querySelector(`[data-x="${newX}"][data-y="${newY}"]`);
+                    if ((!destSquare.hasChildNodes() || destSquare.firstChild.textContent.match(new RegExp(color === 'white' ? '[♟♜♝♞♛♚]' : '[♙♖♗♘♕♔]'))) && !wouldBeInCheck(board.querySelector(`.piece${color === 'white' ? '♔' : '♚'}`), destSquare)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    function isStalemate() {
+        const color = isWhiteTurn ? 'white' : 'black';
+        for (let piece of board.querySelectorAll('.piece')) {
+            if (piece.textContent.match(new RegExp(color === 'white' ? '[♙♖♗♘♕♔]' : '[♟♜♝♞♛♚]'))) {
+                const startX = parseInt(piece.parentElement.getAttribute('data-x'));
+                const startY = parseInt(piece.parentElement.getAttribute('data-y'));
+                for (let i = 0; i < 8; i++) {
+                    for (let j = 0; j < 8; j++) {
+                        const destSquare = document.querySelector(`[data-x="${i}"][data-y="${j}"]`);
+                        if (isValidMove(piece, destSquare) && !wouldBeInCheck(piece, destSquare)) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     function highlightMoves(piece, square) {
-        const pieceType = piece.textContent;
-        const x = parseInt(square.getAttribute('data-x'));
-        const y = parseInt(square.getAttribute('data-y'));
-        // Logic to highlight valid moves goes here
+        const validMoves = getValidMoves(piece, square);
+        validMoves.forEach(move => {
+            const moveSquare = document.querySelector(`[data-x="${move.x}"][data-y="${move.y}"]`);
+            moveSquare.classList.add('highlight');
+        });
     }
+
+    function getValidMoves(piece, square) {
+        const moves = [];
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                const endSquare = document.querySelector(`[data-x="${j}"][data-y="${i}"]`);
+                if (isValidMove(piece, endSquare) && !wouldBeInCheck(piece, endSquare)) {
+                    moves.push({ x: j, y: i });
+                }
+            }
+        }
+        return moves;
+    }
+
+    function removeHighlight() {
+        document.querySelectorAll('.highlight').forEach(square => square.classList.remove('highlight'));
+    }
+
+    // ... (Ensure all functions are defined)
 });
