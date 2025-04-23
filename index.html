@@ -1,15 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chess Game</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Garage Door Repair | South Jordan, UT</title>
+  <meta name="description" content="24/7 Garage Door Repair in South Jordan. Fast service for springs, openers, rollers. Call 385-454-5760">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚪</text></svg>">
 </head>
 <body>
-    <div id="chessboard">
-        <!-- Chessboard will be dynamically filled here by JavaScript -->
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1>Prime Garage Door Repair</h1>
+        <p>Serving South Jordan, UT</p>
+      </div>
+      <nav>
+        <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-contact">
+        <a href="tel:385-454-5760" class="btn">📞 Call Now: 385-454-5760</a>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h2>24/7 Emergency Garage Door Repair</h2>
+        <p>Fast, Reliable, and Affordable Service</p>
+        <a href="tel:385-454-5760" class="btn">Call for Immediate Help</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services">
+    <div class="container">
+      <h2>Our Services</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <h3>Broken Spring Repair</h3>
+          <p>24/7 spring replacement with safety-certified technicians</p>
+        </div>
+        <div class="service-card">
+          <h3>Opener Installation</h3>
+          <p>Smart openers with battery backup & Wi-Fi control</p>
+        </div>
+        <div class="service-card">
+          <h3>Roller Replacement</h3>
+          <p>Quiet nylon rollers for smooth operation</p>
+        </div>
+        <div class="service-card">
+          <h3>Full Tune-Ups</h3>
+          <p>Lubrication, alignment, and safety checks</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about">
+    <div class="container">
+      <h2>Why Choose Us?</h2>
+      <div class="about-content">
+        <ul>
+          <li>✅ Licensed & Insured</li>
+          <li>✅ Same-Day Service</li>
+          <li>✅ Lifetime Warranty on Parts</li>
+          <li>✅ Local South Jordan Experts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h3>24/7 Emergency Service</h3>
+          <p><a href="tel:385-454-5760" class="btn">📞 385-454-5760</a></p>
+          <p>Serving South Jordan & Surrounding Areas</p>
+        </div>
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="tel" name="phone" placeholder="Phone Number" required>
+          <textarea name="message" placeholder="Describe your issue..." required></textarea>
+          <button type="submit" class="btn">Get Free Quote</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2023 Prime Garage Door Repair | <a href="http://www.utahgarageservice.com">utahgarageservice.com</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
