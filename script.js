@@ -2,11 +2,19 @@
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const nav = document.querySelector('nav');
 
-mobileMenuBtn.addEventListener('click', () => {
+mobileMenuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
   nav.classList.toggle('active');
 });
 
-// Contact Form Submission
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  if (!nav.contains(e.target)) {
+    nav.classList.remove('active');
+  }
+});
+
+// Form Submission
 document.getElementById('contactForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
