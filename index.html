@@ -4,107 +4,340 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Garage Door Repair | South Jordan, UT</title>
-  <meta name="description" content="24/7 Garage Door Repair in South Jordan. Fast service for springs, openers, rollers. Call 385-454-5760">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚪</text></svg>">
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --primary-color: #cc0000;
+      --secondary-color: #ff4444;
+      --accent-color: #ffffff;
+      --dark-text: #333333;
+      --light-text: #ffffff;
+    }
+
+    /* ===== Base Styles ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: var(--dark-text);
+      padding-top: 80px;
+    }
+
+    /* ===== Sticky Header ===== */
+    header {
+      background: var(--primary-color);
+      color: var(--light-text);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 1rem;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* ===== Navigation ===== */
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-link {
+      color: var(--light-text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .phone-link {
+      background: rgba(255,255,255,0.2);
+      padding: 8px 15px;
+      border-radius: 4px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ===== Hero Section ===== */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('garage-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      color: var(--light-text);
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    /* ===== Services Grid ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--accent-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    /* ===== Why Choose Us ===== */
+    .benefits {
+      background: #f8f8f8;
+      padding: 2rem 1rem;
+    }
+
+    .benefits-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .benefit-card {
+      background: var(--accent-color);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    /* ===== Contact Section ===== */
+    .contact-section {
+      padding: 2rem 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      background: var(--primary-color);
+      color: var(--light-text);
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: var(--dark-text);
+      color: var(--light-text);
+      padding: 2rem 1rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    /* ===== Mobile Styles ===== */
+    @media (max-width: 768px) {
+      .nav-container {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-color);
+        padding: 1rem;
+        flex-direction: column;
+      }
+
+      .nav-container.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .phone-link {
+        order: -1;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    /* ===== Desktop Styles ===== */
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Sticky Header -->
-  <!-- Replace ONLY the header section -->
-<header>
-  <div class="container">
-    <div class="logo">
+  <!-- Header -->
+  <header>
+    <div class="header-content">
       <h1>Prime Garage Door Repair</h1>
+      <nav class="nav-container">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#about" class="nav-link">Why Us</a>
+        <a href="tel:385-454-5760" class="nav-link phone-link">📞 385-454-5760</a>
+      </nav>
+      <button class="mobile-menu-btn">☰</button>
     </div>
-    <nav>
-      <button class="mobile-menu-btn" aria-label="Toggle menu">☰</button>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li class="phone-link"><a href="tel:385-454-5760">📞 385-454-5760</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
   <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h2>24/7 Emergency Garage Door Repair</h2>
-        <p>Fast, Reliable, and Affordable Service</p>
-        <a href="tel:385-454-5760" class="btn">Call for Immediate Help</a>
+  <section class="hero">
+    <h2>24/7 Emergency Garage Door Service</h2>
+    <p>Fast, reliable repairs and installations in South Jordan</p>
+    <a href="tel:385-454-5760" class="btn">Call Now for Immediate Service</a>
+  </section>
+
+  <!-- Services Grid -->
+  <section id="services" class="services-grid">
+    <div class="service-card">
+      <h3>Spring Replacement</h3>
+      <p>24/7 emergency torsion & extension spring repairs</p>
+    </div>
+    <div class="service-card">
+      <h3>Opener Installation</h3>
+      <p>Smart openers with battery backup & Wi-Fi control</p>
+    </div>
+    <div class="service-card">
+      <h3>Roller Replacement</h3>
+      <p>Quiet nylon rollers for smooth operation</p>
+    </div>
+    <div class="service-card">
+      <h3>Full Maintenance</h3>
+      <p>Lubrication, alignment, and safety checks</p>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="benefits">
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <h3>✅ 24/7 Service</h3>
+        <p>Emergency repairs anytime, day or night</p>
+      </div>
+      <div class="benefit-card">
+        <h3>✅ Local Experts</h3>
+        <p>Serving South Jordan for over 10 years</p>
+      </div>
+      <div class="benefit-card">
+        <h3>✅ Lifetime Warranty</h3>
+        <p>On all parts and labor</p>
+      </div>
+      <div class="benefit-card">
+        <h3>✅ Free Estimates</h3>
+        <p>Transparent pricing upfront</p>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section id="services" class="services">
-    <div class="container">
-      <h2>Our Services</h2>
-      <div class="service-grid">
-        <div class="service-card">
-          <h3>Broken Spring Repair</h3>
-          <p>24/7 spring replacement with safety-certified technicians</p>
-        </div>
-        <div class="service-card">
-          <h3>Opener Installation</h3>
-          <p>Smart openers with battery backup & Wi-Fi control</p>
-        </div>
-        <div class="service-card">
-          <h3>Roller Replacement</h3>
-          <p>Quiet nylon rollers for smooth operation</p>
-        </div>
-        <div class="service-card">
-          <h3>Full Tune-Ups</h3>
-          <p>Lubrication, alignment, and safety checks</p>
-        </div>
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p>📞 <a href="tel:385-454-5760">385-454-5760</a></p>
+        <p>📍 Serving South Jordan & Surrounding Areas</p>
       </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="about">
-    <div class="container">
-      <h2>Why Choose Us?</h2>
-      <div class="about-content">
-        <ul>
-          <li>✅ Licensed & Insured</li>
-          <li>✅ Same-Day Service</li>
-          <li>✅ Lifetime Warranty on Parts</li>
-          <li>✅ Local South Jordan Experts</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <div class="contact-grid">
-        <div class="contact-info">
-          <h3>24/7 Emergency Service</h3>
-          <p>Serving South Jordan & Surrounding Areas</p>
-        </div>
-        <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="tel" name="phone" placeholder="Phone Number" required>
-          <textarea name="message" placeholder="Describe your issue..." required></textarea>
-          <button type="submit" class="btn">Get Free Quote</button>
-        </form>
-      </div>
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <textarea name="message" placeholder="How can we help?" rows="4" required></textarea>
+        <button type="submit">Request Callback</button>
+      </form>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>© 2023 Prime Garage Door Repair | <a href="http://www.utahgarageservice.com">utahgarageservice.com</a></p>
-    </div>
+    <p>© 2024 Prime Garage Door Repair</p>
+    <p><a href="http://www.utahgarageservice.com">utahgarageservice.com</a></p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navContainer = document.querySelector('.nav-container');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      navContainer.classList.toggle('active');
+    });
+
+    // Form Submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Replace with your Formspree endpoint
+      const formData = new FormData(this);
+      
+      fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Message sent! We'll call you shortly.');
+          this.reset();
+        } else {
+          alert('Error: Please call us directly at 385-454-5760');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
