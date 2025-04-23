@@ -1,4 +1,5 @@
-// Mobile Menu Toggle
+// script.js - FULL CONTENTS
+// Mobile Menu
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const nav = document.querySelector('nav');
 
@@ -29,7 +30,7 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
   })
   .then(response => {
     if (response.ok) {
-      alert('Message sent! We'll call you within 15 minutes.');
+      alert('Message sent! We'll call you shortly.');
       this.reset();
     } else {
       alert('Error: Please call us directly at 385-454-5760');
