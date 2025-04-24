@@ -303,12 +303,28 @@
   </footer>
 
   <script>
-    // Mobile Menu Toggle
+     // ===== JavaScript =====
+    // Mobile Menu Toggle - FIXED VERSION
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navContainer = document.querySelector('.nav-container');
 
-    mobileMenuBtn.addEventListener('click', () => {
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       navContainer.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navContainer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        navContainer.classList.remove('active');
+      }
+    });
+
+    // Optional: Close menu on desktop resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        navContainer.classList.remove('active');
+      }
     });
 
     // Form Submission
@@ -316,13 +332,6 @@
       e.preventDefault();
       alert('Thank you! We will contact you shortly.');
       this.reset();
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!navContainer.contains(e.target)) {
-        navContainer.classList.remove('active');
-      }
     });
   </script>
 </body>
