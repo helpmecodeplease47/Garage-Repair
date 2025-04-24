@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Garage Door Repair | South Jordan, UT</title>
-  <script src="https://js.stripe.com/v3/"></script>
   <style>
     /* ===== CSS ===== */
     :root {
@@ -249,23 +248,23 @@
   <section class="services-grid" id="services">
     <div class="service-card">
       <h3>Spring Replacement</h3>
-      <p>$199+</p>
-      <button class="add-to-cart">Schedule Service</button>
+      <p>Professional torsion spring replacement</p>
+      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
     </div>
     <div class="service-card">
       <h3>Opener Installation</h3>
-      <p>$299+</p>
-      <button class="add-to-cart">Schedule Service</button>
+      <p>Smart garage door opener systems</p>
+      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
     </div>
     <div class="service-card">
-      <h3>Full Maintenance</h3>
-      <p>$149</p>
-      <button class="add-to-cart">Schedule Service</button>
+      <h3>Preventative Maintenance</h3>
+      <p>Complete system tune-up service</p>
+      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
     </div>
     <div class="service-card">
-      <h3>Emergency Repair</h3>
-      <p>$99 Service Call</p>
-      <button class="add-to-cart">Request Help</button>
+      <h3>Roller Replacement</h3>
+      <p>Quiet nylon roller installation</p>
+      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
     </div>
   </section>
 
@@ -304,45 +303,12 @@
   </footer>
 
   <script>
-    // ===== JavaScript =====
-    // Mobile Menu
+    // Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navContainer = document.querySelector('.nav-container');
 
     mobileMenuBtn.addEventListener('click', () => {
       navContainer.classList.toggle('active');
-    });
-
-    // Cart Logic
-    let cartItems = [];
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', (e) => {
-        const service = e.target.closest('.service-card');
-        const serviceName = service.querySelector('h3').textContent;
-        const price = service.querySelector('p').textContent;
-        cartItems.push({ name: serviceName, price: price });
-        alert(`Added ${serviceName} to your service request!`);
-      });
-    });
-
-    // Stripe Checkout
-    const stripe = Stripe('pk_test_your_key_here');
-    document.getElementById('checkout-button').addEventListener('click', async () => {
-      if (cartItems.length === 0) return alert('Please select a service first!');
-      
-      try {
-        const response = await fetch('/create-checkout-session', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ items: cartItems })
-        });
-        
-        const session = await response.json();
-        await stripe.redirectToCheckout({ sessionId: session.id });
-      } catch (error) {
-        console.error('Checkout error:', error);
-        alert('Payment failed. Please call us directly.');
-      }
     });
 
     // Form Submission
