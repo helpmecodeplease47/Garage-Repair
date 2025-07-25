@@ -1,338 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prime Garage Door Repair | South Jordan, UT</title>
-  <style>
-    /* ===== CSS ===== */
-    :root {
-      --primary-red: #cc0000;
-      --secondary-red: #ff4444;
-      --accent-white: #ffffff;
-      --dark-text: #333333;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Garage Door Repair West Jordan, UT | 24/7 Service</title>
+    <meta name="description" content="Your trusted local experts for 24/7 emergency garage door repair, spring replacement, and opener installation in West Jordan, Utah. Call for a free estimate!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <style>
+        /* ===== Global CSS Variables & Reset ===== */
+        :root {
+            --primary-red: #b91c1c;
+            --secondary-red: #dc2626;
+            --accent-white: #ffffff;
+            --light-gray: #f8f9fa; /* Slightly brighter gray */
+            --dark-text: #1f2937;
+            --medium-text: #4b5563;
+            --border-color: #e5e7eb;
+        }
 
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: var(--dark-text);
-      padding-top: 80px;
-    }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    header {
-      background: var(--primary-red);
-      color: var(--accent-white);
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        body {
+            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background-color: var(--accent-white);
+        }
 
-    .nav-container {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
+        /* ===== Utility & Typography ===== */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
 
-    .nav-link {
-      color: var(--accent-white);
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      transition: background 0.3s;
-    }
+        .section-padding {
+            padding: 3rem 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 5rem 1rem;
+            }
+        }
 
-    .nav-link:hover {
-      background: rgba(255,255,255,0.1);
-    }
+        .text-center {
+            text-align: center;
+        }
+        
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(2.2rem, 5vw, 2.8rem);
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            max-width: 650px;
+            margin: 0 auto 3rem auto;
+        }
 
-    .phone-link {
-      background: rgba(255,255,255,0.2);
-      padding: 8px 15px;
-      border-radius: 4px;
-    }
+        .btn {
+            display: inline-block;
+            background: var(--primary-red);
+            color: var(--accent-white);
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
 
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--accent-white);
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
+        .btn:hover {
+            background: var(--secondary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
 
-    @media (max-width: 768px) {
-      .nav-container {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--primary-red);
-        padding: 1rem;
-        flex-direction: column;
-      }
+        /* ===== Header & Navigation ===== */
+        header {
+            background: var(--dark-text);
+            color: var(--accent-white);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
 
-      .nav-container.active {
-        display: flex;
-      }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            text-decoration: none;
+            color: var(--primary-red);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.1;
+        }
+        
+        .logo .prime-word {
+            font-size: 1.8rem;
+        }
+        
+        .logo .tagline {
+            font-size: 1.1rem;
+            display: block;
+        }
 
-      .mobile-menu-btn {
-        display: block;
-      }
+        .main-nav { display: none; }
+        .main-nav a { color: var(--accent-white); text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.3s; }
+        .main-nav a:hover { background: rgba(255,255,255,0.1); }
+        .header-cta { display: none; }
 
-      .phone-link {
-        order: -1;
-        width: 100%;
-        text-align: center;
-      }
-    }
+        .mobile-menu-btn { display: block; background: none; border: none; color: var(--accent-white); font-size: 2rem; cursor: pointer; z-index: 1001; }
+        .mobile-nav { position: fixed; top: 0; right: -100%; width: 80%; max-width: 300px; height: 100%; background: var(--dark-text); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: right 0.35s ease-in-out; }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav a { color: var(--accent-white); text-decoration: none; font-size: 1.5rem; }
+        .mobile-nav .btn { font-size: 1.2rem; padding: 1rem 2rem; }
 
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('garage-bg.jpg');
-      background-size: cover;
-      background-position: center;
-      color: var(--accent-white);
-      padding: 4rem 1rem;
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+        /* ===== Hero Section ===== */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1580490189182-9f37502f6104?q=80&w=2070') no-repeat center center/cover;
+            color: var(--accent-white);
+            padding: 9rem 1rem 5rem 1rem;
+        }
+        .hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+        /* ===== Services Section ===== */
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        .service-card { background: var(--accent-white); border-radius: 8px; padding: 2rem 1.5rem; border: 1px solid var(--border-color); transition: transform 0.3s, box-shadow 0.3s; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .service-card .icon { font-size: 3rem; color: var(--primary-red); margin-bottom: 1rem; }
+        .service-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .service-card p { margin-bottom: 1.5rem; color: var(--medium-text); }
 
-    .service-card {
-      background: var(--accent-white);
-      border-radius: 8px;
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
+        /* ===== Benefits Section ===== */
+        .benefits { background: var(--light-gray); }
+        .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 800px; margin: 0 auto; }
+        .benefit-card { display: flex; align-items: center; gap: 1.5rem; background: var(--accent-white); padding: 1.5rem; border-radius: 8px; }
+        .benefit-card .icon { color: var(--primary-red); flex-shrink: 0; }
+        .benefit-card .icon svg { width: 32px; height: 32px; }
+        .benefit-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; }
+        
+        /* ===== Contact Section ===== */
+        .contact { background: var(--light-gray); }
+        .contact-form { display: grid; gap: 1rem; max-width: 600px; margin: 2rem auto 0 auto; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 0.5rem; font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1rem; font-family: 'Roboto', sans-serif; }
+        .form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--primary-red); border-color: transparent; }
 
-    .service-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .benefits {
-      background: #f8f8f8;
-      padding: 3rem 1rem;
-    }
-
-    .benefits-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    .benefit-card {
-      background: var(--accent-white);
-      padding: 1.5rem;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-
-    .contact-section {
-      padding: 2rem 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    form {
-      display: grid;
-      gap: 1rem;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    button {
-      background: var(--primary-red);
-      color: var(--accent-white);
-      border: none;
-      padding: 1rem 2rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: var(--secondary-red);
-    }
-
-    footer {
-      background: var(--dark-text);
-      color: var(--accent-white);
-      padding: 2rem 1rem;
-      text-align: center;
-      margin-top: 2rem;
-    }
-
-    @media (min-width: 768px) {
-      body {
-        padding-top: 100px;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .benefits-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .services-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-  </style>
+        /* ===== Footer ===== */
+        footer { background: var(--dark-text); color: #a1a1aa; padding: 3rem 1rem 2rem 1rem; }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+        .footer-content a { color: var(--accent-white); text-decoration: none; }
+        .footer-content a:hover { text-decoration: underline; }
+        
+        /* ===== Media Queries for Responsive Design ===== */
+        @media (min-width: 768px) {
+            .mobile-menu-btn, .mobile-nav { display: none; }
+            .main-nav { display: flex; align-items: center; gap: 0.5rem; }
+            .header-cta { display: block; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (min-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="header-content">
-      <h1>Prime Garage Door Repair</h1>
-      <nav class="nav-container">
+
+    <header>
+        <div class="header-content">
+            <a href="#home" class="logo">
+                <span class="prime-word">PRIME</span>
+                <span class="tagline">Garage Door Repair</span>
+            </a>
+            
+            <nav class="main-nav">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#benefits">Why Us</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="header-cta">
+                 <a href="tel:385-454-5760" class="btn">📞 Call 385-454-5760</a>
+            </div>
+
+            <button class="mobile-menu-btn" aria-label="Open navigation menu">☰</button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav">
         <a href="#home" class="nav-link">Home</a>
         <a href="#services" class="nav-link">Services</a>
         <a href="#benefits" class="nav-link">Why Us</a>
-        <a href="tel:385-454-5760" class="nav-link phone-link">📞 385-454-5760</a>
-      </nav>
-      <button class="mobile-menu-btn">☰</button>
-    </div>
-  </header>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="tel:385-454-5760" class="btn">Call Now</a>
+    </nav>
+    
+    <main>
+        <section class="hero text-center" id="home">
+            <h1>Expert Garage Door Repair</h1>
+            <p>Your local choice in West Jordan for 24/7 emergency service, repairs, and installations. Fast, reliable, and always professional.</p>
+            <a href="tel:385-454-5760" class="btn">Get a Free Estimate Now</a>
+        </section>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <h2>24/7 Emergency Garage Door Service</h2>
-    <p>Fast, reliable repairs & installations in South Jordan</p>
-    <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
-  </section>
+        <section class="section-padding" id="services">
+            <div class="container text-center">
+                <h2 class="section-title">Our Professional Services</h2>
+                <p class="section-subtitle">We handle all types of garage door problems, from minor adjustments to major repairs and installations.</p>
+                <div class="services-grid">
+                    <div class="service-card text-center">
+                        <div class="icon">⚙️</div>
+                        <h3>Spring Replacement</h3>
+                        <p>Safe and efficient replacement for broken torsion and extension springs.</p>
+                        <a href="tel:385-454-5760" class="btn">Call for Repair</a>
+                    </div>
+                    <div class="service-card text-center">
+                        <div class="icon">🔧</div>
+                        <h3>Opener Installation</h3>
+                        <p>We install and repair all major brands, including smart opener systems.</p>
+                        <a href="tel:385-454-5760" class="btn">Call for Install</a>
+                    </div>
+                    <div class="service-card text-center">
+                        <div class="icon">🛠️</div>
+                        <h3>Preventative Maintenance</h3>
+                        <p>Keep your door running smoothly with our complete system tune-up service.</p>
+                        <a href="tel:385-454-5760" class="btn">Book a Tune-Up</a>
+                    </div>
+                    <div class="service-card text-center">
+                        <div class="icon">🔩</div>
+                        <h3>Roller & Cable Repair</h3>
+                        <p>Quiet nylon roller installation and repair for frayed or broken cables.</p>
+                        <a href="tel:385-454-5760" class="btn">Call for Service</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- Services Grid -->
-  <section class="services-grid" id="services">
-    <div class="service-card">
-      <h3>Spring Replacement</h3>
-      <p>Professional torsion spring replacement</p>
-      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
-    </div>
-    <div class="service-card">
-      <h3>Opener Installation</h3>
-      <p>Smart garage door opener systems</p>
-      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
-    </div>
-    <div class="service-card">
-      <h3>Preventative Maintenance</h3>
-      <p>Complete system tune-up service</p>
-      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
-    </div>
-    <div class="service-card">
-      <h3>Roller Replacement</h3>
-      <p>Quiet nylon roller installation</p>
-      <button onclick="window.location.href='tel:385-454-5760'">Call Now</button>
-    </div>
-  </section>
+        <section class="benefits section-padding" id="benefits">
+            <div class="container text-center">
+                <h2 class="section-title">Why Choose Prime?</h2>
+                <p class="section-subtitle">We are committed to providing top-quality service and ensuring our customers are 100% satisfied.</p>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                        </div>
+                        <div>
+                            <h3>24/7 Availability</h3>
+                            <p>Emergency service when you need it most, day or night.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
+                        </div>
+                        <div>
+                            <h3>Local West Jordan Experts</h3>
+                            <p>Proudly serving our community with years of experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <!-- Benefits Section -->
-  <section class="benefits" id="benefits">
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <h3>24/7 Availability</h3>
-        <p>Emergency service any time, day or night</p>
-      </div>
-      <div class="benefit-card">
-        <h3>Lifetime Warranty</h3>
-        <p>On all parts and labor</p>
-      </div>
-      <div class="benefit-card">
-        <h3>Local Experts</h3>
-        <p>Serving South Jordan for over 10 years</p>
-      </div>
-    </div>
-  </section>
+        <section class="section-padding contact" id="contact">
+            <div class="container text-center">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-subtitle">Fill out the form below or call us for immediate assistance and a free estimate.</p>
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="801-555-1234" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="issue">Describe Your Issue</label>
+                        <textarea id="issue" name="issue" placeholder="My garage door spring is broken." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Request Callback</button>
+                </form>
+                <div id="form-submission-status" class="text-center mt-4 font-semibold text-green-600" style="min-height: 24px;"></div>
+            </div>
+        </section>
+    </main>
 
-  <!-- Contact Section -->
-  <section class="contact-section">
-    <form id="contactForm">
-      <input type="text" placeholder="Your Name" required>
-      <input type="tel" placeholder="Phone Number" required>
-      <textarea placeholder="Describe Your Issue" rows="4" required></textarea>
-      <button type="submit">Request Callback</button>
-    </form>
-  </section>
+    <footer>
+        <div class="container footer-content">
+            <p><strong>Prime Garage Door Repair - West Jordan, UT</strong></p>
+            <p>Your Local Garage Door Service Experts</p>
+            <p><a href="tel:385-454-5760">Call Us: 385-454-5760</a></p>
+            <p>&copy; 2025 Prime Garage Door Repair. All Rights Reserved.</p>
+        </div>
+    </footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2024 Prime Garage Door Repair</p>
-    <p><a href="http://www.utahgarageservice.com">utahgarageservice.com</a></p>
-  </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
 
-  <script>
-     // ===== JavaScript =====
-    // Mobile Menu Toggle - FIXED VERSION
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navContainer = document.querySelector('.nav-container');
+            // Toggle mobile menu
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('active');
+            });
 
-    mobileMenuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      navContainer.classList.toggle('active');
-    });
+            // Function to close the menu
+            const closeMenu = () => mobileNav.classList.remove('active');
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!navContainer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-        navContainer.classList.remove('active');
-      }
-    });
+            // Close mobile menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+            // Also close menu when clicking the call button
+            document.querySelector('.mobile-nav .btn').addEventListener('click', closeMenu);
 
-    // Optional: Close menu on desktop resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        navContainer.classList.remove('active');
-      }
-    });
-
-    // Form Submission
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Thank you! We will contact you shortly.');
-      this.reset();
-    });
-  </script>
+            // Form Submission
+            const contactForm = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('form-submission-status');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                statusDiv.textContent = 'Thank you for your message! We will contact you shortly.';
+                this.reset();
+                setTimeout(() => {
+                    statusDiv.textContent = '';
+                }, 5000);
+            });
+        });
+    </script>
 </body>
 </html>
