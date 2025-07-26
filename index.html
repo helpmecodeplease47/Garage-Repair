@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font for the game -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 
     <style>
         /* ===== Global CSS Variables & Reset ===== */
@@ -188,7 +191,7 @@
         .footer-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
         .footer-content a { color: var(--accent-white); text-decoration: none; }
         .footer-content a:hover { text-decoration: underline; }
-        
+
         /* ===== Media Queries for Responsive Design ===== */
         @media (min-width: 768px) {
             .mobile-menu-btn, .mobile-nav { display: none; }
@@ -200,6 +203,178 @@
         
         @media (min-width: 1024px) {
             .services-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        
+        /* ===== CONNECT 4 GAME STYLES ===== */
+        .game-zone {
+            background-color: #111827; /* gray-900 */
+            color: #f9fafb; /* gray-100 */
+        }
+        .game-zone .section-title, .game-zone .section-subtitle {
+             color: #f9fafb; /* gray-100 */
+        }
+        
+        #game-container {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem;
+        }
+
+        #board-container {
+            position: relative;
+            width: 100%;
+            max-width: 560px;
+            aspect-ratio: 7 / 6;
+            margin-bottom: 1rem;
+        }
+
+        .board {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #3b82f6; /* blue-500 */
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 8px;
+            padding: 8px;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .cell {
+            background-color: #1e293b; /* slate-800, the "holes" */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cell .piece {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .cell .piece.player1 {
+            background-color: #ef4444; /* red-500 */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+            transform: scale(1);
+        }
+
+        .cell .piece.player2 {
+            background-color: #facc15; /* yellow-400 */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+            transform: scale(1);
+        }
+
+        #column-selectors {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            z-index: 10;
+        }
+        
+        .column {
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        
+        .column:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .column.disabled {
+            cursor: not-allowed;
+        }
+        
+        .column.disabled:hover {
+            background-color: transparent;
+        }
+
+        .winning-cell .piece {
+            animation: bounce 0.8s ease-in-out infinite;
+        }
+        
+        #newGameBtn {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #3b82f6;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #newGameBtn:hover {
+            background-color: #2563eb;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1.05); }
+            50% { transform: scale(0.85); }
+        }
+
+        #winnerModal {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.6);
+            display: none; /* Initially hidden */
+            align-items: center;
+            justify-content: center;
+            z-index: 2000; /* Higher than header */
+        }
+        #winnerModal.flex {
+            display: flex;
+        }
+        #winnerModal > div {
+            background-color: #ffffff;
+            color: var(--dark-text);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 2rem;
+            text-align: center;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+        }
+        #winnerModal.flex > div {
+             transform: scale(1);
+             opacity: 1;
+        }
+        #winnerText {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        #playAgainBtn {
+            padding: 0.75rem 1.5rem;
+            background-color: #3b82f6;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #playAgainBtn:hover {
+            background-color: #2563eb;
         }
     </style>
 </head>
@@ -217,6 +392,7 @@
                 <a href="#services">Services</a>
                 <a href="#benefits">Why Us</a>
                 <a href="#contact">Contact</a>
+                <a href="#connect-four">Connect Four</a>
             </nav>
 
             <div class="header-cta">
@@ -232,6 +408,7 @@
         <a href="#services" class="nav-link">Services</a>
         <a href="#benefits" class="nav-link">Why Us</a>
         <a href="#contact" class="nav-link">Contact</a>
+        <a href="#connect-four" class="nav-link">Connect Four</a>
         <a href="tel:385-454-5760" class="btn">Call Now</a>
     </nav>
     
@@ -324,6 +501,25 @@
                 <div id="form-submission-status" class="text-center mt-4 font-semibold text-green-600" style="min-height: 24px;"></div>
             </div>
         </section>
+
+        <!-- ===== CONNECT 4 GAME SECTION ===== -->
+        <section class="section-padding game-zone" id="connect-four">
+            <div class="container text-center">
+                <h2 class="section-title">Connect Four</h2>
+                <p class="section-subtitle">Waiting for a repair? Pass the time with a game of Connect Four against our tough AI!</p>
+                
+                <div id="game-container">
+                    <div class="w-full max-w-lg text-center mb-4">
+                        <h3 id="game-status" class="text-xl md:text-2xl h-8 font-semibold transition-colors duration-300" style="font-family: 'Poppins', sans-serif;">Your Turn (Red)</h3>
+                    </div>
+                    <div id="board-container">
+                         <div class="board" id="board"></div>
+                         <div id="column-selectors"></div>
+                    </div>
+                    <button id="newGameBtn">New Game</button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
@@ -334,39 +530,269 @@
             <p>&copy; 2025 Prime Garage Door Repair. All Rights Reserved.</p>
         </div>
     </footer>
+    
+    <!-- Winner Modal for the game -->
+    <div id="winnerModal">
+        <div>
+            <h2 id="winnerText"></h2>
+            <button id="playAgainBtn">Play Again</button>
+        </div>
+    </div>
+
 
     <script>
+        // Script for the main website (mobile menu, form)
         document.addEventListener('DOMContentLoaded', () => {
             const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
             const mobileNav = document.querySelector('.mobile-nav');
             const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
 
-            // Toggle mobile menu
+            const closeMenu = () => mobileNav.classList.remove('active');
+
             mobileMenuBtn.addEventListener('click', () => {
                 mobileNav.classList.toggle('active');
             });
 
-            // Function to close the menu
-            const closeMenu = () => mobileNav.classList.remove('active');
-
-            // Close mobile menu when a link is clicked
             navLinks.forEach(link => {
                 link.addEventListener('click', closeMenu);
             });
-            // Also close menu when clicking the call button
             document.querySelector('.mobile-nav .btn').addEventListener('click', closeMenu);
 
-            // Form Submission
             const contactForm = document.getElementById('contactForm');
             const statusDiv = document.getElementById('form-submission-status');
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                statusDiv.textContent = 'Thank you for your message! We will contact you shortly.';
-                this.reset();
-                setTimeout(() => {
-                    statusDiv.textContent = '';
-                }, 5000);
-            });
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    statusDiv.textContent = 'Thank you for your message! We will contact you shortly.';
+                    this.reset();
+                    setTimeout(() => {
+                        statusDiv.textContent = '';
+                    }, 5000);
+                });
+            }
+        });
+
+        // Script for the Connect 4 Game
+        document.addEventListener('DOMContentLoaded', () => {
+            const boardElement = document.getElementById('board');
+            const columnSelectorsElement = document.getElementById('column-selectors');
+            const statusElement = document.getElementById('game-status');
+            const newGameButton = document.getElementById('newGameBtn');
+            const winnerModal = document.getElementById('winnerModal');
+            const winnerText = document.getElementById('winnerText');
+            const playAgainButton = document.getElementById('playAgainBtn');
+
+            if (!boardElement) return; // Don't run if game elements aren't on the page
+
+            const ROWS = 6;
+            const COLS = 7;
+            const HUMAN_PLAYER = 1;
+            const AI_PLAYER = 2;
+            let board = [];
+            let currentPlayer = HUMAN_PLAYER;
+            let gameOver = false;
+
+            function createBoard() {
+                board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+                gameOver = false;
+                currentPlayer = HUMAN_PLAYER;
+                
+                boardElement.innerHTML = '';
+                columnSelectorsElement.innerHTML = '';
+                
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        const cell = document.createElement('div');
+                        cell.classList.add('cell');
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        boardElement.appendChild(cell);
+                    }
+                }
+
+                for (let col = 0; col < COLS; col++) {
+                    const column = document.createElement('div');
+                    column.classList.add('column');
+                    column.dataset.col = col;
+                    column.addEventListener('click', () => handleColumnClick(col));
+                    columnSelectorsElement.appendChild(column);
+                }
+                
+                updateStatus();
+                toggleColumnSelectors(true);
+            }
+
+            function handleColumnClick(col) {
+                if (gameOver || currentPlayer !== HUMAN_PLAYER) return;
+                const row = findAvailableRow(board, col);
+                if (row === -1) return;
+                dropPiece(row, col, HUMAN_PLAYER);
+                if (gameOver) return;
+                currentPlayer = AI_PLAYER;
+                updateStatus();
+                toggleColumnSelectors(false);
+                setTimeout(aiMove, 500);
+            }
+
+            function aiMove() {
+                statusElement.textContent = "Computer is thinking...";
+                const { col } = minimax(board, 6, -Infinity, Infinity, true);
+                if (col === null) {
+                    gameOver = true;
+                    showWinner("It's a Draw!");
+                    return;
+                }
+                const row = findAvailableRow(board, col);
+                dropPiece(row, col, AI_PLAYER);
+                if (gameOver) return;
+                currentPlayer = HUMAN_PLAYER;
+                updateStatus();
+                toggleColumnSelectors(true);
+            }
+
+            function findAvailableRow(b, col) {
+                for (let row = ROWS - 1; row >= 0; row--) {
+                    if (b[row][col] === 0) return row;
+                }
+                return -1;
+            }
+
+            function dropPiece(row, col, player) {
+                board[row][col] = player;
+                const piece = document.createElement('div');
+                piece.classList.add('piece', `player${player}`);
+                const targetCell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
+                targetCell.appendChild(piece);
+                if (checkForWin(board, player)) {
+                    gameOver = true;
+                    const winnerName = player === HUMAN_PLAYER ? "You" : "The Computer";
+                    showWinner(`${winnerName} Wins!`);
+                    highlightWinningCells(board, player);
+                } else if (isBoardFull(board)) {
+                    gameOver = true;
+                    showWinner("It's a Draw!");
+                }
+            }
+
+            function updateStatus() {
+                if (gameOver) return;
+                if (currentPlayer === HUMAN_PLAYER) {
+                    statusElement.textContent = "Your Turn (Red)";
+                    statusElement.style.color = '#ef4444';
+                } else {
+                    statusElement.textContent = "Computer's Turn (Yellow)";
+                    statusElement.style.color = '#facc15';
+                }
+            }
+            
+            function toggleColumnSelectors(enabled) {
+                columnSelectorsElement.style.pointerEvents = enabled ? 'auto' : 'none';
+            }
+
+            function showWinner(message) {
+                statusElement.textContent = message;
+                winnerText.textContent = message;
+                winnerModal.classList.add('flex');
+            }
+            
+            function isBoardFull(b) { return b[0].every(cell => cell !== 0); }
+
+            function checkForWin(b, player) {
+                for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return true; } }
+                for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return true; } }
+                for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r+1][c+1] === player && b[r+2][c+2] === player && b[r+3][c+3] === player) return true; } }
+                for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r-1][c+1] === player && b[r-2][c+2] === player && b[r-3][c+3] === player) return true; } }
+                return false;
+            }
+            
+            function highlightWinningCells(b, player) {
+                let winningLine = [];
+                const findLine = () => {
+                    for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return [{r,c},{r,c:c+1},{r,c:c+2},{r,c:c+3}]; } }
+                    for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return [{r,c},{r:r+1,c},{r:r+2,c},{r:r+3,c}]; } }
+                    for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r+1][c+1] === player && b[r+2][c+2] === player && b[r+3][c+3] === player) return [{r,c},{r:r+1,c:c+1},{r:r+2,c:c+2},{r:r+3,c:c+3}]; } }
+                    for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r-1][c+1] === player && b[r-2][c+2] === player && b[r-3][c+3] === player) return [{r,c},{r:r-1,c:c+1},{r:r-2,c:c+2},{r:r-3,c:c+3}]; } }
+                    return [];
+                };
+                winningLine = findLine();
+                winningLine.forEach(pos => {
+                    const cellElement = document.querySelector(`.cell[data-row='${pos.r}'][data-col='${pos.c}']`);
+                    if (cellElement) cellElement.classList.add('winning-cell');
+                });
+            }
+
+            function scorePosition(b, player) {
+                let score = 0;
+                const opponent = player === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
+                const centerArray = b.map(row => row[Math.floor(COLS / 2)]);
+                score += centerArray.filter(p => p === player).length * 6;
+                const scoreLine = (line, p) => {
+                    let s = 0;
+                    const playerCount = line.filter(val => val === p).length;
+                    const emptyCount = line.filter(val => val === 0).length;
+                    const opponentCount = line.filter(val => val === opponent).length;
+                    if (playerCount === 4) s += 10000;
+                    else if (playerCount === 3 && emptyCount === 1) s += 10;
+                    else if (playerCount === 2 && emptyCount === 2) s += 5;
+                    if (opponentCount === 3 && emptyCount === 1) s -= 80;
+                    return s;
+                };
+                for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { score += scoreLine(b[r].slice(c, c + 4), player); } }
+                for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { score += scoreLine([b[r][c], b[r+1][c], b[r+2][c], b[r+3][c]], player); } }
+                for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { score += scoreLine([b[r][c], b[r+1][c+1], b[r+2][c+2], b[r+3][c+3]], player); } }
+                for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { score += scoreLine([b[r][c], b[r-1][c+1], b[r-2][c+2], b[r-3][c+3]], player); } }
+                return score;
+            }
+
+            function getValidLocations(b) { return [...Array(COLS).keys()].filter(c => b[0][c] === 0); }
+
+            function minimax(b, depth, alpha, beta, maximizingPlayer) {
+                const isTerminal = checkForWin(b, HUMAN_PLAYER) || checkForWin(b, AI_PLAYER) || isBoardFull(b);
+                if (depth === 0 || isTerminal) {
+                    if (isTerminal) {
+                        if (checkForWin(b, AI_PLAYER)) return { col: null, score: 10000000 };
+                        if (checkForWin(b, HUMAN_PLAYER)) return { col: null, score: -10000000 };
+                        return { col: null, score: 0 };
+                    }
+                    return { col: null, score: scorePosition(b, AI_PLAYER) };
+                }
+                const validLocations = getValidLocations(b);
+                if (maximizingPlayer) {
+                    let value = -Infinity;
+                    let column = validLocations[Math.floor(Math.random() * validLocations.length)];
+                    for (const col of validLocations) {
+                        let b_copy = b.map(r => [...r]);
+                        b_copy[findAvailableRow(b_copy, col)][col] = AI_PLAYER;
+                        let new_score = minimax(b_copy, depth - 1, alpha, beta, false).score;
+                        if (new_score > value) { value = new_score; column = col; }
+                        alpha = Math.max(alpha, value);
+                        if (alpha >= beta) break;
+                    }
+                    return { col: column, score: value };
+                } else {
+                    let value = Infinity;
+                    let column = validLocations[Math.floor(Math.random() * validLocations.length)];
+                    for (const col of validLocations) {
+                        let b_copy = b.map(r => [...r]);
+                        b_copy[findAvailableRow(b_copy, col)][col] = HUMAN_PLAYER;
+                        let new_score = minimax(b_copy, depth - 1, alpha, beta, true).score;
+                        if (new_score < value) { value = new_score; column = col; }
+                        beta = Math.min(beta, value);
+                        if (alpha >= beta) break;
+                    }
+                    return { col: column, score: value };
+                }
+            }
+
+            function resetGame() {
+                winnerModal.classList.remove('flex');
+                createBoard();
+            }
+
+            newGameButton.addEventListener('click', createBoard);
+            playAgainButton.addEventListener('click', resetGame);
+
+            createBoard();
         });
     </script>
 </body>
