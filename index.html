@@ -3,8 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quick Fix Garage Doors | West Jordan, UT</title>
     
+    <!-- SEO: Primary Meta Tags -->
+    <title>Garage Door Repair West Jordan, UT | Spring & Opener Fix | Quick Fix Garage Doors</title>
+    <meta name="description" content="Expert garage door repair in West Jordan & Salt Lake Valley. We specialize in broken springs, openers, and new installations. Licensed, Insured, & Family Owned. Call 801-641-6850.">
+    <meta name="keywords" content="garage door repair West Jordan, garage door spring replacement Utah, garage door opener repair, emergency garage door service, new garage door installation Salt Lake City">
+    <meta name="author" content="Quick Fix Garage Doors LLC">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://quickfixgaragedoors.com" />
+    
+    <!-- SEO: Social Media Tags (Open Graph) -->
+    <meta property="og:title" content="Quick Fix Garage Doors - Fast Repair in West Jordan">
+    <meta property="og:description" content="Broken spring? Squeaky door? We fix it all. Licensed and insured family business serving the entire Salt Lake Valley.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1600596542815-e495d915993a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" content="https://quickfixgaragedoors.com">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -13,6 +28,78 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- SEO: Structured Data (Schema.org) for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Quick Fix Garage Doors LLC",
+      "image": "https://placehold.co/200x60/0059B2/white?text=Quick+Fix+Logo",
+      "telephone": "801-641-6850",
+      "url": "https://quickfixgaragedoors.com",
+      "priceRange": "$$",
+      "description": "Professional garage door repair and installation services in West Jordan, Utah. Family owned and operated since 2024.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "West Jordan",
+        "addressRegion": "UT",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 40.6097,
+        "longitude": -111.9391
+      },
+      "areaServed": [
+        {
+            "@type": "City",
+            "name": "West Jordan"
+        },
+        {
+            "@type": "City",
+            "name": "South Jordan"
+        },
+        {
+            "@type": "City",
+            "name": "Salt Lake City"
+        },
+        {
+            "@type": "City",
+            "name": "Sandy"
+        },
+        {
+            "@type": "City",
+            "name": "Draper"
+        }
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "07:00",
+        "closes": "19:00"
+      },
+      "sameAs": [
+        "https://utahgaragerepair.org",
+        "https://share.google/JVZQLrKQCvtMQDD2b"
+      ],
+      "paymentAccepted": "Cash, Credit Card, Check",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "bestRating": "5",
+        "ratingCount": "15" 
+      }
+    }
+    </script>
 
     <script>
         tailwind.config = {
@@ -25,6 +112,7 @@
                     },
                     fontFamily: {
                         sans: ['Roboto', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
                     }
                 }
             }
@@ -43,12 +131,108 @@
         #mobile-menu.open {
             max-height: 400px; /* Adjust based on menu height */
         }
+
+        /* --- GAME STYLES --- */
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        #board-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 7 / 6;
+            margin-bottom: 1rem;
+        }
+
+        .board {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0059B2; /* WD-Blue */
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+            gap: 1.5%;
+            padding: 1.5%;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .cell {
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .cell .piece {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cell .piece.player1 {
+            background-color: #ef4444;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+            transform: scale(1);
+        }
+
+        .cell .piece.player2 {
+            background-color: #FFE600;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+            transform: scale(1);
+        }
+
+        #column-selectors {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            z-index: 10;
+        }
+        
+        .column {
+            cursor: pointer;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease-in-out;
+        }
+        
+        .column:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .column.disabled {
+            cursor: not-allowed;
+        }
+
+        .winning-cell .piece {
+            animation: pulse-win 1s infinite;
+        }
+
+        @keyframes pulse-win {
+            0% { box-shadow: 0 0 0 0 rgba(255, 230, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 230, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 230, 0, 0); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-wd-dark pt-[40px] md:pt-0"> 
-<!-- Added top padding for mobile to account for fixed top bar if needed, though mostly handled by normal flow -->
 
-    <!-- TOP BAR (Mobile Contact) - Fixed at top for easy access -->
+    <!-- TOP BAR (Mobile Contact) -->
     <div class="fixed top-0 left-0 right-0 z-50 bg-wd-yellow text-wd-blue font-bold text-center py-3 md:hidden shadow-md">
         <a href="tel:8016416850" class="flex justify-center items-center gap-2">
             <i class="fas fa-phone-alt animate-pulse"></i> Call or Text: 801-641-6850
@@ -60,8 +244,8 @@
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo Section -->
             <div class="flex items-center">
-                <!-- PLACEHOLDER FOR LOGO -->
-                <img src="https://placehold.co/200x60/0059B2/white?text=Quick+Fix+Logo" alt="Quick Fix Garage Doors Logo" class="h-10 md:h-16 object-contain">
+                <!-- LOGO - Added Alt Text Optimization -->
+                <img src="https://placehold.co/200x60/0059B2/white?text=Quick+Fix+Logo" alt="Quick Fix Garage Doors LLC Logo" class="h-10 md:h-16 object-contain">
             </div>
 
             <!-- Desktop Nav -->
@@ -69,10 +253,10 @@
                 <a href="#services" class="text-gray-700 hover:text-wd-blue font-medium transition">Services</a>
                 <a href="#about" class="text-gray-700 hover:text-wd-blue font-medium transition">About Us</a>
                 <a href="#contact" class="text-gray-700 hover:text-wd-blue font-medium transition">Contact</a>
-                <a href="https://utahgaragerepair.org" target="_blank" class="text-gray-700 hover:text-wd-blue font-medium transition">Partner Site</a>
+                <a href="https://utahgaragerepair.org" target="_blank" class="text-gray-700 hover:text-wd-blue font-medium transition" rel="noopener noreferrer">Partner Site</a>
             </div>
 
-            <!-- CTA Button (Desktop) -->
+            <!-- CTA Button -->
             <div class="hidden md:block">
                 <a href="tel:8016416850" class="bg-wd-yellow text-wd-blue px-6 py-3 rounded-full font-black uppercase tracking-wider hover:bg-yellow-400 transition shadow-lg flex items-center">
                     <i class="fas fa-mobile-alt mr-2"></i> 801-641-6850
@@ -80,7 +264,7 @@
             </div>
 
             <!-- Mobile Hamburger Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-wd-blue text-3xl focus:outline-none">
+            <button id="mobile-menu-btn" class="md:hidden text-wd-blue text-3xl focus:outline-none" aria-label="Open Menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -91,7 +275,7 @@
                 <a href="#services" class="hover:text-wd-blue mobile-link block py-2 border-b border-gray-100">Services</a>
                 <a href="#about" class="hover:text-wd-blue mobile-link block py-2 border-b border-gray-100">About Us</a>
                 <a href="#contact" class="hover:text-wd-blue mobile-link block py-2 border-b border-gray-100">Contact</a>
-                <a href="https://utahgaragerepair.org" target="_blank" class="hover:text-wd-blue mobile-link block py-2 text-wd-blue">
+                <a href="https://utahgaragerepair.org" target="_blank" class="hover:text-wd-blue mobile-link block py-2 text-wd-blue" rel="noopener noreferrer">
                     Partner Site <i class="fas fa-external-link-alt text-sm ml-1"></i>
                 </a>
             </div>
@@ -99,25 +283,31 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <header class="relative bg-wd-blue text-white py-16 md:py-32 overflow-hidden">
-        <!-- Background Overlay/Image -->
-        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1595429035839-c99c298ffdde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
+    <header class="relative py-16 md:py-32 overflow-hidden bg-gray-900">
+        <!-- Background Image - Optimized Alt Text -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600596542815-e495d915993a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" 
+                 alt="Residential Garage Door Repair in West Jordan Utah - Suburban Home" 
+                 class="w-full h-full object-cover opacity-100">
+        </div>
+
+        <!-- Blue Overlay -->
+        <div class="absolute inset-0 z-0 bg-wd-blue/80"></div>
         
         <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
             <div class="md:w-2/3">
                 <span class="bg-wd-yellow text-wd-blue font-bold px-3 py-1 rounded-sm uppercase text-xs md:text-sm mb-2 inline-block shadow-sm">Licensed & Insured</span>
                 
-                <!-- Location Line Added Here -->
+                <!-- Location Line - Keyword Rich -->
                 <div class="text-white font-bold text-sm md:text-base mb-4 flex items-center justify-center md:justify-start gap-2">
                     <i class="fas fa-map-marker-alt text-wd-yellow"></i> 
-                    <span>Serving Salt Lake Valley & Surrounding Areas</span>
+                    <span>Serving West Jordan, South Jordan, & Salt Lake Valley</span>
                 </div>
                 
-                <!-- Tagline -->
                 <h2 class="text-wd-yellow font-black text-2xl md:text-4xl tracking-wider mb-2 uppercase italic">WE FIX IT ALL</h2>
 
                 <h1 class="text-3xl md:text-6xl font-black mb-6 leading-tight text-shadow">
-                    Don't Let a Broken Door <br> <span class="text-white">Slow You Down.</span>
+                    Don't Let a Broken Garage Door <br> <span class="text-white">Slow You Down.</span>
                 </h1>
                 <p class="text-lg md:text-2xl mb-8 font-light text-gray-100 leading-relaxed">
                     Fast, reliable repairs, spring replacements, and tune-ups. Family owned and operated since 2024.
@@ -131,19 +321,19 @@
                     </a>
                 </div>
                 
-                <!-- Google Reviews Link in Hero -->
+                <!-- Google Reviews Link -->
                 <div class="mt-8 flex flex-col md:flex-row items-center gap-3 justify-center md:justify-start">
                     <div class="flex text-wd-yellow text-xl">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                     </div>
-                    <a href="https://share.google/JVZQLrKQCvtMQDD2b" target="_blank" class="text-white font-bold hover:text-wd-yellow underline decoration-wd-yellow decoration-2 underline-offset-4 text-lg">
+                    <a href="https://share.google/JVZQLrKQCvtMQDD2b" target="_blank" class="text-white font-bold hover:text-wd-yellow underline decoration-wd-yellow decoration-2 underline-offset-4 text-lg" rel="noopener noreferrer">
                         Rated 5 Stars on Google
                     </a>
                 </div>
             </div>
         </div>
         
-        <!-- Trust Badge Overlay (Hidden on Mobile) -->
+        <!-- Trust Badge -->
         <div class="hidden md:block absolute bottom-10 right-10 bg-white p-4 rounded shadow-lg text-wd-blue text-center transform rotate-2">
             <p class="font-black text-2xl">5+</p>
             <p class="text-xs uppercase font-bold text-gray-500">Years Experience</p>
@@ -162,7 +352,7 @@
                 <h3 class="font-bold">Family Owned</h3>
             </div>
             <!-- Google Reviews -->
-            <a href="https://share.google/JVZQLrKQCvtMQDD2b" target="_blank" class="flex flex-col items-center hover:scale-105 transition transform duration-200 group cursor-pointer">
+            <a href="https://share.google/JVZQLrKQCvtMQDD2b" target="_blank" class="flex flex-col items-center hover:scale-105 transition transform duration-200 group cursor-pointer" rel="noopener noreferrer">
                 <div class="flex text-wd-blue text-xl mb-2 group-hover:text-wd-yellow">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
@@ -179,47 +369,47 @@
     <section id="services" class="py-12 md:py-20 bg-white scroll-mt-20">
         <div class="container mx-auto px-6">
             <div class="text-center mb-10 md:mb-16">
-                <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Our Services</h2>
+                <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Our Garage Door Services</h2>
                 <div class="h-2 w-24 bg-wd-yellow mx-auto"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">We handle everything from squeaky hinges to brand new installations. We fix it right the first time.</p>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">We handle everything from squeaky hinges to brand new installations in West Jordan. We fix it right the first time.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 <!-- Service 1 -->
-                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                <article class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
                     <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
                         <i class="fas fa-tools"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Spring Replacement</h3>
                     <p class="text-gray-600 text-sm">Broken springs are dangerous. We safely replace torsion and extension springs to get your door lifting again.</p>
-                </div>
+                </article>
 
                 <!-- Service 2 -->
-                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                <article class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
                     <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
                         <i class="fas fa-wifi"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Garage Door Openers</h3>
                     <p class="text-gray-600 text-sm">Time for an upgrade? We specialize in installing new, quiet openers. We also repair existing motors when cost-effective.</p>
-                </div>
+                </article>
 
                 <!-- Service 3 -->
-                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                <article class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
                     <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
                         <i class="fas fa-oil-can"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">Tune-Ups & Silencing</h3>
                     <p class="text-gray-600 text-sm">Stop the noise! We silence grinding and squeaking doors by tightening hardware, lubricating hinges, and balancing the track system.</p>
-                </div>
+                </article>
 
                 <!-- Service 4 -->
-                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                <article class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
                     <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
                         <i class="fas fa-door-open"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">New Installs & Design</h3>
                     <p class="text-gray-600 text-sm">Boost your curb appeal. We supply and install brand new, high-quality garage doors in various styles and colors.</p>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -228,7 +418,11 @@
     <section id="about" class="py-12 md:py-20 bg-wd-blue text-white relative scroll-mt-20">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0">
-                <img src="https://images.unsplash.com/photo-1621251996504-2453c907cb59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Garage Door Technician" class="rounded-lg shadow-2xl border-4 border-wd-yellow w-full">
+                <!-- Lazy Loading Image with Keyword Alt Text -->
+                <img src="https://images.unsplash.com/photo-1621251996504-2453c907cb59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                     alt="Quick Fix Garage Door Technician West Jordan" 
+                     loading="lazy"
+                     class="rounded-lg shadow-2xl border-4 border-wd-yellow w-full">
             </div>
             <div class="md:w-1/2 md:pl-16">
                 <h4 class="text-wd-yellow font-bold uppercase tracking-widest mb-2 text-sm">About Us</h4>
@@ -246,12 +440,53 @@
         </div>
     </section>
 
+    <!-- GAME SECTION -->
+    <section id="game" class="py-16 bg-gray-50 border-t border-b border-gray-200 font-poppins">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-8">
+                <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Beat the AI & Win a Discount!</h2>
+                <div class="h-2 w-24 bg-wd-yellow mx-auto mb-6"></div>
+                <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+                    Challenge our computer to a game of Connect Four. If you win, you'll unlock a 
+                    <span class="font-bold text-wd-blue bg-yellow-100 px-2 rounded">10% discount</span> 
+                    on your next service!
+                </p>
+            </div>
+
+            <div id="game-container">
+                <div class="w-full max-w-lg text-center mb-6">
+                    <div id="status" class="text-xl font-bold h-8 transition-colors duration-300 text-wd-blue">Your Turn (Red)</div>
+                </div>
+
+                <div id="board-container">
+                    <div class="board" id="board"></div>
+                    <div id="column-selectors"></div>
+                </div>
+
+                <button id="newGame" class="mt-6 px-8 py-3 bg-wd-blue text-white font-bold rounded-full shadow-lg hover:bg-blue-800 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
+                    Restart Game
+                </button>
+            </div>
+        </div>
+
+        <!-- Winner Modal -->
+        <div id="winnerModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50 backdrop-blur-sm">
+            <div class="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-sm w-full transform transition-all scale-95 opacity-0 m-4">
+                <h2 id="winnerText" class="text-3xl font-bold mb-2 text-gray-800"></h2>
+                <p id="winnerSubText" class="text-green-600 font-bold text-lg mb-6 hidden"></p>
+                <button id="playAgain" class="w-full px-6 py-3 bg-wd-blue text-white font-bold rounded-lg hover:bg-blue-800 transition-colors">
+                    Play Again
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- PARTNER BANNER -->
     <section class="bg-gray-800 text-gray-300 py-12 text-center">
         <div class="container mx-auto px-6">
             <h3 class="text-lg md:text-xl mb-4">Looking for more regional resources?</h3>
             <p>Visit our partner website:</p>
-            <a href="https://utahgaragerepair.org" target="_blank" class="inline-block mt-4 text-wd-yellow font-bold text-xl md:text-2xl hover:underline break-words">
+            <a href="https://utahgaragerepair.org" target="_blank" class="inline-block mt-4 text-wd-yellow font-bold text-xl md:text-2xl hover:underline break-words" rel="noopener noreferrer">
                 utahgaragerepair.org <i class="fas fa-external-link-alt text-sm ml-2"></i>
             </a>
         </div>
@@ -280,8 +515,8 @@
             
             <div class="flex space-x-8 text-2xl mb-8 md:mb-0">
                 <!-- Social placeholders -->
-                <a href="#" class="text-gray-400 hover:text-white transition p-2"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition p-2"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition p-2" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition p-2" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
 
             <div class="">
@@ -346,6 +581,341 @@
                     mobileMenu.classList.add('hidden');
                 }, 300);
             });
+        });
+
+        /* --- GAME SCRIPT --- */
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
+            const boardElement = document.getElementById('board');
+            const columnSelectorsElement = document.getElementById('column-selectors');
+            const statusElement = document.getElementById('status');
+            const newGameButton = document.getElementById('newGame');
+            const winnerModal = document.getElementById('winnerModal');
+            const winnerModalContent = winnerModal.querySelector('div');
+            const winnerText = document.getElementById('winnerText');
+            const winnerSubText = document.getElementById('winnerSubText');
+            const playAgainButton = document.getElementById('playAgain');
+
+            // --- Game State ---
+            const ROWS = 6;
+            const COLS = 7;
+            const HUMAN_PLAYER = 1;
+            const AI_PLAYER = 2;
+            let board = [];
+            let currentPlayer = HUMAN_PLAYER;
+            let gameOver = false;
+            
+            // Depth 7 is a good balance for browser performance vs intelligence
+            const AI_DEPTH = 7; 
+
+            // --- Game Initialization ---
+            function createBoard() {
+                board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+                gameOver = false;
+                currentPlayer = HUMAN_PLAYER;
+                
+                boardElement.innerHTML = '';
+                columnSelectorsElement.innerHTML = '';
+                
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        const cell = document.createElement('div');
+                        cell.classList.add('cell');
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        boardElement.appendChild(cell);
+                    }
+                }
+
+                for (let col = 0; col < COLS; col++) {
+                    const column = document.createElement('div');
+                    column.classList.add('column');
+                    column.dataset.col = col;
+                    column.addEventListener('click', () => handleColumnClick(col));
+                    columnSelectorsElement.appendChild(column);
+                }
+                
+                updateStatus();
+                toggleColumnSelectors(true);
+            }
+
+            // --- Game Logic ---
+            function handleColumnClick(col) {
+                if (gameOver || currentPlayer !== HUMAN_PLAYER) return;
+                const row = findAvailableRow(board, col);
+                if (row === -1) return;
+                
+                // Human move
+                dropPiece(row, col, HUMAN_PLAYER);
+                
+                if (gameOver) return;
+                
+                currentPlayer = AI_PLAYER;
+                updateStatus();
+                toggleColumnSelectors(false);
+                
+                // Delay AI move slightly for visual pacing
+                setTimeout(() => {
+                    requestAnimationFrame(aiMove);
+                }, 500);
+            }
+
+            function aiMove() {
+                statusElement.textContent = "Computer is thinking...";
+                
+                setTimeout(() => {
+                    const { col } = minimax(board, AI_DEPTH, -Infinity, Infinity, true);
+                    
+                    if (col === null) {
+                        gameOver = true;
+                        showWinner("It's a Draw!");
+                        return;
+                    }
+                    
+                    const row = findAvailableRow(board, col);
+                    dropPiece(row, col, AI_PLAYER);
+                    
+                    if (gameOver) return;
+                    
+                    currentPlayer = HUMAN_PLAYER;
+                    updateStatus();
+                    toggleColumnSelectors(true);
+                }, 50);
+            }
+
+            function findAvailableRow(b, col) {
+                for (let row = ROWS - 1; row >= 0; row--) {
+                    if (b[row][col] === 0) return row;
+                }
+                return -1;
+            }
+
+            function dropPiece(row, col, player) {
+                board[row][col] = player;
+                const piece = document.createElement('div');
+                piece.classList.add('piece', `player${player}`);
+                
+                const targetCell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
+                targetCell.appendChild(piece);
+                
+                if (checkForWin(board, player)) {
+                    gameOver = true;
+                    if (player === HUMAN_PLAYER) {
+                        showWinner("You Won!", "Screenshot this for a 10% discount!");
+                    } else {
+                        showWinner("Computer Wins!");
+                    }
+                    highlightWinningCells(board, player);
+                } else if (isBoardFull(board)) {
+                    gameOver = true;
+                    showWinner("It's a Draw!");
+                }
+            }
+
+            function updateStatus() {
+                if (gameOver) return;
+                if (currentPlayer === HUMAN_PLAYER) {
+                    statusElement.textContent = "Your Turn (Red)";
+                    statusElement.className = "text-xl font-bold h-8 text-red-500 transition-colors duration-300";
+                } else {
+                    statusElement.textContent = "Computer's Turn (Yellow)";
+                    statusElement.className = "text-xl font-bold h-8 text-wd-yellow transition-colors duration-300";
+                }
+            }
+            
+            function toggleColumnSelectors(enabled) {
+                columnSelectorsElement.style.pointerEvents = enabled ? 'auto' : 'none';
+            }
+
+            function showWinner(message, subMessage = "") {
+                statusElement.textContent = message;
+                winnerText.textContent = message;
+                
+                if (subMessage) {
+                    winnerSubText.textContent = subMessage;
+                    winnerSubText.classList.remove('hidden');
+                } else {
+                    winnerSubText.classList.add('hidden');
+                }
+                
+                winnerModal.classList.remove('hidden');
+                winnerModal.classList.add('flex');
+                
+                setTimeout(() => {
+                    winnerModalContent.style.transform = 'scale(1)';
+                    winnerModalContent.style.opacity = '1';
+                }, 10);
+            }
+            
+            function isBoardFull(b) { 
+                return b[0].every(cell => cell !== 0); 
+            }
+
+            function checkForWin(b, player) {
+                // Horizontal
+                for (let r = 0; r < ROWS; r++) { 
+                    for (let c = 0; c <= COLS - 4; c++) { 
+                        if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return true; 
+                    } 
+                }
+                // Vertical
+                for (let c = 0; c < COLS; c++) { 
+                    for (let r = 0; r <= ROWS - 4; r++) { 
+                        if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return true; 
+                    } 
+                }
+                // Diagonal /
+                for (let r = 0; r <= ROWS - 4; r++) { 
+                    for (let c = 0; c <= COLS - 4; c++) { 
+                        if (b[r][c] === player && b[r+1][c+1] === player && b[r+2][c+2] === player && b[r+3][c+3] === player) return true; 
+                    } 
+                }
+                // Diagonal \
+                for (let r = 3; r < ROWS; r++) { 
+                    for (let c = 0; c <= COLS - 4; c++) { 
+                        if (b[r][c] === player && b[r-1][c+1] === player && b[r-2][c+2] === player && b[r-3][c+3] === player) return true; 
+                    } 
+                }
+                return false;
+            }
+            
+            function highlightWinningCells(b, player) {
+                const findLine = () => {
+                    for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return [{r,c},{r,c:c+1},{r,c:c+2},{r,c:c+3}]; } }
+                    for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return [{r,c},{r:r+1,c},{r:r+2,c},{r:r+3,c}]; } }
+                    for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r+1][c+1] === player && b[r+2][c+2] === player && b[r+3][c+3] === player) return [{r,c},{r:r+1,c:c+1},{r:r+2,c:c+2},{r:r+3,c:c+3}]; } }
+                    for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r-1][c+1] === player && b[r-2][c+2] === player && b[r-3][c+3] === player) return [{r,c},{r:r-1,c:c+1},{r:r-2,c:c+2},{r:r-3,c:c+3}]; } }
+                    return [];
+                };
+                const winningLine = findLine();
+                winningLine.forEach(pos => {
+                    const cellElement = document.querySelector(`.cell[data-row='${pos.r}'][data-col='${pos.c}']`);
+                    if (cellElement) cellElement.classList.add('winning-cell');
+                });
+            }
+
+            function scorePosition(b, player) {
+                let score = 0;
+                const opponent = player === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
+                
+                // Prioritize center column
+                const centerArray = b.map(row => row[Math.floor(COLS / 2)]);
+                score += centerArray.filter(p => p === player).length * 3;
+                
+                const scoreLine = (line, p) => {
+                    let s = 0;
+                    const opponentPlayer = p === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
+                    const playerCount = line.filter(val => val === p).length;
+                    const emptyCount = line.filter(val => val === 0).length;
+                    const opponentCount = line.filter(val => val === opponentPlayer).length;
+                    
+                    if (playerCount === 3 && emptyCount === 1) s += 10;
+                    else if (playerCount === 2 && emptyCount === 2) s += 5;
+                    
+                    // Massive penalty if opponent has 3 in a row (Threat of losing)
+                    // We must block this.
+                    if (opponentCount === 3 && emptyCount === 1) s -= 10000; 
+                    
+                    return s;
+                };
+
+                // Horizontal
+                for (let r = 0; r < ROWS; r++) { 
+                    for (let c = 0; c <= COLS - 4; c++) { 
+                        score += scoreLine(b[r].slice(c, c + 4), player); 
+                    } 
+                }
+                // Vertical
+                for (let c = 0; c < COLS; c++) { 
+                    for (let r = 0; r <= ROWS - 4; r++) { 
+                        score += scoreLine([b[r][c], b[r+1][c], b[r+2][c], b[r+3][c]], player); 
+                    } 
+                }
+                // Diagonal /
+                for (let r = 0; r <= ROWS - 4; r++) { 
+                    for (let c = 0; c <= COLS - 4; c++) { 
+                        score += scoreLine([b[r][c], b[r+1][c+1], b[r+2][c+2], b[r+3][c+3]], player); 
+                    } 
+                }
+                // Diagonal \
+                for (let r = 3; r < ROWS; r++) { 
+                    for (let c = 0; c <= COLS - 4; c++) { 
+                        score += scoreLine([b[r][c], b[r-1][c+1], b[r-2][c+2], b[r-3][c+3]], player); 
+                    } 
+                }
+                
+                return score;
+            }
+
+            function getValidLocations(b) { 
+                return [...Array(COLS).keys()].filter(c => b[0][c] === 0); 
+            }
+
+            function minimax(b, depth, alpha, beta, maximizingPlayer) {
+                const validLocations = getValidLocations(b);
+                const isTerminal = checkForWin(b, HUMAN_PLAYER) || checkForWin(b, AI_PLAYER) || validLocations.length === 0;
+                
+                if (depth === 0 || isTerminal) {
+                    if (isTerminal) {
+                        // Weighted by depth: Win sooner is better, lose later is better.
+                        // Score is massive (1 billion) to strictly override any heuristic values.
+                        if (checkForWin(b, AI_PLAYER)) return { col: null, score: 1000000000 + depth };
+                        if (checkForWin(b, HUMAN_PLAYER)) return { col: null, score: -1000000000 - depth };
+                        return { col: null, score: 0 };
+                    }
+                    return { col: null, score: scorePosition(b, AI_PLAYER) };
+                }
+
+                const columnOrder = [3, 4, 2, 5, 1, 6, 0];
+                const prioritizedLocations = columnOrder.filter(col => validLocations.includes(col));
+
+                if (maximizingPlayer) {
+                    let value = -Infinity;
+                    let column = prioritizedLocations[Math.floor(Math.random() * prioritizedLocations.length)];
+                    for (const col of prioritizedLocations) {
+                        let b_copy = b.map(r => [...r]);
+                        const row = findAvailableRow(b_copy, col);
+                        b_copy[row][col] = AI_PLAYER;
+                        let new_score = minimax(b_copy, depth - 1, alpha, beta, false).score;
+                        if (new_score > value) {
+                            value = new_score;
+                            column = col;
+                        }
+                        alpha = Math.max(alpha, value);
+                        if (alpha >= beta) break;
+                    }
+                    return { col: column, score: value };
+                } else { // Minimizing player
+                    let value = Infinity;
+                    let column = prioritizedLocations[Math.floor(Math.random() * prioritizedLocations.length)];
+                    for (const col of prioritizedLocations) {
+                        let b_copy = b.map(r => [...r]);
+                        const row = findAvailableRow(b_copy, col);
+                        b_copy[row][col] = HUMAN_PLAYER;
+                        let new_score = minimax(b_copy, depth - 1, alpha, beta, true).score;
+                        if (new_score < value) {
+                            value = new_score;
+                            column = col;
+                        }
+                        beta = Math.min(beta, value);
+                        if (alpha >= beta) break;
+                    }
+                    return { col: column, score: value };
+                }
+            }
+
+            function resetGame() {
+                winnerModal.classList.remove('flex');
+                winnerModal.classList.add('hidden');
+                winnerModalContent.style.opacity = '0';
+                winnerModalContent.style.transform = 'scale(0.95)';
+                createBoard();
+            }
+
+            newGameButton.addEventListener('click', createBoard);
+            playAgainButton.addEventListener('click', resetGame);
+
+            createBoard();
         });
     </script>
 </body>
