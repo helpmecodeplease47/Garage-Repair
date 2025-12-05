@@ -1,836 +1,352 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Garage Door Repair West Jordan, UT | 24/7 Service</title>
-    <meta name="description" content="Your trusted local experts for 24/7 emergency garage door repair, spring replacement, and opener installation in West Jordan, Utah. Call for a free estimate!">
+    <title>Quick Fix Garage Doors | West Jordan, UT</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Font for the game -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'wd-blue': '#0059B2', // Deep Royal Blue
+                        'wd-yellow': '#FFE600', // Bright Canary Yellow
+                        'wd-dark': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* ===== Global CSS Variables & Reset ===== */
-        :root {
-            --primary-red: #b91c1c;
-            --secondary-red: #dc2626;
-            --accent-white: #ffffff;
-            --light-gray: #f8f9fa; /* Slightly brighter gray */
-            --dark-text: #1f2937;
-            --medium-text: #4b5563;
-            --border-color: #e5e7eb;
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        /* Mobile Menu Transition */
+        #mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Roboto', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.7;
-            color: var(--dark-text);
-            background-color: var(--accent-white);
-        }
-
-        /* ===== Utility & Typography ===== */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .section-padding {
-            padding: 3rem 1rem;
-        }
-        
-        @media (min-width: 768px) {
-            .section-padding {
-                padding: 5rem 1rem;
-            }
-        }
-
-        .text-center {
-            text-align: center;
-        }
-        
-        .section-title {
-            font-family: 'Oswald', sans-serif;
-            font-size: clamp(2.2rem, 5vw, 2.8rem);
-            color: var(--dark-text);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--medium-text);
-            max-width: 650px;
-            margin: 0 auto 3rem auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--primary-red);
-            color: var(--accent-white);
-            border: none;
-            padding: 0.9rem 2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 700;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        }
-
-        .btn:hover {
-            background: var(--secondary-red);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        /* ===== Header & Navigation ===== */
-        header {
-            background: var(--dark-text);
-            color: var(--accent-white);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            padding: 1rem 0;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 1rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        .logo {
-            text-decoration: none;
-            color: var(--primary-red);
-            font-family: 'Oswald', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            line-height: 1.1;
-        }
-        
-        .logo .prime-word {
-            font-size: 1.8rem;
-        }
-        
-        .logo .tagline {
-            font-size: 1.1rem;
-            display: block;
-        }
-
-        .main-nav { display: none; }
-        .main-nav a { color: var(--accent-white); text-decoration: none; padding: 0.5rem 1rem; border-radius: 4px; transition: background 0.3s; }
-        .main-nav a:hover { background: rgba(255,255,255,0.1); }
-        .header-cta { display: none; }
-
-        .mobile-menu-btn { display: block; background: none; border: none; color: var(--accent-white); font-size: 2rem; cursor: pointer; z-index: 1001; }
-        .mobile-nav { position: fixed; top: 0; right: -100%; width: 80%; max-width: 300px; height: 100%; background: var(--dark-text); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: right 0.35s ease-in-out; }
-        .mobile-nav.active { right: 0; }
-        .mobile-nav a { color: var(--accent-white); text-decoration: none; font-size: 1.5rem; }
-        .mobile-nav .btn { font-size: 1.2rem; padding: 1rem 2rem; }
-
-        /* ===== Hero Section ===== */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1580490189182-9f37502f6104?q=80&w=2070') no-repeat center center/cover;
-            color: var(--accent-white);
-            padding: 9rem 1rem 5rem 1rem;
-        }
-        .hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1.5px; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-        /* ===== Services Section ===== */
-        .services-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        .service-card { background: var(--accent-white); border-radius: 8px; padding: 2rem 1.5rem; border: 1px solid var(--border-color); transition: transform 0.3s, box-shadow 0.3s; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-        .service-card .icon { font-size: 3rem; color: var(--primary-red); margin-bottom: 1rem; }
-        .service-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .service-card p { margin-bottom: 1.5rem; color: var(--medium-text); }
-
-        /* ===== Benefits Section ===== */
-        .benefits { background: var(--light-gray); }
-        .benefits-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 800px; margin: 0 auto; }
-        .benefit-card { display: flex; align-items: center; gap: 1.5rem; background: var(--accent-white); padding: 1.5rem; border-radius: 8px; }
-        .benefit-card .icon { color: var(--primary-red); flex-shrink: 0; }
-        .benefit-card .icon svg { width: 32px; height: 32px; }
-        .benefit-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.3rem; }
-        
-        /* ===== Contact Section ===== */
-        .contact { background: var(--light-gray); }
-        .contact-form { display: grid; gap: 1rem; max-width: 600px; margin: 2rem auto 0 auto; }
-        .form-group { display: flex; flex-direction: column; }
-        .form-group label { margin-bottom: 0.5rem; font-weight: 600; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid var(--border-color); border-radius: 4px; font-size: 1rem; font-family: 'Roboto', sans-serif; }
-        .form-group input:focus, .form-group textarea:focus { outline: 2px solid var(--primary-red); border-color: transparent; }
-
-        /* ===== Footer ===== */
-        footer { background: var(--dark-text); color: #a1a1aa; padding: 3rem 1rem 2rem 1rem; }
-        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-        .footer-content a { color: var(--accent-white); text-decoration: none; }
-        .footer-content a:hover { text-decoration: underline; }
-
-        /* ===== Media Queries for Responsive Design ===== */
-        @media (min-width: 768px) {
-            .mobile-menu-btn, .mobile-nav { display: none; }
-            .main-nav { display: flex; align-items: center; gap: 0.5rem; }
-            .header-cta { display: block; }
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        
-        @media (min-width: 1024px) {
-            .services-grid { grid-template-columns: repeat(4, 1fr); }
-        }
-        
-        /* ===== CONNECT 4 GAME STYLES ===== */
-        .game-zone {
-            background-color: #111827; /* gray-900 */
-            color: #f9fafb; /* gray-100 */
-        }
-        .game-zone .section-title, .game-zone .section-subtitle {
-             color: #f9fafb; /* gray-100 */
-        }
-        .discount-offer {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #facc15; /* yellow-400 */
-            margin: -2rem auto 3rem auto;
-            max-width: 650px;
-        }
-        
-        #game-container {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 1rem;
-        }
-
-        #board-container {
-            position: relative;
-            width: 100%;
-            max-width: 560px;
-            aspect-ratio: 7 / 6;
-            margin-bottom: 1rem;
-        }
-
-        .board {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #3b82f6; /* blue-500 */
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(6, 1fr);
-            gap: 8px;
-            padding: 8px;
-            border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-        }
-
-        .cell {
-            background-color: #1e293b; /* slate-800, the "holes" */
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .cell .piece {
-            width: 90%;
-            height: 90%;
-            border-radius: 50%;
-            transform: scale(0);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .cell .piece.player1 {
-            background-color: #ef4444; /* red-500 */
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
-            transform: scale(1);
-        }
-
-        .cell .piece.player2 {
-            background-color: #facc15; /* yellow-400 */
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-            transform: scale(1);
-        }
-
-        #column-selectors {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            z-index: 10;
-        }
-        
-        .column {
-            cursor: pointer;
-            border-radius: 0.5rem;
-            transition: background-color 0.2s ease-in-out;
-        }
-        
-        .column:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        .column.disabled {
-            cursor: not-allowed;
-        }
-        
-        .column.disabled:hover {
-            background-color: transparent;
-        }
-
-        .winning-cell .piece {
-            animation: bounce 0.8s ease-in-out infinite;
-        }
-        
-        #newGameBtn {
-            margin-top: 1rem;
-            padding: 0.75rem 1.5rem;
-            background-color: #3b82f6;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        #newGameBtn:hover {
-            background-color: #2563eb;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: scale(1.05); }
-            50% { transform: scale(0.85); }
-        }
-
-        #winnerModal {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0,0,0,0.6);
-            display: none; /* Initially hidden */
-            align-items: center;
-            justify-content: center;
-            z-index: 2000; /* Higher than header */
-        }
-        #winnerModal.flex {
-            display: flex;
-        }
-        #winnerModal > div {
-            background-color: #ffffff;
-            color: var(--dark-text);
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            padding: 2rem;
-            text-align: center;
-            transform: scale(0.95);
-            opacity: 0;
-            transition: transform 0.2s ease-out, opacity 0.2s ease-out;
-        }
-        #winnerModal.flex > div {
-             transform: scale(1);
-             opacity: 1;
-        }
-        #winnerText {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        @media (min-width: 768px) {
-            #winnerText {
-                font-size: 2rem;
-            }
-        }
-        #playAgainBtn {
-            padding: 0.75rem 1.5rem;
-            background-color: #3b82f6;
-            color: white;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        #playAgainBtn:hover {
-            background-color: #2563eb;
+        #mobile-menu.open {
+            max-height: 400px; /* Adjust based on menu height */
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-wd-dark pt-[40px] md:pt-0"> 
+<!-- Added top padding for mobile to account for fixed top bar if needed, though mostly handled by normal flow -->
 
-    <header>
-        <div class="header-content">
-            <a href="#home" class="logo">
-                <span class="prime-word">PRIME</span>
-                <span class="tagline">Garage Door Repair</span>
-            </a>
-            
-            <nav class="main-nav">
-                <a href="#home">Home</a>
-                <a href="#services">Services</a>
-                <a href="#benefits">Why Us</a>
-                <a href="#contact">Contact</a>
-                <a href="#discounts">Discounts</a>
-            </nav>
+    <!-- TOP BAR (Mobile Contact) - Fixed at top for easy access -->
+    <div class="fixed top-0 left-0 right-0 z-50 bg-wd-yellow text-wd-blue font-bold text-center py-3 md:hidden shadow-md">
+        <a href="tel:8016416850" class="flex justify-center items-center gap-2">
+            <i class="fas fa-phone-alt animate-pulse"></i> Call or Text: 801-641-6850
+        </a>
+    </div>
 
-            <div class="header-cta">
-                 <a href="tel:385-454-5760" class="btn">📞 Call 385-454-5760</a>
+    <!-- NAVIGATION -->
+    <nav class="bg-white shadow-md sticky top-[48px] md:top-0 z-40 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo Section -->
+            <div class="flex items-center">
+                <!-- PLACEHOLDER FOR LOGO -->
+                <img src="https://placehold.co/200x60/0059B2/white?text=Quick+Fix+Logo" alt="Quick Fix Garage Doors Logo" class="h-10 md:h-16 object-contain">
             </div>
 
-            <button class="mobile-menu-btn" aria-label="Open navigation menu">☰</button>
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="text-gray-700 hover:text-wd-blue font-medium transition">Services</a>
+                <a href="#about" class="text-gray-700 hover:text-wd-blue font-medium transition">About Us</a>
+                <a href="#contact" class="text-gray-700 hover:text-wd-blue font-medium transition">Contact</a>
+                <a href="https://utahgaragerepair.org" target="_blank" class="text-gray-700 hover:text-wd-blue font-medium transition">Partner Site</a>
+            </div>
+
+            <!-- CTA Button (Desktop) -->
+            <div class="hidden md:block">
+                <a href="tel:8016416850" class="bg-wd-yellow text-wd-blue px-6 py-3 rounded-full font-black uppercase tracking-wider hover:bg-yellow-400 transition shadow-lg flex items-center">
+                    <i class="fas fa-mobile-alt mr-2"></i> 801-641-6850
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-wd-blue text-3xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="bg-white border-t border-gray-100 md:hidden shadow-lg">
+            <div class="flex flex-col p-4 space-y-4 font-bold text-lg text-gray-700">
+                <a href="#services" class="hover:text-wd-blue mobile-link block py-2 border-b border-gray-100">Services</a>
+                <a href="#about" class="hover:text-wd-blue mobile-link block py-2 border-b border-gray-100">About Us</a>
+                <a href="#contact" class="hover:text-wd-blue mobile-link block py-2 border-b border-gray-100">Contact</a>
+                <a href="https://utahgaragerepair.org" target="_blank" class="hover:text-wd-blue mobile-link block py-2 text-wd-blue">
+                    Partner Site <i class="fas fa-external-link-alt text-sm ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative bg-wd-blue text-white py-16 md:py-32 overflow-hidden">
+        <!-- Background Overlay/Image -->
+        <div class="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1595429035839-c99c298ffdde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
+        
+        <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
+            <div class="md:w-2/3">
+                <span class="bg-wd-yellow text-wd-blue font-bold px-3 py-1 rounded-sm uppercase text-xs md:text-sm mb-2 inline-block shadow-sm">Licensed & Insured</span>
+                
+                <!-- Location Line Added Here -->
+                <div class="text-white font-bold text-sm md:text-base mb-4 flex items-center justify-center md:justify-start gap-2">
+                    <i class="fas fa-map-marker-alt text-wd-yellow"></i> 
+                    <span>Serving Salt Lake Valley & Surrounding Areas</span>
+                </div>
+                
+                <!-- Tagline -->
+                <h2 class="text-wd-yellow font-black text-2xl md:text-4xl tracking-wider mb-2 uppercase italic">WE FIX IT ALL</h2>
+
+                <h1 class="text-3xl md:text-6xl font-black mb-6 leading-tight text-shadow">
+                    Don't Let a Broken Door <br> <span class="text-white">Slow You Down.</span>
+                </h1>
+                <p class="text-lg md:text-2xl mb-8 font-light text-gray-100 leading-relaxed">
+                    Fast, reliable repairs, spring replacements, and tune-ups. Family owned and operated since 2024.
+                </p>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <a href="tel:8016416850" class="bg-wd-yellow text-wd-blue px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition text-center shadow-xl transform active:scale-95 md:hover:scale-105 duration-200">
+                        Get a Free Quote
+                    </a>
+                    <a href="#services" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-wd-blue transition text-center active:bg-white active:text-wd-blue">
+                        View Services
+                    </a>
+                </div>
+                
+                <!-- Google Reviews Link in Hero -->
+                <div class="mt-8 flex flex-col md:flex-row items-center gap-3 justify-center md:justify-start">
+                    <div class="flex text-wd-yellow text-xl">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <a href="https://share.google/JVZQLrKQCvtMQDD2b" target="_blank" class="text-white font-bold hover:text-wd-yellow underline decoration-wd-yellow decoration-2 underline-offset-4 text-lg">
+                        Rated 5 Stars on Google
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trust Badge Overlay (Hidden on Mobile) -->
+        <div class="hidden md:block absolute bottom-10 right-10 bg-white p-4 rounded shadow-lg text-wd-blue text-center transform rotate-2">
+            <p class="font-black text-2xl">5+</p>
+            <p class="text-xs uppercase font-bold text-gray-500">Years Experience</p>
         </div>
     </header>
 
-    <nav class="mobile-nav">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#benefits" class="nav-link">Why Us</a>
-        <a href="#contact" class="nav-link">Contact</a>
-        <a href="#discounts" class="nav-link">Discounts</a>
-        <a href="tel:385-454-5760" class="btn">Call Now</a>
-    </nav>
-    
-    <main>
-        <section class="hero text-center" id="home">
-            <h1>Expert Garage Door Repair</h1>
-            <p>Your local choice in West Jordan for 24/7 emergency service, repairs, and installations. Fast, reliable, and always professional.</p>
-            <a href="tel:385-454-5760" class="btn">Get a Free Estimate Now</a>
-        </section>
+    <!-- TRUST BANNERS -->
+    <section class="bg-gray-100 py-8 border-b border-gray-200">
+        <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-sm md:text-base">
+            <div class="flex flex-col items-center">
+                <i class="fas fa-certificate text-wd-blue text-2xl md:text-3xl mb-2"></i>
+                <h3 class="font-bold">Licensed & Insured</h3>
+            </div>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-users text-wd-blue text-2xl md:text-3xl mb-2"></i>
+                <h3 class="font-bold">Family Owned</h3>
+            </div>
+            <!-- Google Reviews -->
+            <a href="https://share.google/JVZQLrKQCvtMQDD2b" target="_blank" class="flex flex-col items-center hover:scale-105 transition transform duration-200 group cursor-pointer">
+                <div class="flex text-wd-blue text-xl mb-2 group-hover:text-wd-yellow">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <h3 class="font-bold group-hover:text-wd-blue text-gray-800 underline decoration-dotted">5 Stars on Google</h3>
+            </a>
+            <div class="flex flex-col items-center">
+                <i class="fas fa-wallet text-wd-blue text-2xl md:text-3xl mb-2"></i>
+                <h3 class="font-bold">Free Quotes</h3>
+            </div>
+        </div>
+    </section>
 
-        <section class="section-padding" id="services">
-            <div class="container text-center">
-                <h2 class="section-title">Our Professional Services</h2>
-                <p class="section-subtitle">We handle all types of garage door problems, from minor adjustments to major repairs and installations.</p>
-                <div class="services-grid">
-                    <div class="service-card text-center">
-                        <div class="icon">⚙️</div>
-                        <h3>Spring Replacement</h3>
-                        <p>Safe and efficient replacement for broken torsion and extension springs.</p>
-                        <a href="tel:385-454-5760" class="btn">Call for Repair</a>
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-12 md:py-20 bg-white scroll-mt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Our Services</h2>
+                <div class="h-2 w-24 bg-wd-yellow mx-auto"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto text-lg">We handle everything from squeaky hinges to brand new installations. We fix it right the first time.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                    <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
+                        <i class="fas fa-tools"></i>
                     </div>
-                    <div class="service-card text-center">
-                        <div class="icon">🔧</div>
-                        <h3>Opener Installation</h3>
-                        <p>We install and repair all major brands, including smart opener systems.</p>
-                        <a href="tel:385-454-5760" class="btn">Call for Install</a>
+                    <h3 class="text-xl font-bold mb-2">Spring Replacement</h3>
+                    <p class="text-gray-600 text-sm">Broken springs are dangerous. We safely replace torsion and extension springs to get your door lifting again.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                    <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
+                        <i class="fas fa-wifi"></i>
                     </div>
-                    <div class="service-card text-center">
-                        <div class="icon">🛠️</div>
-                        <h3>Preventative Maintenance</h3>
-                        <p>Keep your door running smoothly with our complete system tune-up service.</p>
-                        <a href="tel:385-454-5760" class="btn">Book a Tune-Up</a>
+                    <h3 class="text-xl font-bold mb-2">Garage Door Openers</h3>
+                    <p class="text-gray-600 text-sm">Time for an upgrade? We specialize in installing new, quiet openers. We also repair existing motors when cost-effective.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                    <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
+                        <i class="fas fa-oil-can"></i>
                     </div>
-                    <div class="service-card text-center">
-                        <div class="icon">🔩</div>
-                        <h3>Roller & Cable Repair</h3>
-                        <p>Quiet nylon roller installation and repair for frayed or broken cables.</p>
-                        <a href="tel:385-454-5760" class="btn">Call for Service</a>
+                    <h3 class="text-xl font-bold mb-2">Tune-Ups & Silencing</h3>
+                    <p class="text-gray-600 text-sm">Stop the noise! We silence grinding and squeaking doors by tightening hardware, lubricating hinges, and balancing the track system.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-gray-50 p-6 md:p-8 rounded-xl shadow-sm hover:shadow-xl transition border-t-4 border-wd-blue group">
+                    <div class="bg-wd-blue text-white w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center text-xl md:text-2xl mb-4 md:mb-6 group-hover:bg-wd-yellow group-hover:text-wd-blue transition">
+                        <i class="fas fa-door-open"></i>
                     </div>
+                    <h3 class="text-xl font-bold mb-2">New Installs & Design</h3>
+                    <p class="text-gray-600 text-sm">Boost your curb appeal. We supply and install brand new, high-quality garage doors in various styles and colors.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="benefits section-padding" id="benefits">
-            <div class="container text-center">
-                <h2 class="section-title">Why Choose Prime?</h2>
-                <p class="section-subtitle">We are committed to providing top-quality service and ensuring our customers are 100% satisfied.</p>
-                <div class="benefits-grid">
-                    <div class="benefit-card">
-                        <div class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
-                        </div>
-                        <div>
-                            <h3>24/7 Availability</h3>
-                            <p>Emergency service when you need it most, day or night.</p>
-                        </div>
-                    </div>
-                    <div class="benefit-card">
-                        <div class="icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" /></svg>
-                        </div>
-                        <div>
-                            <h3>Local West Jordan Experts</h3>
-                            <p>Proudly serving our community with years of experience.</p>
-                        </div>
-                    </div>
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-12 md:py-20 bg-wd-blue text-white relative scroll-mt-20">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <img src="https://images.unsplash.com/photo-1621251996504-2453c907cb59?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Garage Door Technician" class="rounded-lg shadow-2xl border-4 border-wd-yellow w-full">
+            </div>
+            <div class="md:w-1/2 md:pl-16">
+                <h4 class="text-wd-yellow font-bold uppercase tracking-widest mb-2 text-sm">About Us</h4>
+                <h2 class="text-3xl md:text-4xl font-black mb-6">Family Owned. Expertly Trained.</h2>
+                <p class="text-gray-200 mb-6 leading-relaxed text-lg">
+                    Quick Fix Garage Doors was established in 2024 with a simple mission: provide honest, high-quality garage door repair to our Utah neighbors.
+                </p>
+                <p class="text-gray-200 mb-8 leading-relaxed text-lg">
+                    With over 5 years of hands-on experience in the industry, we have seen it all. We are fully licensed and insured, so you can rest easy knowing your home is in safe hands.
+                </p>
+                <div class="border-l-4 border-wd-yellow pl-4 bg-blue-900/30 p-4 rounded-r-lg">
+                    <p class="italic text-lg">"We treat every garage door like it's our own home."</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="section-padding contact" id="contact">
-            <div class="container text-center">
-                <h2 class="section-title">Get in Touch</h2>
-                <p class="section-subtitle">Fill out the form below or call us for immediate assistance and a free estimate.</p>
-                <form id="contactForm" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" name="name" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" placeholder="801-555-1234" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="issue">Describe Your Issue</label>
-                        <textarea id="issue" name="issue" placeholder="My garage door spring is broken." rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Request Callback</button>
-                </form>
-                <div id="form-submission-status" class="text-center mt-4 font-semibold text-green-600" style="min-height: 24px;"></div>
+    <!-- PARTNER BANNER -->
+    <section class="bg-gray-800 text-gray-300 py-12 text-center">
+        <div class="container mx-auto px-6">
+            <h3 class="text-lg md:text-xl mb-4">Looking for more regional resources?</h3>
+            <p>Visit our partner website:</p>
+            <a href="https://utahgaragerepair.org" target="_blank" class="inline-block mt-4 text-wd-yellow font-bold text-xl md:text-2xl hover:underline break-words">
+                utahgaragerepair.org <i class="fas fa-external-link-alt text-sm ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section id="contact" class="py-16 md:py-20 bg-wd-yellow">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-wd-blue text-3xl md:text-5xl font-black mb-6">Need a Quick Fix?</h2>
+            <p class="text-wd-blue text-lg md:text-xl mb-8 font-medium">Text or Call us today for a free quote.</p>
+            <a href="tel:8016416850" class="inline-flex items-center justify-center bg-wd-blue text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-xl md:text-2xl hover:bg-blue-900 transition shadow-lg w-full md:w-auto">
+                <i class="fas fa-phone mr-3"></i> 801-641-6850
+            </a>
+            <p class="mt-4 text-wd-blue opacity-80 font-bold">Serving West Jordan & Surrounding Areas</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-wd-dark text-white py-12 border-t-8 border-wd-blue">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-8 md:mb-0">
+                <h3 class="text-2xl font-black text-wd-yellow mb-2">Quick Fix Garage Doors LLC</h3>
+                <p class="text-gray-400">Licensed & Insured</p>
+                <p class="text-gray-500 text-sm mt-2">Est. 2024</p>
             </div>
-        </section>
-
-        <!-- ===== DISCOUNT GAME SECTION ===== -->
-        <section class="section-padding game-zone" id="discounts">
-            <div class="container text-center">
-                <h2 class="section-title">Discounts</h2>
-                <p class="section-subtitle">Beat our AI at Connect Four to earn a discount!</p>
-                
-                <div id="game-container">
-                    <div class="w-full max-w-lg text-center mb-4">
-                        <h3 id="game-status" class="text-xl md:text-2xl h-8 font-semibold transition-colors duration-300" style="font-family: 'Poppins', sans-serif;">Your Turn (Red)</h3>
-                    </div>
-                    <div id="board-container">
-                         <div class="board" id="board"></div>
-                         <div id="column-selectors"></div>
-                    </div>
-                    <button id="newGameBtn">New Game</button>
-                </div>
+            
+            <div class="flex space-x-8 text-2xl mb-8 md:mb-0">
+                <!-- Social placeholders -->
+                <a href="#" class="text-gray-400 hover:text-white transition p-2"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-gray-400 hover:text-white transition p-2"><i class="fab fa-instagram"></i></a>
             </div>
-        </section>
-    </main>
 
-    <footer>
-        <div class="container footer-content">
-            <p><strong>Prime Garage Door Repair - West Jordan, UT</strong></p>
-            <p>Your Local Garage Door Service Experts</p>
-            <p><a href="tel:385-454-5760">Call Us: 385-454-5760</a></p>
-            <p>&copy; 2025 Prime Garage Door Repair. All Rights Reserved.</p>
+            <div class="">
+                <a href="tel:8016416850" class="block font-bold text-xl hover:text-wd-yellow transition mb-2">801-641-6850</a>
+                <p class="text-gray-500 text-sm">&copy; 2024 Quick Fix Garage Doors LLC.<br>All rights reserved.</p>
+            </div>
         </div>
     </footer>
-    
-    <!-- Winner Modal for the game -->
-    <div id="winnerModal">
-        <div>
-            <h2 id="winnerText"></h2>
-            <button id="playAgainBtn">Play Again</button>
-        </div>
-    </div>
 
-
+    <!-- Scripts -->
     <script>
-        // Script for the main website (mobile menu, form)
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileNav = document.querySelector('.mobile-nav');
-            const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
-
-            const closeMenu = () => mobileNav.classList.remove('active');
-
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileNav.classList.toggle('active');
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!document.getElementById('mobile-menu').classList.contains('hidden')) {
+                         document.getElementById('mobile-menu').classList.remove('open');
+                         // wait for transition then hide
+                         setTimeout(() => {
+                             document.getElementById('mobile-menu').classList.add('hidden');
+                         }, 300);
+                    }
+                }
             });
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-            document.querySelector('.mobile-nav .btn').addEventListener('click', closeMenu);
-
-            const contactForm = document.getElementById('contactForm');
-            const statusDiv = document.getElementById('form-submission-status');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    statusDiv.textContent = 'Thank you for your message! We will contact you shortly.';
-                    this.reset();
-                    setTimeout(() => {
-                        statusDiv.textContent = '';
-                    }, 5000);
-                });
-            }
         });
 
-        // Script for the Connect 4 Game
-        document.addEventListener('DOMContentLoaded', () => {
-            const boardElement = document.getElementById('board');
-            const columnSelectorsElement = document.getElementById('column-selectors');
-            const statusElement = document.getElementById('game-status');
-            const newGameButton = document.getElementById('newGameBtn');
-            const winnerModal = document.getElementById('winnerModal');
-            const winnerText = document.getElementById('winnerText');
-            const playAgainButton = document.getElementById('playAgainBtn');
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-            if (!boardElement) return; // Don't run if game elements aren't on the page
-
-            const ROWS = 6;
-            const COLS = 7;
-            const HUMAN_PLAYER = 1;
-            const AI_PLAYER = 2;
-            let board = [];
-            let currentPlayer = HUMAN_PLAYER;
-            let gameOver = false;
-
-            function createBoard() {
-                board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-                gameOver = false;
-                currentPlayer = HUMAN_PLAYER;
-                
-                boardElement.innerHTML = '';
-                columnSelectorsElement.innerHTML = '';
-                
-                for (let row = 0; row < ROWS; row++) {
-                    for (let col = 0; col < COLS; col++) {
-                        const cell = document.createElement('div');
-                        cell.classList.add('cell');
-                        cell.dataset.row = row;
-                        cell.dataset.col = col;
-                        boardElement.appendChild(cell);
-                    }
-                }
-
-                for (let col = 0; col < COLS; col++) {
-                    const column = document.createElement('div');
-                    column.classList.add('column');
-                    column.dataset.col = col;
-                    column.addEventListener('click', () => handleColumnClick(col));
-                    columnSelectorsElement.appendChild(column);
-                }
-                
-                updateStatus();
-                toggleColumnSelectors(true);
+        menuBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                // Open menu
+                mobileMenu.classList.remove('hidden');
+                // Small delay to allow display:block to apply before transition
+                setTimeout(() => {
+                    mobileMenu.classList.add('open');
+                }, 10);
+            } else {
+                // Close menu
+                mobileMenu.classList.remove('open');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
             }
-
-            function handleColumnClick(col) {
-                if (gameOver || currentPlayer !== HUMAN_PLAYER) return;
-                const row = findAvailableRow(board, col);
-                if (row === -1) return;
-                dropPiece(row, col, HUMAN_PLAYER);
-                if (gameOver) return;
-                currentPlayer = AI_PLAYER;
-                updateStatus();
-                toggleColumnSelectors(false);
-                setTimeout(aiMove, 500);
-            }
-
-            function aiMove() {
-                statusElement.textContent = "Computer is thinking...";
-                const { col } = minimax(board, 7, -Infinity, Infinity, true);
-                if (col === null) {
-                    gameOver = true;
-                    showWinner("It's a Draw!");
-                    return;
-                }
-                const row = findAvailableRow(board, col);
-                dropPiece(row, col, AI_PLAYER);
-                if (gameOver) return;
-                currentPlayer = HUMAN_PLAYER;
-                updateStatus();
-                toggleColumnSelectors(true);
-            }
-
-            function findAvailableRow(b, col) {
-                for (let row = ROWS - 1; row >= 0; row--) {
-                    if (b[row][col] === 0) return row;
-                }
-                return -1;
-            }
-
-            function dropPiece(row, col, player) {
-                board[row][col] = player;
-                const piece = document.createElement('div');
-                piece.classList.add('piece', `player${player}`);
-                const targetCell = document.querySelector(`.cell[data-row='${row}'][data-col='${col}']`);
-                targetCell.appendChild(piece);
-                if (checkForWin(board, player)) {
-                    gameOver = true;
-                    if (player === HUMAN_PLAYER) {
-                         showWinner("You Win! Take a screenshot for a 10% discount.");
-                    } else {
-                         showWinner("The Computer Wins!");
-                    }
-                    highlightWinningCells(board, player);
-                } else if (isBoardFull(board)) {
-                    gameOver = true;
-                    showWinner("It's a Draw!");
-                }
-            }
-
-            function updateStatus() {
-                if (gameOver) return;
-                if (currentPlayer === HUMAN_PLAYER) {
-                    statusElement.textContent = "Your Turn (Red)";
-                    statusElement.style.color = '#ef4444';
-                } else {
-                    statusElement.textContent = "Computer's Turn (Yellow)";
-                    statusElement.style.color = '#facc15';
-                }
-            }
-            
-            function toggleColumnSelectors(enabled) {
-                columnSelectorsElement.style.pointerEvents = enabled ? 'auto' : 'none';
-            }
-
-            function showWinner(message) {
-                statusElement.textContent = message;
-                winnerText.textContent = message;
-                winnerModal.classList.add('flex');
-            }
-            
-            function isBoardFull(b) { return b[0].every(cell => cell !== 0); }
-
-            function checkForWin(b, player) {
-                for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return true; } }
-                for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return true; } }
-                for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r+1][c+1] === player && b[r+2][c+2] === player && b[r+3][c+3] === player) return true; } }
-                for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r-1][c+1] === player && b[r-2][c+2] === player && b[r-3][c+3] === player) return true; } }
-                return false;
-            }
-            
-            function highlightWinningCells(b, player) {
-                let winningLine = [];
-                const findLine = () => {
-                    for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return [{r,c},{r,c:c+1},{r,c:c+2},{r,c:c+3}]; } }
-                    for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return [{r,c},{r:r+1,c},{r:r+2,c},{r:r+3,c}]; } }
-                    for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r+1][c+1] === player && b[r+2][c+2] === player && b[r+3][c+3] === player) return [{r,c},{r:r+1,c:c+1},{r:r+2,c:c+2},{r:r+3,c:c+3}]; } }
-                    for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r-1][c+1] === player && b[r-2][c+2] === player && b[r-3][c+3] === player) return [{r,c},{r:r-1,c:c+1},{r:r-2,c:c+2},{r:r-3,c:c+3}]; } }
-                    return [];
-                };
-                winningLine = findLine();
-                winningLine.forEach(pos => {
-                    const cellElement = document.querySelector(`.cell[data-row='${pos.r}'][data-col='${pos.c}']`);
-                    if (cellElement) cellElement.classList.add('winning-cell');
-                });
-            }
-
-            function scorePosition(b, player) {
-                let score = 0;
-                const opponent = player === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
-                const centerArray = b.map(row => row[Math.floor(COLS / 2)]);
-                score += centerArray.filter(p => p === player).length * 6;
-                
-                const scoreLine = (line, p) => {
-                    let s = 0;
-                    const opponentPlayer = p === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
-                    const playerCount = line.filter(val => val === p).length;
-                    const emptyCount = line.filter(val => val === 0).length;
-                    const opponentCount = line.filter(val => val === opponentPlayer).length;
-                    
-                    if (playerCount === 4) s += 1000000;
-                    else if (playerCount === 3 && emptyCount === 1) s += 5000;
-                    else if (playerCount === 2 && emptyCount === 2) s += 50;
-                    if (opponentCount === 3 && emptyCount === 1) s -= 10000;
-                    
-                    return s;
-                };
-
-                for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { score += scoreLine(b[r].slice(c, c + 4), player); } }
-                for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { score += scoreLine([b[r][c], b[r+1][c], b[r+2][c], b[r+3][c]], player); } }
-                for (let r = 0; r <= ROWS - 4; r++) { for (let c = 0; c <= COLS - 4; c++) { score += scoreLine([b[r][c], b[r+1][c+1], b[r+2][c+2], b[r+3][c+3]], player); } }
-                for (let r = 3; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { score += scoreLine([b[r][c], b[r-1][c+1], b[r-2][c+2], b[r-3][c+3]], player); } }
-                
-                return score;
-            }
-
-            function getValidLocations(b) { return [...Array(COLS).keys()].filter(c => b[0][c] === 0); }
-
-            function minimax(b, depth, alpha, beta, maximizingPlayer) {
-                const isTerminal = checkForWin(b, HUMAN_PLAYER) || checkForWin(b, AI_PLAYER) || isBoardFull(b);
-                if (depth === 0 || isTerminal) {
-                    if (isTerminal) {
-                        if (checkForWin(b, AI_PLAYER)) return { col: null, score: 10000000 };
-                        if (checkForWin(b, HUMAN_PLAYER)) return { col: null, score: -10000000 };
-                        return { col: null, score: 0 };
-                    }
-                    return { col: null, score: scorePosition(b, AI_PLAYER) };
-                }
-
-                const validLocations = getValidLocations(b);
-                const columnOrder = [3, 4, 2, 5, 1, 6, 0];
-                const prioritizedLocations = columnOrder.filter(col => validLocations.includes(col));
-
-                if (maximizingPlayer) {
-                    let value = -Infinity;
-                    let column = prioritizedLocations[0];
-                    for (const col of prioritizedLocations) {
-                        let b_copy = b.map(r => [...r]);
-                        const row = findAvailableRow(b_copy, col);
-                        b_copy[row][col] = AI_PLAYER;
-                        let new_score = minimax(b_copy, depth - 1, alpha, beta, false).score;
-                        if (new_score > value) {
-                            value = new_score;
-                            column = col;
-                        }
-                        alpha = Math.max(alpha, value);
-                        if (alpha >= beta) break;
-                    }
-                    return { col: column, score: value };
-                } else { // Minimizing player
-                    let value = Infinity;
-                    let column = prioritizedLocations[0];
-                    for (const col of prioritizedLocations) {
-                        let b_copy = b.map(r => [...r]);
-                        const row = findAvailableRow(b_copy, col);
-                        b_copy[row][col] = HUMAN_PLAYER;
-                        let new_score = minimax(b_copy, depth - 1, alpha, beta, true).score;
-                        if (new_score < value) {
-                            value = new_score;
-                            column = col;
-                        }
-                        beta = Math.min(beta, value);
-                        if (alpha >= beta) break;
-                    }
-                    return { col: column, score: value };
-                }
-            }
-
-            function resetGame() {
-                winnerModal.classList.remove('flex');
-                winnerModal.classList.add('hidden');
-                createBoard();
-            }
-
-            newGameButton.addEventListener('click', createBoard);
-            playAgainButton.addEventListener('click', resetGame);
-
-            createBoard();
+        });
+        
+        // Close menu when clicking links
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+            });
         });
     </script>
 </body>
 </html>
-
