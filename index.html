@@ -563,7 +563,7 @@
             const COLS = 7;
             const HUMAN_PLAYER = 1;
             const AI_PLAYER = 2;
-            const AI_DEPTH = 5; // Reduced depth slightly for faster mobile response
+            const AI_DEPTH = 6; // Increased Depth for smarter AI
             
             let board = [];
             let currentPlayer = HUMAN_PLAYER;
@@ -618,7 +618,7 @@
                 // Small delay for UX
                 setTimeout(() => {
                     requestAnimationFrame(aiMove);
-                }, 400);
+                }, 100);
             }
 
             function aiMove() {
@@ -627,8 +627,16 @@
                     const { col } = minimax(board, AI_DEPTH, -Infinity, Infinity, true);
                     
                     if (col === null) {
-                        gameOver = true;
-                        showWinner("It's a Draw!");
+                        // Attempt fallback to first valid move if panic
+                        const valid = getValidLocations(board);
+                        if (valid.length > 0) {
+                             const randomCol = valid[Math.floor(Math.random() * valid.length)];
+                             const row = findAvailableRow(board, randomCol);
+                             dropPiece(row, randomCol, AI_PLAYER);
+                        } else {
+                            gameOver = true;
+                            showWinner("It's a Draw!");
+                        }
                         return;
                     }
                     
@@ -727,7 +735,6 @@
             }
             
             function highlightWinningCells(b, player) {
-                // Simplified highlighting logic for brevity
                  const findLine = () => {
                     for (let r = 0; r < ROWS; r++) { for (let c = 0; c <= COLS - 4; c++) { if (b[r][c] === player && b[r][c+1] === player && b[r][c+2] === player && b[r][c+3] === player) return [{r,c},{r,c:c+1},{r,c:c+2},{r,c:c+3}]; } }
                     for (let c = 0; c < COLS; c++) { for (let r = 0; r <= ROWS - 4; r++) { if (b[r][c] === player && b[r+1][c] === player && b[r+2][c] === player && b[r+3][c] === player) return [{r,c},{r:r+1,c},{r:r+2,c},{r:r+3,c}]; } }
@@ -742,47 +749,148 @@
                 });
             }
 
-            // Minimax and Score logic (Standard Implementation)
-            function scorePosition(b, player) {
+            // --- AI & Minimax Logic ---
+
+            function evaluateWindow(window, player) {
                 let score = 0;
                 const opponent = player === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
-                const centerArray = b.map(row => row[Math.floor(COLS / 2)]);
-                score += centerArray.filter(p => p === player).length * 3;
                 
-                const scoreLine = (line, p) => {
-                    let s = 0;
-                    const opponentPlayer = p === AI_PLAYER ? HUMAN_PLAYER : AI_PLAYER;
-                    const playerCount = line.filter(val => val === p).length;
-                    const emptyCount = line.filter(val => val === 0).length;
-                    const opponentCount = line.filter(val => val === opponentPlayer).length;
-                    
-                    if (playerCount === 3 && emptyCount === 1) s += 10;
-                    else if (playerCount === 2 && emptyCount === 2) s += 5;
-                    if (opponentCount === 3 && emptyCount === 1) s -= 1000; 
-                    return s;
-                };
+                const pieceCount = window.filter(p => p === player).length;
+                const emptyCount = window.filter(p => p === 0).length;
+                const oppCount = window.filter(p => p === opponent).length;
+
+                if (pieceCount === 4) {
+                    score += 100;
+                } else if (pieceCount === 3 && emptyCount === 1) {
+                    score += 5;
+                } else if (pieceCount === 2 && emptyCount === 2) {
+                    score += 2;
+                }
+
+                if (oppCount === 3 && emptyCount === 1) {
+                    score -= 4; // Penalize states where opponent has 3 in a row
+                }
+
+                return score;
+            }
+
+            function scorePosition(b, player) {
+                let score = 0;
                 
-                // Check all directions (Simplified loop for brevity)
-                // In production, full loop logic is used.
-                return score; // Placeholder for full heuristic implementation from original
+                // Center column preference
+                const centerArray = [];
+                for(let r = 0; r < ROWS; r++) {
+                    centerArray.push(b[r][Math.floor(COLS/2)]);
+                }
+                const centerCount = centerArray.filter(p => p === player).length;
+                score += centerCount * 3;
+
+                // Horizontal
+                for (let r = 0; r < ROWS; r++) {
+                    const rowArray = b[r];
+                    for (let c = 0; c < COLS - 3; c++) {
+                        const window = rowArray.slice(c, c + 4);
+                        score += evaluateWindow(window, player);
+                    }
+                }
+
+                // Vertical
+                for (let c = 0; c < COLS; c++) {
+                    const colArray = [];
+                    for(let r = 0; r < ROWS; r++) {
+                        colArray.push(b[r][c]);
+                    }
+                    for (let r = 0; r < ROWS - 3; r++) {
+                        const window = colArray.slice(r, r + 4);
+                        score += evaluateWindow(window, player);
+                    }
+                }
+
+                // Diagonal /
+                for (let r = 0; r < ROWS - 3; r++) {
+                    for (let c = 0; c < COLS - 3; c++) {
+                        const window = [b[r][c], b[r+1][c+1], b[r+2][c+2], b[r+3][c+3]];
+                        score += evaluateWindow(window, player);
+                    }
+                }
+
+                // Diagonal \
+                for (let r = 0; r < ROWS - 3; r++) {
+                    for (let c = 0; c < COLS - 3; c++) {
+                        const window = [b[r+3][c], b[r+2][c+1], b[r+1][c+2], b[r][c+3]];
+                        score += evaluateWindow(window, player);
+                    }
+                }
+
+                return score;
+            }
+
+            function getValidLocations(b) {
+                const valid = [];
+                for (let c = 0; c < COLS; c++) {
+                    if (b[0][c] === 0) valid.push(c);
+                }
+                return valid;
+            }
+
+            function isTerminalNode(b) {
+                return checkForWin(b, AI_PLAYER) || checkForWin(b, HUMAN_PLAYER) || getValidLocations(b).length === 0;
             }
 
             function minimax(b, depth, alpha, beta, maximizingPlayer) {
-                // Reuse original Minimax Logic or Simplified Random for speed in demo
-                // For this optimized file, I'm keeping the structure but ensuring it runs smoothly on mobile
-                const validLocations = [...Array(COLS).keys()].filter(c => b[0][c] === 0);
-                const isTerminal = checkForWin(b, HUMAN_PLAYER) || checkForWin(b, AI_PLAYER) || validLocations.length === 0;
+                const validLocations = getValidLocations(b);
+                const isTerminal = isTerminalNode(b);
+                
                 if (depth === 0 || isTerminal) {
                     if (isTerminal) {
-                         if (checkForWin(b, AI_PLAYER)) return { col: null, score: 1000000 };
-                         if (checkForWin(b, HUMAN_PLAYER)) return { col: null, score: -1000000 };
-                         return { col: null, score: 0 };
+                        if (checkForWin(b, AI_PLAYER)) {
+                            return { col: null, score: 1000000000 };
+                        } else if (checkForWin(b, HUMAN_PLAYER)) {
+                            return { col: null, score: -1000000000 };
+                        } else { // Game over, no more valid moves
+                            return { col: null, score: 0 };
+                        }
+                    } else { // Depth is zero
+                        return { col: null, score: scorePosition(b, AI_PLAYER) };
                     }
-                    return { col: null, score: 0 }; // Simplified heuristic
                 }
-                
-                const column = validLocations[Math.floor(Math.random() * validLocations.length)];
-                return { col: column, score: 0 };
+
+                // Move ordering: check center columns first
+                validLocations.sort((a, b) => Math.abs(a - 3) - Math.abs(b - 3));
+
+                if (maximizingPlayer) {
+                    let value = -Infinity;
+                    let column = validLocations[Math.floor(Math.random() * validLocations.length)];
+                    for (let col of validLocations) {
+                        const row = findAvailableRow(b, col);
+                        const bCopy = b.map(arr => [...arr]);
+                        bCopy[row][col] = AI_PLAYER;
+                        const newScore = minimax(bCopy, depth - 1, alpha, beta, false).score;
+                        if (newScore > value) {
+                            value = newScore;
+                            column = col;
+                        }
+                        alpha = Math.max(alpha, value);
+                        if (alpha >= beta) break;
+                    }
+                    return { col: column, score: value };
+                } else { // Minimizing player
+                    let value = Infinity;
+                    let column = validLocations[Math.floor(Math.random() * validLocations.length)];
+                    for (let col of validLocations) {
+                        const row = findAvailableRow(b, col);
+                        const bCopy = b.map(arr => [...arr]);
+                        bCopy[row][col] = HUMAN_PLAYER;
+                        const newScore = minimax(bCopy, depth - 1, alpha, beta, true).score;
+                        if (newScore < value) {
+                            value = newScore;
+                            column = col;
+                        }
+                        beta = Math.min(beta, value);
+                        if (alpha >= beta) break;
+                    }
+                    return { col: column, score: value };
+                }
             }
 
             // Initialize
