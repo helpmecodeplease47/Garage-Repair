@@ -50,7 +50,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- SEO: Enhanced Structured Data (Schema.org) - FULL LIST -->
+    <!-- SEO: Enhanced Structured Data (Schema.org) - WITH REVIEW SCHEMA -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -100,6 +100,26 @@
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Garage Motor Repair" } },
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "New Garage Door Installation" } }
         ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "52",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": {
+        "@type": "Review",
+        "author": {
+            "@type": "Person",
+            "name": "Local Customer"
+        },
+        "datePublished": "2024-02-15",
+        "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+        },
+        "reviewBody": "Quick Fix Garage Doors provided excellent service. They arrived on time and fixed my spring same-day."
       },
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
@@ -456,11 +476,11 @@
         <section id="about" class="py-12 md:py-20 bg-wd-blue text-white relative scroll-mt-20">
             <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
-                    <img src="Images/Tech.png" 
-                         alt="Garage Door Technician repairing a door in Utah" 
-                         class="rounded-lg shadow-2xl border-4 border-wd-yellow w-full"
-                         loading="lazy"
-                         width="800" height="533">
+                    <img src="Images/Tech.png" 
+                         alt="Garage Door Technician repairing a door in Utah" 
+                         class="rounded-lg shadow-2xl border-4 border-wd-yellow w-full"
+                         loading="lazy"
+                         width="800" height="533">
                 </div>
                 <div class="md:w-1/2 md:pl-16">
                     <h4 class="text-wd-yellow font-bold uppercase tracking-widest mb-2 text-sm">About Us</h4>
