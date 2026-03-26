@@ -40,54 +40,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- SEO: Service & Review Schema Specific to this Page -->
+    
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Garage Door Spring Replacement",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Quick Fix Garage Doors LLC",
-        "image": "https://utahgaragerepair.org/Images/long logo quick.png",
-        "telephone": "801-641-6850",
-        "url": "https://utahgaragerepair.org",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "West Jordan",
-          "addressRegion": "UT",
-          "postalCode": "84084",
-          "addressCountry": "US"
-        }
-      },
-      "areaServed": [
-        {"@type": "City", "name": "West Jordan"},
-        {"@type": "City", "name": "South Jordan"},
-        {"@type": "City", "name": "Sandy"},
-        {"@type": "City", "name": "Draper"},
-        {"@type": "City", "name": "Lehi"}
-      ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "52",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": {
-        "@type": "Review",
-        "author": {
-            "@type": "Person",
-            "name": "Sarah M."
-        },
-        "datePublished": "2024-03-10",
-        "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5"
-        },
-        "reviewBody": "Heard a massive bang in the garage and my car was trapped. Quick Fix came out to West Jordan within 2 hours and replaced both torsion springs. Highly recommend!"
-      }
-    }
-    </script>
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Garage Door Spring Replacement",
+  "image": "https://utahgaragerepair.org/Images/long logo quick.png",
+  "description": "Fast and safe garage door torsion and extension spring replacement in the Salt Lake Valley.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Quick Fix Garage Doors LLC"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "52",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": {
+    "@type": "Review",
+    "author": {
+        "@type": "Person",
+        "name": "Sarah M."
+    },
+    "datePublished": "2024-03-10",
+    "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+    },
+    "reviewBody": "Heard a massive bang in the garage and my car was trapped. Quick Fix came out to West Jordan within 2 hours and replaced both torsion springs. Highly recommend!"
+  }
+}
+</script>
 
     <script>
         tailwind.config = {
