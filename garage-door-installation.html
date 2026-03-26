@@ -55,37 +55,53 @@
 
     <!-- SEO: Specific Service Schema Markup -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Garage Door Installation and Replacement",
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "Quick Fix Garage Doors LLC",
-        "telephone": "801-641-6850",
-        "image": "https://utahgaragerepair.org/Images/long%20logo%20quick.png",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "West Jordan",
-          "addressRegion": "UT",
-          "postalCode": "84084",
-          "addressCountry": "US"
-        }
-      },
-      "areaServed": [
-        {"@type": "City", "name": "West Jordan"},
-        {"@type": "City", "name": "South Jordan"},
-        {"@type": "City", "name": "Lehi"},
-        {"@type": "City", "name": "Orem"},
-        {"@type": "City", "name": "Sandy"},
-        {"@type": "City", "name": "Draper"},
-        {"@type": "AdministrativeArea", "name": "Salt Lake County"},
-        {"@type": "AdministrativeArea", "name": "Utah County"}
-      ],
-      "description": "Expert new garage door installation, replacement, and design services. We offer a wide variety of styles including insulated, modern, and traditional steel doors.",
-      "url": "https://utahgaragerepair.org/garage-door-installation.html"
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "New Garage Door Installation",
+  "image": "https://utahgaragerepair.org/Images/long%20logo%20quick.png",
+  "description": "Expert new garage door installation, replacement, and design services. We offer insulated, modern, and traditional steel doors.",
+  "brand": {
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Quick Fix Garage Doors LLC",
+    "telephone": "801-641-6850",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "West Jordan",
+      "addressRegion": "UT",
+      "postalCode": "84084",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 40.6097,
+      "longitude": -111.9391
     }
-    </script>
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://utahgaragerepair.org/garage-door-installation.html",
+    "availability": "https://schema.org/InStock",
+    "areaServed": [
+      {"@type": "City", "name": "West Jordan"},
+      {"@type": "City", "name": "South Jordan"},
+      {"@type": "City", "name": "Sandy"},
+      {"@type": "City", "name": "Draper"},
+      {"@type": "City", "name": "Lehi"},
+      {"@type": "City", "name": "Orem"},
+      {"@type": "AdministrativeArea", "name": "Salt Lake County"},
+      {"@type": "AdministrativeArea", "name": "Utah County"}
+    ]
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "52",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+}
+</script>
 
     <script>
         tailwind.config = {
