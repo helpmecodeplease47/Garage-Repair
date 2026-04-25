@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="canonical" href="https://utahgaragerepair.org/garage-door-installation.html" />
     
     <link rel="icon" href="Images/favicon.png" type="image/png">
@@ -98,6 +99,7 @@
   }
 }
 </script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -115,10 +117,11 @@
             }
         }
     </script>
+
     <style>
         .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
         
-        /* Mobile Menu Transition */
+        /* Mobile Menu Transition (Makes the mobile menu slide open smoothly) */
         #mobile-menu {
             transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
             max-height: 0;
@@ -130,7 +133,7 @@
             opacity: 1;
         }
 
-        /* Floating Button Animation */
+        /* Floating Button Animation (Makes the phone button gently bounce) */
         @keyframes bounce-gentle {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
@@ -148,6 +151,7 @@
 
     <nav class="bg-white shadow-md sticky top-0 z-40 transition-all duration-300">
         <div class="container mx-auto px-6 py-1 md:py-1 flex justify-between items-center">
+            
             <a href="/" class="flex items-center" aria-label="Quick Fix Garage Doors Home">
                 <img src="Images/long logo quick.png" 
                      alt="Quick Fix Garage Doors West Jordan Logo" 
@@ -189,6 +193,7 @@
     </nav>
 
     <main id="main-content">
+        
         <header class="relative bg-wd-dark text-white py-16 md:py-32 overflow-hidden flex items-center min-h-[450px]">
             <div class="absolute inset-0 z-0">
                 <img src="Images/install-hero.jpg" 
@@ -201,6 +206,7 @@
             
             <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
                 <div class="md:w-3/4 lg:w-2/3">
+                    
                     <nav aria-label="Breadcrumb" class="mb-4 text-sm text-gray-300">
                         <ol class="flex justify-center md:justify-start space-x-2">
                             <li><a href="/" class="hover:text-wd-yellow">Home</a></li>
@@ -210,7 +216,7 @@
                     </nav>
 
                     <h2 class="text-wd-yellow font-black text-xl md:text-3xl tracking-wider mb-2 uppercase italic">Upgrade Your Curb Appeal</h2>
-
+                    
                     <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight text-shadow">
                         New Garage Door <br> <span class="text-gray-100">Installation.</span>
                     </h1>
@@ -417,6 +423,7 @@
 
     <footer class="bg-wd-dark text-white py-12 border-t-8 border-wd-blue pb-24 md:pb-12">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            
             <div class="mb-8 md:mb-0">
                 <h3 class="text-2xl font-black text-wd-yellow mb-2">Quick Fix Garage Doors LLC</h3>
                 <p class="text-gray-400">Licensed & Insured</p>
@@ -436,11 +443,14 @@
     </footer>
 
     <script>
+        // This makes sure the code doesn't run until the entire webpage is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile Menu Toggle
+            
+            // Logic for the Mobile Hamburger Menu
             const menuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
 
+            // Opens and closes the menu when the hamburger icon is tapped
             menuBtn.addEventListener('click', () => {
                 if (mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
@@ -449,25 +459,28 @@
                 }
             });
             
-            // Smooth Scroll for local anchor links
+            // Smooth Scroll Logic: Makes the page gently slide down when you click a link like "Contact" instead of instantly jumping.
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href');
-                    if (targetId === '#') return; // Skip if just #
+                    if (targetId === '#') return; // Do nothing if it's just a blank # link
                     
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         e.preventDefault();
+                        
+                        // The 'headerOffset' accounts for your sticky navigation bar so it doesn't cover up the content when it scrolls down
                         const headerOffset = 60;
                         const elementPosition = targetElement.getBoundingClientRect().top;
                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                     
+                        // Execute the smooth scroll
                         window.scrollTo({
                             top: offsetPosition,
                             behavior: "smooth"
                         });
                         
-                        // Close mobile menu
+                        // Automatically close the mobile menu after a link is clicked
                         if (mobileMenu.classList.contains('open')) {
                              mobileMenu.classList.remove('open');
                         }
