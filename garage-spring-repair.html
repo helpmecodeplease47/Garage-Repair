@@ -40,55 +40,71 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Garage Door Spring Replacement",
-      "image": "https://utahgaragerepair.org/Images/long%20logo%20quick.png",
-      "description": "Fast and safe garage door torsion and extension spring replacement in the Salt Lake Valley. Serving West Jordan, South Jordan, Sandy, Draper, Lehi, and surrounding areas.",
-      "provider": {
-        "@type": "HomeAndConstructionBusiness",
-        "name": "Quick Fix Garage Doors LLC",
-        "telephone": "801-641-6850",
-        "url": "https://utahgaragerepair.org",
-        "image": "https://utahgaragerepair.org/Images/long%20logo%20quick.png",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "West Jordan",
-          "addressRegion": "UT",
-          "postalCode": "84084",
-          "addressCountry": "US"
+      "@graph": [
+        {
+          "@type": "Product",
+          "name": "Garage Door Spring Replacement Service",
+          "image": "https://utahgaragerepair.org/Images/long-logo-quick.png",
+          "description": "Fast and safe garage door torsion and extension spring replacement in the Salt Lake Valley. Serving West Jordan, South Jordan, Sandy, Draper, Lehi, and surrounding areas.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Quick Fix Garage Doors LLC"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "url": "https://utahgaragerepair.org/garage-spring-repair.html",
+            "priceCurrency": "USD",
+            "lowPrice": "200.00",
+            "highPrice": "550.00",
+            "offerCount": "2",
+            "availability": "https://schema.org/InStock"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "bestRating": "5",
+            "worstRating": "1",
+            "reviewCount": "58"
+          }
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": 40.6097,
-          "longitude": -111.9391
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How much does spring replacement cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The average cost for a professional spring replacement typically ranges between $250 and $550 depending on the size and weight of your door, whether it's an extension or torsion spring, and if you need one or two springs replaced."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Should I replace both springs if only one broke?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. If your door has two springs and one breaks, the second spring has experienced the exact same amount of wear and tear (cycles) and is highly likely to break within a few weeks."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long do new springs last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Standard torsion springs are rated for about 10,000 cycles. For an average family using the garage 4 times a day, high-quality springs will last roughly 7 to 10 years."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I just open the door with my opener?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Your automatic opener is designed to move the door, but the springs do the heavy lifting. Forcing the opener to lift a dead-weight door can strip the gears or burn out the motor."
+              }
+            }
+          ]
         }
-      },
-      "areaServed": [
-    { "@type": "City", "name": "West Jordan" },
-    { "@type": "City", "name": "South Jordan" },
-    { "@type": "City", "name": "Sandy" },
-    { "@type": "City", "name": "Draper" },
-    { "@type": "City", "name": "Herriman" },
-    { "@type": "City", "name": "Daybreak" },
-    { "@type": "City", "name": "Riverton" },
-    { "@type": "City", "name": "Bluffdale" },
-    { "@type": "City", "name": "West Valley City" },
-    { "@type": "City", "name": "Taylorsville" },
-    { "@type": "City", "name": "Midvale" },
-    { "@type": "City", "name": "Oquirrh" },
-    { "@type": "City", "name": "Lehi" },
-    { "@type": "City", "name": "Orem" },
-    { "@type": "City", "name": "Provo" },
-    { "@type": "City", "name": "Vineyard" },
-    { "@type": "AdministrativeArea", "name": "Salt Lake County" },
-    { "@type": "AdministrativeArea", "name": "Utah County" }
-      ],
-      "offers": {
-        "@type": "Offer",
-        "url": "https://utahgaragerepair.org/garage-spring-repair.html",
-        "priceCurrency": "USD",
-        "price": "200.00"
-      }
+      ]
     }
     </script>
     
