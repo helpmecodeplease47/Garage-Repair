@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,16 +30,8 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
 {
@@ -186,141 +178,98 @@
   ]
 }
     </script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'wd-blue': '#0059B2',
-                        'wd-yellow': '#FFE600',
-                        'wd-dark': '#1a1a1a',
-                    },
-                    fontFamily: {
-                        sans: ['Roboto', 'sans-serif'],
-                        poppins: ['Poppins', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
-        
-        /* Mobile Menu Transition */
-        #mobile-menu {
-            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
-        #mobile-menu.open {
-            max-height: 400px;
-            opacity: 1;
-        }
-
-        /* Floating Button Animation */
-        @keyframes bounce-gentle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        .animate-bounce-gentle { animation: bounce-gentle 2s infinite; }
-    </style>
+    <meta name="theme-color" content="#1F45C8">
+    <link rel="preload" href="fonts/roboto-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-50 font-sans text-wd-dark">
+<body class="bg-white font-sans text-wd-dark">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-[100] bg-white text-wd-blue p-4 font-bold rounded shadow-lg">Skip to content</a>
 
-    <a href="tel:8016416850" class="fixed bottom-6 right-6 z-50 md:hidden bg-wd-blue text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl animate-bounce-gentle hover:scale-110 transition border-4 border-wd-yellow" aria-label="Call Now">
+    <a href="tel:8016416850" class="fixed bottom-6 right-6 z-50 md:hidden bg-wd-blue text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl animate-bounce-gentle hover:scale-110 transition border-4 border-wd-blue" aria-label="Call Now">
         <i class="fas fa-phone fa-lg"></i>
     </a>
+    <div class="top-bar">Licensed &amp; Insured Utah Contractor<span class="hidden sm:inline"> • Serving West Jordan, South Jordan &amp; Salt Lake County</span></div>
 
-    <nav aria-label="Main" class="bg-white shadow-md sticky top-0 z-40 transition-all duration-300">
-        <div class="container mx-auto px-6 py-1 md:py-1 flex justify-between items-center">
+    <nav aria-label="Main" class="bg-wd-blue text-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <a href="/" class="flex items-center" aria-label="Quick Fix Garage Doors Home">
-                <img src="Images/long-logo-quick.png"
-                     alt="Quick Fix Garage Doors Logo"
-                     width="200" height="60"
-                     class="h-28 md:h-36 w-auto object-contain">
+                <img src="Images/logo-white.png" alt="Quick Fix Garage Doors Logo" width="79" height="80" class="h-[60px] md:h-[80px] w-auto">
             </a>
 
             <div class="md:hidden flex flex-col items-center justify-center animate-bounce-gentle">
-                <p class="text-[10px] sm:text-xs font-bold text-gray-500 uppercase tracking-widest mb-0.5">Local Dispatch</p>
-                <a href="tel:8016416850" class="text-wd-blue font-black text-lg sm:text-xl leading-none hover:text-wd-yellow transition">801-641-6850</a>
+                <p class="text-[10px] sm:text-xs font-bold text-blue-100 uppercase tracking-widest mb-0.5">Local Dispatch</p>
+                <a href="tel:8016416850" class="text-white font-black text-lg sm:text-xl leading-none hover:text-blue-100 transition">801-641-6850</a>
             </div>
 
             <div class="hidden md:flex items-center space-x-8">
-                <a href="/" class="text-gray-700 hover:text-wd-blue font-medium transition py-2">Home</a>
-                <a href="/#services" class="text-gray-700 hover:text-wd-blue font-medium transition py-2">Services</a>
-                <a href="service-areas.html" class="text-wd-blue font-bold transition py-2 border-b-2 border-wd-yellow">Service Areas</a>
-                <a href="#contact" class="text-gray-700 hover:text-wd-blue font-medium transition py-2">Contact</a>
+                <a href="/" class="text-white hover:text-blue-100 font-semibold transition py-2">Home</a>
+                <a href="/#services" class="text-white hover:text-blue-100 font-semibold transition py-2">Services</a>
+                <a href="service-areas.html" class="text-white font-bold transition py-2 border-b-2 border-white">Service Areas</a>
+                <a href="#contact" class="text-white hover:text-blue-100 font-semibold transition py-2">Contact</a>
             </div>
 
             <div class="hidden md:block">
-                <a href="tel:8016416850" class="bg-wd-yellow text-wd-blue px-6 py-2.5 rounded-full font-black uppercase tracking-wider hover:bg-yellow-400 transition shadow-lg flex items-center group">
-                    <i class="fas fa-mobile-alt mr-2 group-hover:rotate-12 transition"></i> 801-641-6850
+                <a href="tel:8016416850" class="border-2 border-white text-white px-5 py-2.5 rounded-lg font-bold hover:bg-white hover:text-blue-100 transition flex items-center group">
+                    <i class="fas fa-phone mr-2" aria-hidden="true"></i> (801) 641-6850
                 </a>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden text-wd-blue text-3xl focus:outline-none p-2" aria-label="Toggle navigation menu">
+            <button id="mobile-menu-btn" type="button" aria-controls="mobile-menu" aria-expanded="false" class="md:hidden text-white text-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded p-2" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
         </div>
 
-        <div id="mobile-menu" class="bg-white border-t border-gray-100 md:hidden shadow-lg">
-            <div class="flex flex-col p-4 space-y-2 font-bold text-lg text-gray-700">
-                <a href="/" class="hover:text-wd-blue mobile-link block py-3 border-b border-gray-100">Home</a>
-                <a href="/#services" class="hover:text-wd-blue mobile-link block py-3 border-b border-gray-100">Services</a>
-                <a href="service-areas.html" class="text-wd-blue mobile-link block py-3 border-b border-gray-100">Service Areas</a>
-                <a href="#contact" class="hover:text-wd-blue mobile-link block py-3">Contact</a>
+        <div id="mobile-menu" class="bg-wd-blue-d border-t border-white/10 md:hidden shadow-lg">
+            <div class="flex flex-col p-4 space-y-2 font-bold text-lg text-white">
+                <a href="/" class="hover:text-blue-100 mobile-link block py-3 border-b border-white/10">Home</a>
+                <a href="/#services" class="hover:text-blue-100 mobile-link block py-3 border-b border-white/10">Services</a>
+                <a href="service-areas.html" class="text-white underline underline-offset-4 mobile-link block py-3 border-b border-white/10">Service Areas</a>
+                <a href="#contact" class="hover:text-blue-100 mobile-link block py-3">Contact</a>
             </div>
         </div>
     </nav>
 
     <main id="main-content">
-        <header class="relative bg-wd-dark text-white py-16 md:py-32 overflow-hidden flex items-center min-h-[450px]">
+        <header class="relative bg-wd-blue-d text-white py-16 md:py-32 overflow-hidden flex items-center min-h-[450px]">
             <div class="absolute inset-0 z-0">
-                <img src="Images/tune-up-hero.jpg"
+                <img src="Images/tune-up-hero.jpg" srcset="Images/tune-up-hero-828.jpg 828w, Images/tune-up-hero.jpg 1200w" sizes="100vw"
                      alt="Garage door tune-up in progress"
-                     class="w-full h-full object-cover opacity-40"
+                     class="w-full h-full object-cover"
                      width="1200" height="800"
                      fetchpriority="high">
-                <div class="absolute inset-0 bg-gradient-to-r from-wd-blue to-transparent opacity-90"></div>
+                <div class="absolute inset-0 hero-overlay"></div>
             </div>
 
             <div class="container mx-auto px-6 relative z-10 text-center md:text-left">
                 <div class="md:w-3/4 lg:w-2/3">
-                    <nav aria-label="Breadcrumb" class="mb-4 text-sm text-gray-300">
+                    <nav aria-label="Breadcrumb" class="mb-4 text-sm text-blue-100">
                         <ol class="flex flex-wrap justify-center md:justify-start space-x-2">
-                            <li><a href="/" class="hover:text-wd-yellow">Home</a></li>
+                            <li><a href="/" class="hover:text-white">Home</a></li>
                             <li><span>/</span></li>
-                            <li><a href="service-areas.html" class="hover:text-wd-yellow">Service Areas</a></li>
+                            <li><a href="service-areas.html" class="hover:text-white">Service Areas</a></li>
                             <li><span>/</span></li>
-                            <li class="text-wd-yellow font-bold" aria-current="page">Taylorsville</li>
+                            <li class="text-white font-bold" aria-current="page">Taylorsville</li>
                         </ol>
                     </nav>
 
-                    <p class="text-wd-yellow font-black text-xl md:text-3xl tracking-wider mb-2 uppercase italic">Taylorsville 84118 · 84123 · 84129</p>
+                    <p class="hero-pill">Taylorsville 84118 · 84123 · 84129</p>
 
-                    <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight text-shadow">Garage Door Repair in Taylorsville, UT</h1>
+                    <h1 class="text-4xl md:text-6xl font-black mb-6 tracking-tight leading-tight text-shadow">Garage Door Repair in Taylorsville, UT</h1>
 
                     <p class="text-lg md:text-2xl mb-8 font-light text-gray-100 leading-relaxed max-w-2xl">
                         Taylorsville is just north of West Jordan, and many of its garage doors have been working for decades. We repair, tune, and replace them.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#contact" class="bg-wd-yellow text-wd-blue px-8 py-4 rounded-lg font-bold text-lg hover:bg-yellow-400 transition text-center shadow-xl transform active:scale-95 md:hover:scale-105 duration-200">
-                            Get a Free Estimate
-                        </a>
-                        <a href="tel:8016416850" class="border-2 border-white text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-white hover:text-wd-blue transition text-center active:bg-white active:text-wd-blue flex items-center justify-center">
-                            <i class="fas fa-phone mr-2"></i> Call 801-641-6850
-                        </a>
+                        <a href="tel:8016416850" class="btn-call"><i class="fas fa-phone" aria-hidden="true"></i> Call Now (801) 641-6850</a>
+                        <a href="#contact" class="btn-outline">Get a Free Estimate</a>
                     </div>
                 </div>
             </div>
         </header>
 
-        <section class="bg-gray-100 py-6 border-b border-gray-200">
+        <section class="bg-white py-6 border-b border-gray-200">
             <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 text-center text-sm md:text-base">
                 <div class="flex flex-col items-center">
                     <i class="fas fa-certificate text-wd-blue text-2xl mb-1" aria-hidden="true"></i>
@@ -359,7 +308,7 @@
                         <div class="relative rounded-xl overflow-hidden shadow-2xl border-4 border-white">
                             <img src="Images/tighten-bolts.jpg" alt="Tightening bolts on garage door hinges" width="1000" height="1333" loading="lazy" decoding="async" class="w-full h-[400px] object-cover">
                             <div class="absolute bottom-0 left-0 right-0 bg-wd-blue bg-opacity-95 text-white p-5 text-center">
-                                <p class="font-bold text-lg"><i class="fas fa-map-marker-alt text-wd-yellow mr-2" aria-hidden="true"></i> Serving ZIP 84118, 84123 &amp; 84129</p>
+                                <p class="font-bold text-lg"><i class="fas fa-map-marker-alt text-wd-blue mr-2" aria-hidden="true"></i> Serving ZIP 84118, 84123 &amp; 84129</p>
                             </div>
                         </div>
                     </div>
@@ -371,22 +320,22 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Repairs Taylorsville Homes Need Most</h2>
-                    <div class="h-2 w-24 bg-wd-yellow mx-auto"></div>
+                    <div class="h-1 w-16 bg-wd-blue rounded mx-auto"></div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-yellow shadow-sm">
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-blue shadow-sm">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Extension springs and missing safety cables</h3>
                         <p class="text-gray-600">Many older Taylorsville doors lift with extension springs alongside the tracks. Over time they lose tension, and without safety cables a breaking spring can fly loose. We replace them in pairs, add safety cables, or talk with you about converting to torsion springs.</p>
                     </div>
-                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-yellow shadow-sm">
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-blue shadow-sm">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Wood and thin steel doors</h3>
                         <p class="text-gray-600">Some homes still have wood doors or thin, uninsulated steel ones. Wood dries, cracks, and swells through Utah&#x27;s dry summers and snowy winters, and thin steel dents easily. If the panels are sound we repair them; if not, an insulated steel door is a big upgrade.</p>
                     </div>
-                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-yellow shadow-sm">
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-blue shadow-sm">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Openers past their prime</h3>
                         <p class="text-gray-600">A 25-year-old opener can still run but may lack modern safety reversal, rolling-code security, or a quiet drive. We&#x27;ll test the safety reversal and tell you where it stands.</p>
                     </div>
-                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-yellow shadow-sm">
+                    <div class="bg-white rounded-xl p-6 border-l-4 border-wd-blue shadow-sm">
                         <h3 class="text-xl font-bold mb-2 text-gray-800">Garages used for storage and projects</h3>
                         <p class="text-gray-600">When the garage is a workshop or storage space, the door is the biggest opening in the house. New weatherstripping and an insulated door cut drafts in winter and heat in summer.</p>
                     </div>
@@ -398,34 +347,34 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Garage Door Services in Taylorsville</h2>
-                    <div class="h-2 w-24 bg-wd-yellow mx-auto"></div>
+                    <div class="h-1 w-16 bg-wd-blue rounded mx-auto"></div>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-yellow shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
+                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-blue shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
                         <div class="text-wd-blue text-3xl mb-3"><i class="fas fa-tools" aria-hidden="true"></i></div>
                         <p class="text-gray-600 mb-6 flex-grow">Extension and torsion spring replacement, with safety cables added where needed.</p>
-                        <a href="garage-spring-repair.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-yellow hover:text-wd-blue transition mt-auto shadow-sm">
+                        <a href="garage-spring-repair.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-blue-d hover:text-white transition mt-auto shadow-sm">
                             Garage Spring Repair <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-yellow shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
+                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-blue shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
                         <div class="text-wd-blue text-3xl mb-3"><i class="fas fa-wifi" aria-hidden="true"></i></div>
                         <p class="text-gray-600 mb-6 flex-grow">Repair for older openers, or replacement with quieter, safer models.</p>
-                        <a href="garage-motor-repair.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-yellow hover:text-wd-blue transition mt-auto shadow-sm">
+                        <a href="garage-motor-repair.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-blue-d hover:text-white transition mt-auto shadow-sm">
                             Garage Motor &amp; Opener Repair <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-yellow shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
+                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-blue shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
                         <div class="text-wd-blue text-3xl mb-3"><i class="fas fa-oil-can" aria-hidden="true"></i></div>
                         <p class="text-gray-600 mb-6 flex-grow">Tune-ups that bring decades-old doors back into balance.</p>
-                        <a href="garage-door-tune-up.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-yellow hover:text-wd-blue transition mt-auto shadow-sm">
+                        <a href="garage-door-tune-up.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-blue-d hover:text-white transition mt-auto shadow-sm">
                             Garage Door Tune-Up <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-yellow shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
+                    <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-wd-blue shadow-md hover:-translate-y-1 transition transform flex flex-col h-full">
                         <div class="text-wd-blue text-3xl mb-3"><i class="fas fa-door-open" aria-hidden="true"></i></div>
                         <p class="text-gray-600 mb-6 flex-grow">Insulated steel doors to replace worn wood or thin steel.</p>
-                        <a href="garage-door-installation.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-yellow hover:text-wd-blue transition mt-auto shadow-sm">
+                        <a href="garage-door-installation.html" class="inline-block w-full bg-wd-blue text-white text-center font-bold py-3 px-4 rounded hover:bg-wd-blue-d hover:text-white transition mt-auto shadow-sm">
                             Garage Door Installation <i class="fas fa-arrow-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -437,22 +386,22 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
                     <h2 class="text-wd-blue font-black text-3xl md:text-4xl mb-4">Taylorsville Garage Door FAQ</h2>
-                    <div class="h-2 w-24 bg-wd-yellow mx-auto"></div>
+                    <div class="h-1 w-16 bg-wd-blue rounded mx-auto"></div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-yellow">
+                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-blue">
                         <h3 class="font-bold text-xl mb-2 text-gray-800">Do you serve all of Taylorsville?</h3>
                         <p class="text-gray-600">Yes, including the 84118, 84123, and 84129 ZIP codes, from the Jordan River west to the Bangerter Highway area.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-yellow">
+                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-blue">
                         <h3 class="font-bold text-xl mb-2 text-gray-800">Can you repair a wooden garage door?</h3>
                         <p class="text-gray-600">Often. We can replace springs, rollers, hinges, and seals on wood doors. Badly cracked or rotted panels usually mean it&#x27;s time for a new door.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-yellow">
+                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-blue">
                         <h3 class="font-bold text-xl mb-2 text-gray-800">How do I tell whether I have extension or torsion springs?</h3>
                         <p class="text-gray-600">Look above the closed door. A spring wrapped around a bar across the top is a torsion system. Long springs running beside the horizontal tracks near the ceiling are extension springs. Either way, don&#x27;t adjust them yourself.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-yellow">
+                    <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-wd-blue">
                         <h3 class="font-bold text-xl mb-2 text-gray-800">Can you add an automatic opener to a manual door?</h3>
                         <p class="text-gray-600">Usually, as long as the door is balanced and in good shape. We check the door first, then install and adjust the opener and its safety sensors.</p>
                     </div>
@@ -466,35 +415,35 @@
                 <p class="text-gray-600 mb-8 max-w-3xl mx-auto">Neighbors of Taylorsville can reach the same crew. See every city on our <a href="service-areas.html" class="text-wd-blue font-bold underline">service areas page</a>.</p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm font-bold text-gray-700 uppercase tracking-wide max-w-5xl mx-auto">
                     <a href="west-jordan.html" class="bg-gray-50 px-4 py-2 rounded shadow-sm border border-gray-200 border-l-4 border-l-wd-blue hover:bg-wd-blue hover:text-white transition-all duration-300 group flex items-center justify-start">
-                        <i class="fas fa-map-marker-alt text-wd-yellow group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>West Jordan Garage Door Repair
+                        <i class="fas fa-map-marker-alt text-wd-blue group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>West Jordan Garage Door Repair
                     </a>
                     <a href="west-valley-city.html" class="bg-gray-50 px-4 py-2 rounded shadow-sm border border-gray-200 border-l-4 border-l-wd-blue hover:bg-wd-blue hover:text-white transition-all duration-300 group flex items-center justify-start">
-                        <i class="fas fa-map-marker-alt text-wd-yellow group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>West Valley City Garage Door Repair
+                        <i class="fas fa-map-marker-alt text-wd-blue group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>West Valley City Garage Door Repair
                     </a>
                     <a href="murray.html" class="bg-gray-50 px-4 py-2 rounded shadow-sm border border-gray-200 border-l-4 border-l-wd-blue hover:bg-wd-blue hover:text-white transition-all duration-300 group flex items-center justify-start">
-                        <i class="fas fa-map-marker-alt text-wd-yellow group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>Murray Garage Door Repair
+                        <i class="fas fa-map-marker-alt text-wd-blue group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>Murray Garage Door Repair
                     </a>
                     <a href="south-jordan.html" class="bg-gray-50 px-4 py-2 rounded shadow-sm border border-gray-200 border-l-4 border-l-wd-blue hover:bg-wd-blue hover:text-white transition-all duration-300 group flex items-center justify-start">
-                        <i class="fas fa-map-marker-alt text-wd-yellow group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>South Jordan Garage Door Repair
+                        <i class="fas fa-map-marker-alt text-wd-blue group-hover:text-white mr-2 transition-colors duration-300" aria-hidden="true"></i>South Jordan Garage Door Repair
                     </a>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="py-16 md:py-20 bg-wd-yellow">
+        <section id="contact" class="py-16 md:py-20 bg-wd-blue text-white">
             <div class="container mx-auto px-6">
                 <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
                     <div class="text-center md:text-left">
-                        <h2 class="text-wd-blue text-3xl md:text-5xl font-black mb-6">Call Quick Fix Garage Doors</h2>
-                        <p class="text-wd-blue text-lg md:text-xl mb-8 font-medium">Stuck door, snapped spring, or dead opener in Taylorsville? Call for a fast, free estimate.</p>
-                        <a href="tel:8016416850" class="inline-flex items-center justify-center bg-wd-blue text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-xl md:text-2xl hover:bg-blue-900 transition shadow-lg w-full md:w-auto mb-4">
-                            <i class="fas fa-phone mr-3" aria-hidden="true"></i> 801-641-6850
+                        <h2 class="text-white text-3xl md:text-5xl font-black mb-6">Call Quick Fix Garage Doors</h2>
+                        <p class="text-white text-lg md:text-xl mb-8 font-medium">Stuck door, snapped spring, or dead opener in Taylorsville? Call for a fast, free estimate.</p>
+                        <a href="tel:8016416850" class="inline-flex items-center justify-center bg-white text-wd-dark px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-xl md:text-2xl hover:bg-blue-50 transition shadow-lg w-full md:w-auto mb-4">
+                            <i class="fas fa-phone mr-3 text-wd-blue" aria-hidden="true"></i> (801) 641-6850
                         </a>
-                        <p class="text-wd-blue font-bold">Mon–Thu: open 24 hours · Fri: 12 AM–8 PM · Sat &amp; Sun: 5 AM–4 PM</p>
+                        <p class="text-white font-bold">Mon–Thu: open 24 hours · Fri: 12 AM–8 PM · Sat &amp; Sun: 5 AM–4 PM</p>
                     </div>
 
-                    <div class="bg-white p-8 rounded-xl shadow-2xl">
+                    <div class="bg-white text-wd-dark p-8 rounded-xl shadow-2xl">
                         <h3 class="text-xl font-bold text-wd-blue mb-4">Request Service</h3>
                         
                         <form action="https://formspree.io/f/xoejbppp" method="POST" class="space-y-4">
@@ -522,7 +471,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <button type="submit" class="w-full bg-wd-blue text-white font-bold py-3 rounded hover:bg-blue-900 transition shadow-md mt-2">
+                            <button type="submit" class="w-full bg-wd-blue text-white font-bold py-3 rounded hover:bg-wd-blue-d transition shadow-md mt-2">
                                 Send Request
                             </button>
                         </form>
@@ -533,25 +482,48 @@
         </section>
     </main>
 
-    <footer class="bg-wd-dark text-white py-12 border-t-8 border-wd-blue pb-24 md:pb-12">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-            <div class="mb-8 md:mb-0">
-                <p class="text-2xl font-black text-wd-yellow mb-2">Quick Fix Garage Doors</p>
-                <p class="text-gray-300">9256 Targhee Dr, West Jordan, UT 84088</p>
-                <p class="text-gray-300 text-sm mt-2">Utah DOPL License #14116475-5501</p>
-                <p class="text-gray-300 text-sm mt-2"><a href="service-areas.html" class="underline hover:text-wd-yellow">All service areas</a> · Est. 2024</p>
+        <footer class="bg-wd-dark text-gray-300 pt-12 pb-24 md:pb-10">
+        <div class="container mx-auto px-6 grid gap-10 md:grid-cols-4 text-center md:text-left">
+            <div class="md:col-span-1">
+                <a href="/" aria-label="Quick Fix Garage Doors home"><img src="Images/logo-white.png" alt="Quick Fix Garage Doors logo" width="79" height="80" loading="lazy" class="h-20 w-auto mx-auto md:mx-0 mb-4"></a>
+                <p class="font-bold text-white">Quick Fix Garage Doors LLC</p>
+                <p>Licensed &amp; Insured Utah Contractor</p>
+                <p class="text-sm mt-1">Utah DOPL License #14116475-5501</p>
+                <p class="text-sm mt-1">Est. 2024</p>
             </div>
-
-            <div class="flex space-x-8 text-2xl mb-8 md:mb-0">
-                <a href="#" class="text-gray-400 hover:text-white transition p-2" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white transition p-2" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <div>
+                <p class="font-bold text-white mb-3">Contact</p>
+                <p><a href="tel:8016416850" class="font-bold text-white text-lg hover:underline">(801) 641-6850</a></p>
+                <p class="mt-1">9256 Targhee Dr<br>West Jordan, UT 84088</p>
+                <p class="text-sm mt-3">Mon–Thu: open 24 hours<br>Fri: 12 AM–8 PM<br>Sat &amp; Sun: 5 AM–4 PM</p>
             </div>
-
-            <div class="">
-                <a href="tel:8016416850" class="block font-bold text-xl hover:text-wd-yellow transition mb-2">801-641-6850</a>
-                <p class="text-gray-300 text-sm">&copy; 2026 Quick Fix Garage Doors LLC.<br>All rights reserved.</p>
+            <div>
+                <p class="font-bold text-white mb-3">Services</p>
+                <ul class="space-y-1">
+                    <li><a href="garage-spring-repair.html" class="hover:text-white hover:underline">Garage Spring Repair</a></li>
+                    <li><a href="garage-motor-repair.html" class="hover:text-white hover:underline">Garage Motor &amp; Opener Repair</a></li>
+                    <li><a href="garage-door-tune-up.html" class="hover:text-white hover:underline">Garage Door Tune-Up</a></li>
+                    <li><a href="garage-door-installation.html" class="hover:text-white hover:underline">Garage Door Installation</a></li>
+                </ul>
+            </div>
+            <div>
+                <p class="font-bold text-white mb-3">Service Areas</p>
+                <ul class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+                    <li><a href="west-jordan.html" class="hover:text-white hover:underline">West Jordan</a></li>
+                    <li><a href="south-jordan.html" class="hover:text-white hover:underline">South Jordan</a></li>
+                    <li><a href="daybreak.html" class="hover:text-white hover:underline">Daybreak</a></li>
+                    <li><a href="riverton.html" class="hover:text-white hover:underline">Riverton</a></li>
+                    <li><a href="herriman.html" class="hover:text-white hover:underline">Herriman</a></li>
+                    <li><a href="sandy.html" class="hover:text-white hover:underline">Sandy</a></li>
+                    <li><a href="draper.html" class="hover:text-white hover:underline">Draper</a></li>
+                    <li><a href="taylorsville.html" class="hover:text-white hover:underline">Taylorsville</a></li>
+                    <li><a href="murray.html" class="hover:text-white hover:underline">Murray</a></li>
+                    <li><a href="west-valley-city.html" class="hover:text-white hover:underline">West Valley City</a></li>
+                </ul>
+                <p class="mt-3 text-sm"><a href="service-areas.html" class="font-bold text-white underline">All service areas</a></p>
             </div>
         </div>
+        <p class="text-center text-xs text-gray-400 mt-10 px-6">&copy; 2026 Quick Fix Garage Doors LLC. All rights reserved.</p>
     </footer>
 
     <script>
@@ -561,11 +533,8 @@
             const mobileMenu = document.getElementById('mobile-menu');
 
             menuBtn.addEventListener('click', () => {
-                if (mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                } else {
-                    mobileMenu.classList.add('open');
-                }
+                const isOpen = mobileMenu.classList.toggle('open');
+                menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
             });
             
             // Smooth Scroll for local anchor links
@@ -589,6 +558,7 @@
                         // Close mobile menu
                         if (mobileMenu.classList.contains('open')) {
                              mobileMenu.classList.remove('open');
+                             menuBtn.setAttribute('aria-expanded', 'false');
                         }
                     }
                 });

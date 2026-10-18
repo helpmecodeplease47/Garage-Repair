@@ -1,53 +1,22 @@
-# Quick Fix Garage Doors: city pages update (Oct 18, 2026)
+# Quick Fix Garage Doors – Royal Blue Redesign
 
-Based on GitHub main at commit afc39e9 (Gavin's Oct 18 v2 upload). Nothing was pushed.
+Built on GitHub `main` at commit 0b34913 ("big ai upload here grok", Oct 18, 2026, 4:08 PM MT).
 
-## New pages
-- service-areas.html: hub linking every city page
-- south-jordan.html, riverton.html, herriman.html, sandy.html, draper.html,
-  taylorsville.html, murray.html, west-valley-city.html
+## What changed
+- **New theme on all 16 pages:** royal blue (#1F45C8), darker blue (#16349A), navy text (#0F1B3D), light gray sections (#F3F5F9).
+  Yellow (#FFE600) appears only on the main "Call Now (801) 641-6850" button at the top of each page.
+- **New white circle logo** in a blue header (about 18% bigger than the mockup), and in the footer. The homepage hero also shows the large logo.
+- **Tailwind CDN removed.** All pages now share one small stylesheet, `css/styles.css` (26 KB). The font (Roboto) is hosted on the site (`fonts/`), preloaded, with font-display: swap. Google Fonts and Poppins are no longer loaded.
+- **Phone menu:** same menu button and open/close behavior as before, restyled blue. It now also reports open or closed to screen readers.
+- **Homepage:** the hero matches the mockup. The service cards now have photos, and the New Installs card uses your new install photo. City buttons are now chips. Connect Four stays at the bottom, above the contact form. No review cards were added.
+- **Installation page:** your new install photo is the hero background and also appears in the "Find Your Perfect Door" section with a caption.
+- **Bug fix:** on the spring, motor, tune-up and installation pages, every city in "Proudly Serving" is now a link. Cities with their own page link to that page. The rest (Bluffdale, Midvale, Oquirrh, Lehi, Orem, Provo, Vineyard) link to service-areas.html. Murray was added to those pages, and each one got a "See All Garage Door Service Areas" button.
+- **New footer on every page:** name, Licensed & Insured, DOPL #14116475-5501, 9256 Targhee Dr, West Jordan, UT 84088, hours, phone, links to the 4 services and 10 cities, and All service areas.
+- **Faster loading:** phones download smaller hero photos (the new `*-828.jpg` files). The service cards use small thumbnails (`card-*.jpg`).
+- No changes to: page text, titles and descriptions, the code Google reads (JSON-LD), canonicals, the Formspree form (xoejbppp), Google Analytics, or sitemap.xml.
 
-Each city page has its own title, description, H1, canonical, local content,
-FAQ, click-to-call buttons, links to the 4 service pages and nearby cities, and
-schema for the business (9256 Targhee Dr, West Jordan 84088, real map pin, full hours,
-areaServed = that city) plus breadcrumbs and the FAQ.
+## Upload
+Unzip and drag everything into the repo, keeping the folders (`css/`, `fonts/`, `js/`, `Images/`). Let the new files replace the old ones.
 
-## Rewritten
-- west-jordan.html and daybreak.html: new, non-overlapping text in the same layout.
-  Fixes 3 missing images (daybreak-hero.jpg, daybreak-neighborhood.jpg,
-  west-jordan-neighborhood.jpg) by using photos that exist.
-
-## Edited
-- index.html: the 4 "Learn More" buttons now say Garage Spring Repair, Garage Motor
-  Repair, Garage Door Tune-Up, Garage Door Installation. City names in "Areas We Serve" now link
-  to their pages (Murray added), plus a "See All Service Areas" button. Nothing else changed.
-- Quote form on all 16 pages now posts to https://formspree.io/f/xoejbppp
-  (index, the 4 service pages, and every city page).
-- sitemap.xml: now lists 16 URLs.
-- Trust line "Licensed & Insured Utah Contractor" is in the top trust bar of the homepage and
-  every city page, and in the homepage hero line. Every page's footer now shows
-  "Utah DOPL License #14116475-5501". The service pages' old "Licensed & Insured" footer
-  line now reads "Licensed & Insured Utah Contractor".
-
-## Homepage and service-page cleanup
-- index.html: the Connect Four game section now sits just above the contact form. Its
-  heading is an H3, and the empty winner-popup H2 is now a <p>. The game code moved into
-  js/connect-four.js, which loads with `defer`. The game was tested in a browser and works.
-- index.html: "5+ Years Exp." badge is now "Serving Since 2024". The About text "With over
-  5 years of hands-on experience..." now says "We have been serving the Salt Lake Valley
-  since 2024."
-- Schema: removed the self-given 58-review aggregateRating from the homepage, the spring
-  page and the installation page. The spring and installation pages' Product schema is now
-  Service schema, without the conflicting $200/$250/$2,100 prices.
-- index.html + the 4 service pages: schema business name is now "Quick Fix Garage Doors",
-  with an @id linking to the homepage business and map pin 40.5832, -111.9906 (also in the
-  geo meta tags).
-- index.html: the star rating graphic gets role="img" so its aria-label is valid HTML.
-
-## Images
-- Images/ holds the 13 compressed photos (already live since afc39e9; included again only so
-  the bundle is complete).
-
-## How to upload
-Upload the zip contents over the repo root, keeping the folder structure. Or apply
-quickfix-city-pages.patch with `git am`.
+## Delete from the repo (optional cleanup)
+- `quickfix-city-pages.patch`: an old note file from the last bundle. The site doesn't use it.

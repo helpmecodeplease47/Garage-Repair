@@ -136,7 +136,7 @@
             statusElement.className = "text-xl font-bold h-8 text-red-500 transition-colors duration-300";
         } else {
             statusElement.textContent = "Computer's Turn (Yellow)";
-            statusElement.className = "text-xl font-bold h-8 text-wd-yellow transition-colors duration-300";
+            statusElement.className = "text-xl font-bold h-8 text-yellow-600 transition-colors duration-300";
         }
     }
     

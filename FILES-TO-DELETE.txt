@@ -1,0 +1,4 @@
+Files to delete from the GitHub repo (not used by the site):
+- quickfix-city-pages.patch
+
+(CHANGES.md is replaced by the new one in this zip. Keep Images/long-logo-quick.png: the business info Google reads still uses it as the logo image.)
