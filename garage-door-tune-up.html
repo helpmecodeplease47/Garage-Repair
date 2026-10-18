@@ -15,8 +15,8 @@
     
     <meta name="geo.region" content="US-UT" />
     <meta name="geo.placename" content="West Jordan" />
-    <meta name="geo.position" content="40.6097;-111.9391" />
-    <meta name="ICBM" content="40.6097, -111.9391" />
+    <meta name="geo.position" content="40.5832;-111.9906" />
+    <meta name="ICBM" content="40.5832, -111.9906" />
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHSSPGY5LP"></script>
     <script>
@@ -45,57 +45,113 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Garage Door Maintenance and Tune-Up",
-  "image": "https://utahgaragerepair.org/Images/long-logo-quick.png",
-  "description": "Professional garage door tune-ups, noise silencing, roller replacement, and comprehensive maintenance services across the Wasatch Front.",
-  "provider": {
-    "@type": "HomeAndConstructionBusiness",
-    "name": "Quick Fix Garage Doors LLC",
-    "telephone": "801-641-6850",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "9256 Targhee Dr",
-      "addressLocality": "West Jordan",
-      "addressRegion": "UT",
-      "postalCode": "84088",
-      "addressCountry": "US"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 40.6097,
-      "longitude": -111.9391
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Garage Door Maintenance and Tune-Up",
+      "image": "https://utahgaragerepair.org/Images/long-logo-quick.png",
+      "description": "Professional garage door tune-ups, noise silencing, roller replacement, and comprehensive maintenance services across the Wasatch Front.",
+      "provider": {
+        "@type": "HomeAndConstructionBusiness",
+        "@id": "https://utahgaragerepair.org/#business",
+        "name": "Quick Fix Garage Doors",
+        "telephone": "+1-801-641-6850",
+        "url": "https://utahgaragerepair.org/",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "9256 Targhee Dr",
+          "addressLocality": "West Jordan",
+          "addressRegion": "UT",
+          "postalCode": "84088",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 40.5832,
+          "longitude": -111.9906
+        }
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "West Jordan"
+        },
+        {
+          "@type": "City",
+          "name": "South Jordan"
+        },
+        {
+          "@type": "City",
+          "name": "Sandy"
+        },
+        {
+          "@type": "City",
+          "name": "Draper"
+        },
+        {
+          "@type": "City",
+          "name": "Herriman"
+        },
+        {
+          "@type": "City",
+          "name": "Daybreak"
+        },
+        {
+          "@type": "City",
+          "name": "Riverton"
+        },
+        {
+          "@type": "City",
+          "name": "Bluffdale"
+        },
+        {
+          "@type": "City",
+          "name": "West Valley City"
+        },
+        {
+          "@type": "City",
+          "name": "Taylorsville"
+        },
+        {
+          "@type": "City",
+          "name": "Midvale"
+        },
+        {
+          "@type": "City",
+          "name": "Oquirrh"
+        },
+        {
+          "@type": "City",
+          "name": "Lehi"
+        },
+        {
+          "@type": "City",
+          "name": "Orem"
+        },
+        {
+          "@type": "City",
+          "name": "Provo"
+        },
+        {
+          "@type": "City",
+          "name": "Vineyard"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Salt Lake County"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Utah County"
+        }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "url": "https://utahgaragerepair.org/garage-door-tune-up.html",
+        "availability": "https://schema.org/InStock"
+      }
     }
-  },
-  "areaServed": [
-    { "@type": "City", "name": "West Jordan" },
-    { "@type": "City", "name": "South Jordan" },
-    { "@type": "City", "name": "Sandy" },
-    { "@type": "City", "name": "Draper" },
-    { "@type": "City", "name": "Herriman" },
-    { "@type": "City", "name": "Daybreak" },
-    { "@type": "City", "name": "Riverton" },
-    { "@type": "City", "name": "Bluffdale" },
-    { "@type": "City", "name": "West Valley City" },
-    { "@type": "City", "name": "Taylorsville" },
-    { "@type": "City", "name": "Midvale" },
-    { "@type": "City", "name": "Oquirrh" },
-    { "@type": "City", "name": "Lehi" },
-    { "@type": "City", "name": "Orem" },
-    { "@type": "City", "name": "Provo" },
-    { "@type": "City", "name": "Vineyard" },
-    { "@type": "AdministrativeArea", "name": "Salt Lake County" },
-    { "@type": "AdministrativeArea", "name": "Utah County" }
-  ],
-  "offers": {
-    "@type": "Offer",
-    "url": "https://utahgaragerepair.org/garage-door-tune-up.html",
-    "availability": "https://schema.org/InStock"
-  }
-}
-</script>
+    </script>
 
     <script>
         tailwind.config = {
@@ -384,7 +440,7 @@
 
                     <div class="bg-white p-8 rounded-xl shadow-2xl">
                         <h3 class="text-xl font-bold text-wd-blue mb-4">Request a Tune-Up</h3>
-                        <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST" class="space-y-4">
+                        <form action="https://formspree.io/f/xoejbppp" method="POST" class="space-y-4">
                             <div>
                                 <label for="name" class="block text-sm font-bold text-gray-700 mb-1">Name</label>
                                 <input type="text" id="name" name="name" required class="w-full border-2 border-gray-200 p-3 rounded focus:outline-none focus:border-wd-blue transition bg-gray-50">
@@ -419,7 +475,8 @@
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div class="mb-8 md:mb-0">
                 <h3 class="text-2xl font-black text-wd-yellow mb-2">Quick Fix Garage Doors LLC</h3>
-                <p class="text-gray-400">Licensed & Insured</p>
+                <p class="text-gray-400">Licensed & Insured Utah Contractor</p>
+                <p class="text-gray-400 text-sm mt-1">Utah DOPL License #14116475-5501</p>
                 <p class="text-gray-500 text-sm mt-2">Est. 2024</p>
             </div>
             
