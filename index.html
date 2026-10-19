@@ -23,12 +23,18 @@
     <meta name="geo.position" content="40.5832;-111.9906" />
     <meta name="ICBM" content="40.5832, -111.9906" />
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHSSPGY5LP"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-GHSSPGY5LP'); 
+      // Load Google Analytics after the page has finished loading so it doesn't compete with the hero image.
+      window.addEventListener('load', function () {
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-GHSSPGY5LP';
+        document.head.appendChild(ga);
+      });
     </script>
     
     <meta property="og:title" content="Quick Fix Garage Doors | 50+ Five-Star Google Reviews">
@@ -38,8 +44,8 @@
     <meta property="og:type" content="business.business">
     <meta property="og:locale" content="en_US">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <!-- Font Awesome 6.4.0 Free (fontawesome.com, Icons CC BY 4.0, Font SIL OFL 1.1, Code MIT): only the 8 icons used on this page, built in, so no external download -->
+    <style>.fa{font-family:var(--fa-style-family,"Font Awesome 6 Free");font-weight:var(--fa-style,900)}.fa,.fas{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:var(--fa-display,inline-block);font-style:normal;font-variant:normal;line-height:1;text-rendering:auto}.fas{font-family:"Font Awesome 6 Free";font-weight:900}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}@font-face{font-family:"Font Awesome 6 Free";font-style:normal;font-weight:900;font-display:block;src:url(data:font/woff2;base64,d09GMgABAAAAAAU4AAoAAAAACQwAAATxAwQBAAAAAAAAAAAAAAAAAAAAAAAAAAAABmAAbMqKJgE2AiQDJMsUBCAFgxgHIBtbCACuB2xjJnw/0OKgEGKIgLRDu2SZjx92UWM8PL/27dz3vvgK7hbF8hAyodFoGxpT0VBhQ0PzXJo57elfuijdZTt/MCeHdEkixVyROztPD7kMsWPoqGxoSkpoCkq83r69FPHNBFXQso9vsJ3NNCUqSQNHQAXvBtNhfDnvUJ+Glc0ZV9zu///YzMDp0sw7IdIqofEu+h8zkTTixJNJ87oQxTyJna5tIVna2W6sME8rAFnbn9PrCGoJ40V14iTcRODIMP03zWJ10s5oyIc9l31Xjh1Ad3zs//P4VSFKe4GA2AafMRdCQsZEWODKmqv/YZQLS+Njv+q/7v3q1yd5VQX/N8w+N/R/6P3QU77e3mJ3mW+E4zSZStoLv8w1ZgO0qEEzQtsJoU3RTEVs1cbmrEq1SiZ5Uo+pYJG8fpzESipqURYnhVT95traZjAMpwHg+90rH2eM+tBghmEC6nZtA1Av/sScRqMfsP1dbk2JAfivoYA4aW0uaRvwzhAu+J23TZn5px30b2fQGAh8PxiofNlEcGv4OAUSplbSUvhlNhSLBeEaoaQfnqok3gQqJSfgQ4h0QoMNRhiYm59OaBB2uzNx159927CLO2736zR4uje+jQR4i5OzH7Bbzyf0LGP7dsOyg+dPBoGP40UCoozCAmjR5iorJyBttyiJwn5o4vokLprz5JsAfrTb7zr9L2fp3ZVrjxwGxV0M/Ph3HzAvQ9yRkg7fockunVgfiQXmQRMWiyzlkHyCaXITzEoAGxXTfCGfG33GT3cnWL/+xqOp3k4HJoRf7p4wWA0PdWaRMQhfhxoEd5i9U49urN8JWvfpIeaQQSPKOoeGq8Gg+zLI1+oTCOugCRtVJotmnsRnCiXtYzyRVhE/WKcis+bW8P0YzTdidt68gjfK6xF+SRPg8vBi3XtXDoYkqkcRpekENGWzygZSkkhorrAOsQqjxKT6N0qq3zOs6O/TNCmPnpebNa2vX4hukzGzY5fVL5qr1bp1Y1qkHVxFz6ZWN20bHm5hvId5qCp+KWZKw2J9P8RJHEUkGCdSmKZKtWClReRJVR6sEhmgZmNppGOB70+Mn5w+/eTqNb4PluktNZrbxWKXf48yn6Wch8WOQ1u2jvTska37qAMXEzmnh/G2FQs2yzVrx/eCOpU8LDhFt1Rmjgn/S/YywM2wX+a1WyLdAO0iKgSVqogTQtupiEjSDkV5ihDbWRBm3hptMnOD2XCUwGB1h7KbBLmTa3BuVZYrWZU7kbOOeEWVVJv/xHGAKCzsJ70ri0IMbeaAPPPsUDgWw3XmcWbqoFuB70caxLYDnIPHMGY1wmoYApcbum4G4Hsh1mLLAQ6/PjTRRciShmGwWcDzHwiEp+Nu4J6G65zlkJpeb+4eZlrdvQ7VPJVVfEwACHMwAFCQxxpUKxVqRpNZ10OCXAP05rvz7gyt/9fqagh+7k8xjtWQpgJaVDKCb31OKqqhy1QI6rdjlrT3ZGOPC7hHlsYQDnAN9z3fowUX4G38SO8E2rmBomiNl62arkNRMxAbIdoe1ivtScdje7bbvfY1PXvdQ79hw8rw0TZD+yKHElmxkEHXOA07DZ1be4uNzT62hmXpRFoKpXGKY3VGJRLV2vb786RxpXGTTmJqEk/UhYKcS6mkFtZgQvK4mkdzo3V84mlo1IgSPWTbSI8O7+fs+44AAA==) format("woff2")}.fa-arrow-right:before{content:"\f061"}.fa-bars:before{content:"\f0c9"}.fa-file-invoice-dollar:before{content:"\f571"}.fa-house-user:before{content:"\e1b0"}.fa-map-marker-alt:before{content:"\f3c5"}.fa-phone:before{content:"\f095"}.fa-shield-halved:before{content:"\f3ed"}.fa-star:before{content:"\f005"}</style>
 
     <script type="application/ld+json">
     {
@@ -215,6 +221,7 @@
     <meta name="theme-color" content="#1F45C8">
     <link rel="preload" href="fonts/roboto-latin-var.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preload" as="image" type="image/webp" imagesrcset="Images/house-828.webp 828w, Images/house.webp 1600w" imagesizes="100vw" fetchpriority="high">
 </head>
 <body class="bg-white font-sans text-wd-dark"> 
     
@@ -267,11 +274,14 @@
  <main id="main-content">
         <header class="relative bg-wd-blue-d text-white overflow-hidden">
             <div class="absolute inset-0 z-0">
+                <picture>
+                <source type="image/webp" srcset="Images/house-828.webp 828w, Images/house.webp 1600w" sizes="100vw">
                 <img src="Images/house.jpg" srcset="Images/house-828.jpg 828w, Images/house.jpg 1600w" sizes="100vw"
                      alt="Garage Door Repair in West Jordan and South Jordan, Utah"
                      class="w-full h-full object-cover"
                      width="1200" height="800"
                      fetchpriority="high">
+                </picture>
                 <div class="absolute inset-0 hero-overlay"></div>
             </div>
             <div class="container mx-auto px-6 relative z-10 py-14 md:py-24 grid md:grid-cols-[1.3fr_.7fr] gap-10 items-center">
